@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Captivate — Client visit coordination</title>
+  <script>
+    const displayParams = new URLSearchParams(window.location.search);
+    if (displayParams.get('preview') === '1') document.documentElement.classList.add('preview-mode');
+    if (displayParams.get('embedded') === '1') document.documentElement.classList.add('embedded-mode');
+  </script>
+  <style>
+    :root {
+      --ink: #17211b;
+      --muted: #647067;
+      --line: #dde4de;
+      --surface: #ffffff;
+      --canvas: #f4f6f3;
+      --green: #167d45;
+      --green-dark: #0d5b32;
+      --green-soft: #e8f5ed;
+      --lime: #c7f05b;
+      --amber: #a86000;
+      --amber-soft: #fff4dc;
+      --red: #a43a3a;
+      --red-soft: #fff0ef;
+      --blue: #2765a8;
+      --blue-soft: #edf4fc;
+      --shadow: 0 10px 30px rgba(18, 42, 27, .07);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font: 14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    html.embedded-mode {
+      scrollbar-color: transparent transparent !important;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    html.embedded-mode::-webkit-scrollbar { width: 0; height: 0; }
+    html.embedded-mode::-webkit-scrollbar-track { background: transparent; }
+    html.embedded-mode::-webkit-scrollbar-thumb { background: transparent; }
+    html.preview-mode,
+    html.preview-mode body {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    html.preview-mode::-webkit-scrollbar,
+    html.preview-mode body::-webkit-scrollbar { display: none; }
+    button, input, select, textarea { font: inherit; }
+    button { color: inherit; }
+    .app { min-height: 100vh; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 68px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #121814;
+      color: white;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 760; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 31px; height: 31px; border-radius: 50%;
+      display: grid; place-items: center;
+      border: 7px solid var(--lime); border-right-color: transparent;
+      transform: rotate(-24deg);
+    }
+    .brand span { font-size: 18px; }
+    .global-nav { display: flex; align-items: center; gap: 8px; }
+    .global-nav button {
+      border: 0; border-radius: 9px; background: transparent; color: #bdc5bf;
+      padding: 10px 15px; cursor: pointer;
+    }
+    .global-nav button.active { color: white; background: #29322c; }
+    .top-actions { display: flex; align-items: center; gap: 13px; }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: 10px; border: 1px solid #3b463e;
+      display: grid; place-items: center; background: #202822; color: white; cursor: pointer;
+    }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--lime); color: #16331f; display: grid; place-items: center; font-weight: 800; }
+    .shell { max-width: 1480px; margin: 0 auto; padding: 32px; }
+    .screen { display: none; }
+    .screen.active { display: block; animation: in .2s ease-out; }
+    @keyframes in { from { opacity: 0; transform: translateY(5px); } }
+    .page-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 7px; font-size: 30px; line-height: 1.18; letter-spacing: -.04em; }
+    h2 { margin-bottom: 5px; font-size: 21px; letter-spacing: -.025em; }
+    h3 { margin-bottom: 5px; font-size: 15px; }
+    .subtle { color: var(--muted); }
+    .eyebrow { color: var(--green-dark); text-transform: uppercase; letter-spacing: .09em; font-size: 11px; font-weight: 800; margin-bottom: 7px; }
+    .btn {
+      border: 1px solid var(--line); border-radius: 10px; min-height: 42px; padding: 0 16px;
+      background: white; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn.primary { color: white; border-color: var(--green); background: var(--green); }
+    .btn.dark { color: white; border-color: #17211b; background: #17211b; }
+    .btn.ghost { background: transparent; }
+    .btn.small { min-height: 34px; padding: 0 11px; font-size: 12px; }
+    .link-btn { padding: 0; border: 0; background: transparent; color: var(--green-dark); font-weight: 750; cursor: pointer; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .metric { padding: 20px; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between; }
+    .metric .value { font-size: 32px; line-height: 1; font-weight: 780; letter-spacing: -.04em; }
+    .metric .label { color: var(--muted); }
+    .metric .delta { font-size: 12px; font-weight: 720; color: var(--green-dark); }
+    .layout-2 { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(300px, .75fr); gap: 22px; }
+    .section-card { padding: 23px; }
+    .section-head { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 18px; }
+    .visit-list { display: grid; gap: 12px; }
+    .visit-row {
+      border: 1px solid var(--line); border-radius: 14px; padding: 16px;
+      display: grid; grid-template-columns: minmax(210px, 1.4fr) 1fr 1fr 1fr auto;
+      gap: 16px; align-items: center; cursor: pointer; transition: .15s ease;
+    }
+    .visit-row:hover { border-color: #adc9b6; transform: translateY(-1px); }
+    .visit-title { font-weight: 780; margin-bottom: 3px; }
+    .meta { color: var(--muted); font-size: 12px; }
+    .cell-label { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+    .cell-value { font-weight: 680; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px; width: fit-content;
+      min-height: 27px; padding: 0 9px; border-radius: 999px; background: #f0f3f0; font-size: 11px; font-weight: 760;
+    }
+    .badge.green { background: var(--green-soft); color: var(--green-dark); }
+    .badge.amber { background: var(--amber-soft); color: var(--amber); }
+    .badge.red { background: var(--red-soft); color: var(--red); }
+    .badge.blue { background: var(--blue-soft); color: var(--blue); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .attention-list { display: grid; gap: 10px; }
+    .attention {
+      padding: 14px; border-radius: 12px; border: 1px solid var(--line);
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .attention .symbol { width: 30px; height: 30px; flex: 0 0 auto; border-radius: 9px; display: grid; place-items: center; background: var(--amber-soft); color: var(--amber); font-weight: 900; }
+    .attention p { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+    .policy { margin-top: 16px; padding: 16px; background: #f0f7f2; border-radius: 13px; }
+    .policy strong { display: block; margin-bottom: 4px; }
+
+    .step-shell { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 24px; }
+    .step-nav { padding: 16px; height: fit-content; position: sticky; top: 92px; }
+    .step-nav button {
+      width: 100%; border: 0; background: transparent; padding: 13px; border-radius: 11px;
+      display: flex; gap: 11px; text-align: left; cursor: pointer; color: var(--muted); font-weight: 680;
+    }
+    .step-nav button.active { background: var(--green-soft); color: var(--green-dark); }
+    .step-number { width: 24px; height: 24px; border-radius: 50%; border: 1px solid currentColor; display: grid; place-items: center; font-size: 11px; flex: 0 0 auto; }
+    .step-nav button.done .step-number { background: var(--green); color: white; border-color: var(--green); }
+    .step-nav .help-note { margin: 16px 7px 3px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+    .form-card { padding: 28px; }
+    .form-section { padding: 22px 0; border-top: 1px solid var(--line); }
+    .form-section:first-of-type { border-top: 0; padding-top: 8px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
+    .field.full { grid-column: 1 / -1; }
+    label { display: block; margin-bottom: 7px; font-size: 12px; font-weight: 760; }
+    .required::after { content: " *"; color: var(--red); }
+    input, select, textarea {
+      width: 100%; border: 1px solid #cfd8d1; background: white; color: var(--ink);
+      border-radius: 10px; min-height: 44px; padding: 10px 12px; outline: none;
+    }
+    textarea { min-height: 98px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(22, 125, 69, .1); }
+    .hint { margin-top: 6px; color: var(--muted); font-size: 11px; }
+    .location-block { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfb; }
+    .location-block + .location-block { margin-top: 12px; }
+    .inline-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .notice { padding: 14px 16px; border-radius: 11px; background: var(--amber-soft); color: #744500; display: flex; gap: 10px; align-items: flex-start; }
+    .form-actions { padding-top: 21px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+
+    .workspace-head { padding: 23px; margin-bottom: 18px; display: flex; justify-content: space-between; gap: 25px; }
+    .visit-context {
+      padding: 15px 20px; margin-bottom: 14px; display: flex; justify-content: space-between;
+      gap: 20px; align-items: center; background: #fbfcfb;
+    }
+    .visit-context-main { display: flex; gap: 13px; align-items: center; min-width: 0; }
+    .visit-context-main strong { display: block; font-size: 15px; }
+    .visit-context-main .meta { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tab-head { margin-bottom: 18px; align-items: center; }
+    .tab-head > .btn {
+      min-height: 42px;
+      height: 42px;
+      align-self: center;
+      white-space: nowrap;
+    }
+    .tab-head > .badge {
+      min-height: 27px;
+      align-self: center;
+      white-space: nowrap;
+      padding: 0 11px;
+    }
+    .workspace-title { display: flex; gap: 14px; align-items: flex-start; }
+    .back { width: 38px; height: 38px; border: 1px solid var(--line); background: white; border-radius: 10px; cursor: pointer; }
+    .workspace-stats { display: flex; gap: 10px; align-items: stretch; }
+    .mini-stat { min-width: 145px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fbfcfb; }
+    .mini-stat strong { display: block; font-size: 18px; }
+    .tabs { display: flex; gap: 5px; padding: 6px; margin-bottom: 18px; border: 1px solid var(--line); background: white; border-radius: 13px; width: fit-content; }
+    .tabs button { border: 0; background: transparent; padding: 10px 15px; border-radius: 9px; color: var(--muted); font-weight: 720; cursor: pointer; }
+    .tabs button.active { background: #1b251f; color: white; }
+    .progress-track { height: 8px; border-radius: 99px; background: #e4e9e5; overflow: hidden; margin-top: 10px; }
+    .progress-track span { height: 100%; display: block; border-radius: inherit; background: var(--green); }
+    .task-list { display: grid; gap: 10px; }
+    .task { padding: 15px; border: 1px solid var(--line); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .task-left { display: flex; gap: 12px; align-items: center; }
+    .check { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #bbc7be; display: grid; place-items: center; color: white; }
+    .check.done { background: var(--green); border-color: var(--green); }
+    .timeline { display: grid; gap: 0; }
+    .timeline-item { position: relative; padding: 0 0 22px 26px; border-left: 1px solid #d5ddd6; margin-left: 6px; }
+    .timeline-item::before { content:""; position: absolute; left: -5px; top: 3px; width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
+    .timeline-item:last-child { border-left-color: transparent; }
+    .timeline-item time { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+
+    .attendee-toolbar { display: flex; justify-content: space-between; gap: 14px; align-items: center; margin-bottom: 16px; }
+    .segmented { display: inline-flex; padding: 4px; border-radius: 10px; background: #eef1ee; }
+    .segmented button { border: 0; background: transparent; border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 720; color: var(--muted); cursor: pointer; }
+    .segmented button.active { background: white; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .person-table { width: 100%; border-collapse: collapse; }
+    .person-table th { padding: 11px 12px; text-align: left; color: var(--muted); font-size: 11px; border-bottom: 1px solid var(--line); }
+    .person-table td { padding: 14px 12px; border-bottom: 1px solid #edf0ed; }
+    .person { display: flex; gap: 10px; align-items: center; }
+    .person-avatar { width: 34px; height: 34px; border-radius: 50%; background: #edf1ed; display: grid; place-items: center; font-weight: 800; color: var(--green-dark); }
+
+    .location-tabs { display: flex; gap: 10px; margin-bottom: 16px; }
+    .location-tabs button { border: 1px solid var(--line); background: white; border-radius: 12px; padding: 12px 15px; text-align: left; cursor: pointer; min-width: 190px; }
+    .location-tabs button.active { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+    .session-list { display: grid; gap: 12px; }
+    .session {
+      border: 1px solid var(--line); border-radius: 14px; padding: 17px;
+      display: grid; grid-template-columns: 110px minmax(210px, 1fr) minmax(220px, 1.2fr) auto;
+      align-items: center; gap: 18px;
+    }
+    .date-tile { border-right: 1px solid var(--line); }
+    .date-tile strong { display: block; font-size: 20px; }
+    .service-chips { display: flex; gap: 7px; flex-wrap: wrap; }
+    .chip { padding: 6px 8px; border-radius: 8px; background: #eef3ef; color: #39453d; font-size: 11px; font-weight: 680; }
+
+    .service-layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 20px; }
+    .session-summary { padding: 18px; height: fit-content; position: sticky; top: 92px; }
+    .session-summary .summary-row { padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .session-summary .summary-row:last-child { border: 0; }
+    .service-list { display: grid; gap: 12px; }
+    .service-row { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+    .service-top { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+    .service-name { display: flex; gap: 12px; align-items: flex-start; }
+    .service-icon { width: 40px; height: 40px; flex: 0 0 auto; border-radius: 11px; display: grid; place-items: center; background: var(--green-soft); color: var(--green-dark); font-size: 18px; }
+    .service-config { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
+    .recommendation { margin-top: 12px; padding: 11px 13px; border-radius: 10px; background: var(--blue-soft); color: #245486; font-size: 12px; }
+
+    .review-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; }
+    .review-section { margin-bottom: 13px; background: white; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .review-title { padding: 16px 18px; display: flex; justify-content: space-between; gap: 15px; align-items: center; }
+    .review-content { padding: 0 18px 18px; }
+    .review-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+    .review-cell { padding: 12px; background: #f7f9f7; border-radius: 10px; }
+    .review-aside { padding: 20px; height: fit-content; position: sticky; top: 92px; }
+    .ready-box { padding: 15px; background: var(--green-soft); border-radius: 12px; color: var(--green-dark); margin-bottom: 17px; }
+    .ready-box strong { display: block; margin-bottom: 3px; }
+    .checklist { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 10px; }
+    .checklist li { display: flex; gap: 9px; align-items: flex-start; color: var(--muted); font-size: 12px; }
+    .checklist b { color: var(--green); }
+    .mobile-switcher {
+      position: fixed; right: 18px; bottom: 18px; z-index: 30; display: none;
+      background: #17211b; color: white; border: 0; border-radius: 50%; width: 50px; height: 50px;
+    }
+    .toast-stack { position: fixed; right: 24px; top: 84px; z-index: 80; display: grid; gap: 10px; width: min(360px, calc(100vw - 32px)); }
+    .toast { padding: 14px 16px; border-radius: 12px; background: #18221c; color: white; box-shadow: 0 14px 35px rgba(0,0,0,.18); display: flex; gap: 11px; align-items: flex-start; animation: toast-in .22s ease-out; }
+    .toast.success { background: var(--green-dark); }
+    .toast.warning { background: #7a4b08; }
+    @keyframes toast-in { from { opacity: 0; transform: translateY(-8px); } }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 70; padding: 24px; background: rgba(10,18,13,.54); display: none; align-items: center; justify-content: center; }
+    .modal-backdrop.open { display: flex; }
+    .modal { width: min(620px, 100%); max-height: calc(100vh - 48px); overflow: auto; background: white; border-radius: 18px; box-shadow: 0 28px 80px rgba(0,0,0,.26); }
+    .modal-head, .modal-body, .modal-actions { padding: 20px 22px; }
+    .modal-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; border-bottom: 1px solid var(--line); }
+    .modal-head h2 { margin: 0; }
+    .modal-close { border: 0; background: #edf1ed; width: 34px; height: 34px; border-radius: 9px; cursor: pointer; }
+    .modal-actions { border-top: 1px solid var(--line); display: flex; justify-content: flex-end; gap: 9px; }
+    .confirmation-mark { width: 58px; height: 58px; margin-bottom: 16px; border-radius: 50%; display: grid; place-items: center; background: var(--green-soft); color: var(--green-dark); font-size: 27px; font-weight: 900; }
+    .interactive-chip { cursor: pointer; border: 1px solid transparent; }
+    .interactive-chip:not(.green):hover { border-color: #aac3b1; }
+    .row-hidden { display: none; }
+    .library-hero { padding: 28px; margin-bottom: 20px; display: flex; justify-content: space-between; gap: 28px; align-items: flex-end; background: linear-gradient(135deg, #f7fbf8, #e9f5ed); }
+    .library-hero h1 { max-width: 720px; }
+    .library-search { width: min(430px, 100%); display: flex; gap: 8px; padding: 7px; border: 1px solid #cddbd1; border-radius: 13px; background: white; }
+    .library-search input { min-height: 38px; border: 0; box-shadow: none; }
+    .library-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 20px; }
+    .library-filters { padding: 19px; height: fit-content; position: sticky; top: 92px; }
+    .filter-group { padding: 16px 0; border-top: 1px solid var(--line); }
+    .filter-group:first-of-type { border-top: 0; padding-top: 4px; }
+    .filter-option { display: flex; gap: 9px; align-items: center; padding: 7px 0; color: #425047; cursor: pointer; }
+    .filter-option input { width: 16px; min-height: 16px; accent-color: var(--green); }
+    .library-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 15px; }
+    .category-scroll { display: flex; gap: 8px; flex-wrap: wrap; }
+    .category-scroll button { border: 1px solid var(--line); border-radius: 999px; background: white; padding: 8px 12px; font-size: 12px; font-weight: 720; cursor: pointer; }
+    .category-scroll button.active { background: #17211b; border-color: #17211b; color: white; }
+    .service-catalogue { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .catalogue-card { padding: 19px; display: flex; min-height: 280px; flex-direction: column; border: 1px solid var(--line); border-radius: 15px; background: white; transition: .16s ease; }
+    .catalogue-card:hover { transform: translateY(-2px); border-color: #aac5b2; box-shadow: var(--shadow); }
+    .catalogue-icon { width: 45px; height: 45px; margin-bottom: 17px; border-radius: 12px; display: grid; place-items: center; background: var(--green-soft); color: var(--green-dark); font-size: 20px; }
+    .catalogue-card p { color: var(--muted); font-size: 12px; }
+    .catalogue-meta { margin-top: auto; display: grid; gap: 8px; padding-top: 15px; }
+    .catalogue-meta-row { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; }
+    .catalogue-meta-row span { color: var(--muted); }
+    .catalogue-actions { display: flex; gap: 8px; margin-top: 15px; }
+    .bundle-section { margin-top: 22px; padding: 23px; }
+    .bundle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .bundle { min-height: 145px; padding: 17px; border-radius: 13px; background: #18211b; color: white; display: flex; flex-direction: column; justify-content: space-between; }
+    .bundle:nth-child(2) { background: #315949; }
+    .bundle:nth-child(3) { background: #62512d; }
+    .bundle p { color: #d6ddd8; font-size: 12px; margin-bottom: 0; }
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 65; background: rgba(10,18,13,.32); display: none; justify-content: flex-end; }
+    .drawer-backdrop.open { display: flex; }
+    .drawer { width: min(520px, 100%); height: 100%; overflow: auto; padding: 25px; background: white; box-shadow: -18px 0 60px rgba(0,0,0,.18); }
+    .drawer-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .drawer-section { padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .drawer-section ul { padding-left: 18px; color: var(--muted); }
+    .help-hero { padding: 34px; margin-bottom: 20px; text-align: center; background: linear-gradient(135deg, #17211b, #244b38); color: white; }
+    .help-hero h1 { font-size: 36px; }
+    .help-hero p { color: #d4ddd7; }
+    .help-search { max-width: 720px; margin: 22px auto 0; padding: 8px; border-radius: 14px; background: white; display: flex; gap: 8px; text-align: left; }
+    .help-search input { border: 0; box-shadow: none; }
+    .help-shortcuts { margin-top: 14px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .help-shortcuts button { border: 1px solid #65796c; color: white; background: rgba(255,255,255,.06); border-radius: 999px; padding: 7px 11px; cursor: pointer; font-size: 11px; }
+    .context-help { padding: 22px; margin-bottom: 20px; display: grid; grid-template-columns: minmax(0,1.2fr) minmax(300px,.8fr); gap: 22px; }
+    .context-actions { display: grid; gap: 9px; }
+    .context-action { padding: 13px; border: 1px solid var(--line); border-radius: 11px; display: flex; justify-content: space-between; gap: 15px; align-items: center; background: white; cursor: pointer; }
+    .help-category-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 22px; }
+    .help-category { padding: 20px; min-height: 180px; cursor: pointer; }
+    .help-category:hover { border-color: #aac5b2; transform: translateY(-1px); }
+    .help-category .catalogue-icon { margin-bottom: 13px; }
+    .help-category p { color: var(--muted); font-size: 12px; }
+    .help-category .link-btn { margin-top: 8px; }
+    .guide-layout { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(290px,.7fr); gap: 20px; }
+    .guide-list { padding: 22px; }
+    .guide-item { padding: 15px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .guide-item:first-of-type { border-top: 0; }
+    .contact-card { padding: 22px; height: fit-content; }
+    .contact-option { padding: 14px 0; border-top: 1px solid var(--line); }
+    .contact-option:first-of-type { border-top: 0; }
+    @media (max-width: 1050px) {
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .layout-2, .review-layout { grid-template-columns: 1fr; }
+      .review-aside { position: static; }
+      .visit-row { grid-template-columns: 1.4fr 1fr 1fr auto; }
+      .visit-row > div:nth-child(3) { display: none; }
+      .service-config { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 760px) {
+      .topbar { padding: 0 16px; }
+      .global-nav { display: none; }
+      .shell { padding: 20px 14px 80px; }
+      .page-head, .workspace-head, .visit-context { flex-direction: column; align-items: stretch; }
+      .metric-grid, .form-grid, .review-grid { grid-template-columns: 1fr; }
+      .step-shell, .service-layout { grid-template-columns: 1fr; }
+      .step-nav { position: static; display: flex; overflow-x: auto; }
+      .step-nav button { min-width: 150px; }
+      .step-nav .help-note { display: none; }
+      .visit-row { grid-template-columns: 1fr auto; }
+      .visit-row > div:not(:first-child):not(:last-child) { display: none; }
+      .workspace-stats { width: 100%; overflow-x: auto; }
+      .tabs { width: 100%; overflow-x: auto; }
+      .tabs button { white-space: nowrap; }
+      .session { grid-template-columns: 70px 1fr; }
+      .session > div:nth-child(3), .session > div:nth-child(4) { grid-column: 2; }
+      .service-config { grid-template-columns: 1fr; }
+      .person-table th:nth-child(3), .person-table td:nth-child(3),
+      .person-table th:nth-child(4), .person-table td:nth-child(4) { display: none; }
+      .mobile-switcher { display: grid; place-items: center; }
+      .library-hero { flex-direction: column; align-items: stretch; }
+      .library-shell { grid-template-columns: 1fr; }
+      .library-filters { position: static; }
+      .service-catalogue, .bundle-grid { grid-template-columns: 1fr; }
+      .context-help, .guide-layout { grid-template-columns: 1fr; }
+      .help-category-grid { grid-template-columns: 1fr; }
+      .help-hero { padding: 26px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><i class="brand-mark"></i><span>Captivate</span></div>
+    <nav class="global-nav" aria-label="Primary">
+      <button class="active" data-screen-link="dashboard">My visits</button>
+      <button data-screen-link="new-request">Plan a visit</button>
+      <button data-screen-link="library">Service library</button>
+      <button data-screen-link="help">Help</button>
+    </nav>
+    <div class="top-actions">
+      <button class="icon-btn" aria-label="Notifications">●</button>
+      <div class="avatar">RS</div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="screen active" id="dashboard">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Friday, 19 June</div>
+          <h1>Good morning, Ramesh</h1>
+          <p class="subtle">Here’s what needs your attention across upcoming client visits.</p>
+        </div>
+        <button class="btn primary" data-screen-link="new-request">＋ Plan a new visit</button>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric card"><div><div class="value">3</div><div class="label">Need your attention</div></div><span class="delta">2 due this week</span></article>
+        <article class="metric card"><div><div class="value">4</div><div class="label">Awaiting service teams</div></div><span class="delta">All within response time</span></article>
+        <article class="metric card"><div><div class="value">2</div><div class="label">Confirmed visits</div></div><span class="delta">Next visit in 12 days</span></article>
+        <article class="metric card"><div><div class="value">8</div><div class="label">Completed this quarter</div></div><span class="delta">View visit history</span></article>
+      </div>
+
+      <div class="layout-2">
+        <section class="section-card card">
+          <div class="section-head">
+            <div><h2>Upcoming visits</h2><p class="subtle">Sorted by next action and visit date</p></div>
+            <button class="link-btn">View all visits</button>
+          </div>
+          <div class="visit-list">
+            <article class="visit-row" data-screen-link="workspace">
+              <div><div class="visit-title">Dell Technologies leadership visit</div><div class="meta">Hyderabad · Bengaluru · CX-100908</div></div>
+              <div><div class="cell-label">Visit dates</div><div class="cell-value">05–08 Jul 2026</div></div>
+              <div><div class="cell-label">Information</div><div class="cell-value">8 of 10 complete</div></div>
+              <div><span class="badge amber"><i class="dot"></i>Action needed</span></div>
+              <button class="btn small">Open visit →</button>
+            </article>
+            <article class="visit-row">
+              <div><div class="visit-title">ABC Technologies executive workshop</div><div class="meta">Mumbai NESCO · CX-100921</div></div>
+              <div><div class="cell-label">Visit date</div><div class="cell-value">14 Jul 2026</div></div>
+              <div><div class="cell-label">Services</div><div class="cell-value">4 of 5 confirmed</div></div>
+              <div><span class="badge blue"><i class="dot"></i>Under review</span></div>
+              <button class="btn small">Track visit →</button>
+            </article>
+            <article class="visit-row">
+              <div><div class="visit-title">Orion Bank client immersion</div><div class="meta">Bengaluru Vista · CX-100887</div></div>
+              <div><div class="cell-label">Visit date</div><div class="cell-value">01 Jul 2026</div></div>
+              <div><div class="cell-label">Services</div><div class="cell-value">6 of 6 confirmed</div></div>
+              <div><span class="badge green"><i class="dot"></i>Confirmed</span></div>
+              <button class="btn small">View plan →</button>
+            </article>
+          </div>
+        </section>
+
+        <aside class="section-card card">
+          <div class="section-head"><div><h2>Attention required</h2><p class="subtle">Items blocking confirmation</p></div></div>
+          <div class="attention-list">
+            <div class="attention"><span class="symbol">!</span><div><strong>Add dietary requirements</strong><p>Dell Technologies · Lunch in Hyderabad · Due 22 Jun</p></div></div>
+            <div class="attention"><span class="symbol">?</span><div><strong>Technology team has a question</strong><p>Confirm whether a non-Zoom VC bridge is required.</p></div></div>
+            <div class="attention"><span class="symbol">↗</span><div><strong>Guest list is incomplete</strong><p>2 visitor profiles still need badge information.</p></div></div>
+          </div>
+          <div class="policy"><strong>Planning a visit soon?</strong><span class="subtle">Submit preliminary details at least 2 business days before the visit. Individual services may need more lead time.</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="screen" id="new-request">
+      <div class="page-head">
+        <div><div class="eyebrow">New visit</div><h1>Request preliminary support</h1><p class="subtle">Share what you know now. Attendees, sessions and detailed services can be completed later.</p></div>
+        <span class="badge blue">Autosaved just now</span>
+      </div>
+      <div class="step-shell">
+        <aside class="step-nav card">
+          <button class="active"><span class="step-number">1</span><span>Preliminary details<small style="display:block;font-weight:500">Required now</small></span></button>
+          <button><span class="step-number">2</span><span>Attendees<small style="display:block;font-weight:500">Can be added later</small></span></button>
+          <button><span class="step-number">3</span><span>Sessions & services<small style="display:block;font-weight:500">Can be added later</small></span></button>
+          <button><span class="step-number">4</span><span>Review request</span></button>
+          <p class="help-note">Submitting this step alerts the coordination team and creates a shared visit workspace. Services are not confirmed yet.</p>
+        </aside>
+
+        <section class="form-card card">
+          <div class="form-section">
+            <div class="section-head"><div><h2>About the visit</h2><p class="subtle">Enough information to identify and provisionally assess the visit.</p></div></div>
+            <div class="form-grid">
+              <div class="field"><label class="required">Client organisation</label><input value="Dell Technologies Inc."></div>
+              <div class="field"><label class="required">Visit type</label><select><option>Leadership visit</option></select></div>
+              <div class="field"><label class="required">Executive sponsor / hosting leader</label><input value="Anita Menon"></div>
+              <div class="field"><label class="required">Business area</label><select><option>Audit & Assurance</option></select></div>
+              <div class="field full"><label class="required">What should this visit achieve?</label><textarea>Strengthen the strategic relationship, demonstrate our technology capabilities and align leadership teams on next-year priorities.</textarea><div class="hint">This helps service teams understand the level and tone of support required.</div></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-head"><div><h2>Locations and dates</h2><p class="subtle">Add each city or office the visitors will attend.</p></div></div>
+            <div class="location-block">
+              <div class="inline-title"><strong>Location 1</strong><button class="link-btn">Remove</button></div>
+              <div class="form-grid">
+                <div><label class="required">Office</label><select><option>Hyderabad — Towers 1 & 2</option></select></div>
+                <div><label class="required">Visit dates</label><input value="05 Jul 2026 — 06 Jul 2026"></div>
+                <div><label>Approximate start time</label><input value="09:00 AM"></div>
+                <div><label>Approximate attendees</label><input value="15"></div>
+              </div>
+            </div>
+            <div class="location-block">
+              <div class="inline-title"><strong>Location 2</strong><button class="link-btn">Remove</button></div>
+              <div class="form-grid">
+                <div><label class="required">Office</label><select><option>Bengaluru — Vista</option></select></div>
+                <div><label class="required">Visit dates</label><input value="07 Jul 2026 — 08 Jul 2026"></div>
+                <div><label>Approximate start time</label><input value="10:00 AM"></div>
+                <div><label>Approximate attendees</label><input value="18"></div>
+              </div>
+            </div>
+            <button class="btn ghost" style="margin-top:12px">＋ Add another location</button>
+          </div>
+
+          <div class="form-section">
+            <div class="section-head"><div><h2>Expected support</h2><p class="subtle">Choose broad categories now; detailed requirements come later.</p></div></div>
+            <div class="service-chips">
+              <span class="badge green">✓ Meeting spaces</span><span class="badge green">✓ Technology</span><span class="badge green">✓ Visitor access</span><span class="badge green">✓ Food & refreshments</span><span class="badge">＋ Transport</span><span class="badge">＋ Experience design</span>
+            </div>
+          </div>
+          <div class="notice"><strong>48h</strong><span>Your first location is 16 days away. The coordination team aims to review preliminary requests within 2 business days. Service confirmation depends on availability and service-specific lead times.</span></div>
+          <div class="form-actions"><button class="btn" data-action="save-exit">Save and exit</button><button class="btn primary" data-action="submit-preliminary">Request preliminary support →</button></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="screen" id="library">
+      <section class="library-hero card">
+        <div>
+          <div class="eyebrow">Plan with confidence</div>
+          <h1>Explore services for memorable client visits</h1>
+          <p class="subtle">Understand what each service includes, where it is available and how early to request it.</p>
+        </div>
+        <div class="library-search">
+          <input data-library-search aria-label="Search services" placeholder="Search rooms, catering, technology...">
+          <button class="btn primary">Search</button>
+        </div>
+      </section>
+
+      <div class="library-shell">
+        <aside class="library-filters card">
+          <div class="section-head"><div><h2>Filters</h2><p class="subtle">Narrow available support</p></div><button class="link-btn" data-action="clear-library">Clear</button></div>
+          <div class="filter-group">
+            <h3>Office location</h3>
+            <label class="filter-option"><input type="checkbox" data-library-location value="Hyderabad"> Hyderabad</label>
+            <label class="filter-option"><input type="checkbox" data-library-location value="Bengaluru"> Bengaluru</label>
+            <label class="filter-option"><input type="checkbox" data-library-location value="Mumbai"> Mumbai</label>
+          </div>
+          <div class="filter-group">
+            <h3>Lead time</h3>
+            <label class="filter-option"><input type="radio" name="lead" value="all" checked> Any lead time</label>
+            <label class="filter-option"><input type="radio" name="lead" value="2"> Up to 2 days</label>
+            <label class="filter-option"><input type="radio" name="lead" value="5"> Up to 5 days</label>
+          </div>
+          <div class="filter-group">
+            <h3>Visit context</h3>
+            <label class="filter-option"><input type="checkbox"> Leadership visit</label>
+            <label class="filter-option"><input type="checkbox"> Workshop</label>
+            <label class="filter-option"><input type="checkbox"> Client immersion</label>
+          </div>
+        </aside>
+
+        <div>
+          <div class="library-toolbar">
+            <div class="category-scroll" data-library-categories>
+              <button class="active" data-category="all">All services</button>
+              <button data-category="spaces">Spaces</button>
+              <button data-category="technology">Technology</button>
+              <button data-category="access">Visitor access</button>
+              <button data-category="food">Food & refreshments</button>
+              <button data-category="experience">Experience design</button>
+            </div>
+            <span class="subtle" data-library-count>6 services</span>
+          </div>
+
+          <section class="service-catalogue">
+            <article class="catalogue-card" data-library-card data-category="spaces" data-locations="Hyderabad Bengaluru Mumbai" data-lead="2">
+              <span class="catalogue-icon">▣</span><span class="badge green">Spaces</span>
+              <h2 style="margin-top:13px">Executive meeting space</h2>
+              <p>Boardrooms and collaboration spaces configured for client and leadership discussions.</p>
+              <div class="catalogue-meta"><div class="catalogue-meta-row"><span>Lead time</span><strong>2 business days</strong></div><div class="catalogue-meta-row"><span>Available in</span><strong>All major offices</strong></div></div>
+              <div class="catalogue-actions"><button class="btn small" data-action="view-service" data-service="Executive meeting space">View details</button><button class="btn small primary" data-action="add-library-service">Add to visit</button></div>
+            </article>
+            <article class="catalogue-card" data-library-card data-category="technology" data-locations="Hyderabad Bengaluru Mumbai" data-lead="2">
+              <span class="catalogue-icon">◉</span><span class="badge blue">Technology</span>
+              <h2 style="margin-top:13px">AV and collaboration support</h2>
+              <p>Room readiness, video conferencing, presentation equipment and on-site technical support.</p>
+              <div class="catalogue-meta"><div class="catalogue-meta-row"><span>Lead time</span><strong>2 business days</strong></div><div class="catalogue-meta-row"><span>Available in</span><strong>All major offices</strong></div></div>
+              <div class="catalogue-actions"><button class="btn small" data-action="view-service" data-service="AV and collaboration support">View details</button><button class="btn small primary" data-action="add-library-service">Add to visit</button></div>
+            </article>
+            <article class="catalogue-card" data-library-card data-category="food" data-locations="Hyderabad Bengaluru" data-lead="5">
+              <span class="catalogue-icon">☕</span><span class="badge amber">Food & refreshments</span>
+              <h2 style="margin-top:13px">Hosted leadership lunch</h2>
+              <p>A curated dining experience with menu options, dietary planning and executive hosting support.</p>
+              <div class="catalogue-meta"><div class="catalogue-meta-row"><span>Lead time</span><strong>5 business days</strong></div><div class="catalogue-meta-row"><span>Available in</span><strong>Hyderabad, Bengaluru</strong></div></div>
+              <div class="catalogue-actions"><button class="btn small" data-action="view-service" data-service="Hosted leadership lunch">View details</button><button class="btn small primary" data-action="add-library-service">Add to visit</button></div>
+            </article>
+            <article class="catalogue-card" data-library-card data-category="access" data-locations="Hyderabad Bengaluru Mumbai" data-lead="2">
+              <span class="catalogue-icon">⌁</span><span class="badge green">Visitor access</span>
+              <h2 style="margin-top:13px">Visitor badging</h2>
+              <p>Pre-arrival registration, security coordination and prepared badges for external visitors.</p>
+              <div class="catalogue-meta"><div class="catalogue-meta-row"><span>Lead time</span><strong>2 business days</strong></div><div class="catalogue-meta-row"><span>Available in</span><strong>All offices</strong></div></div>
+              <div class="catalogue-actions"><button class="btn small" data-action="view-service" data-service="Visitor badging">View details</button><button class="btn small primary" data-action="add-library-service">Add to visit</button></div>
+            </article>
+            <article class="catalogue-card" data-library-card data-category="experience" data-locations="Hyderabad Bengaluru" data-lead="5">
+              <span class="catalogue-icon">✦</span><span class="badge blue">Experience design</span>
+              <h2 style="margin-top:13px">Innovation studio showcase</h2>
+              <p>A facilitated capability showcase tailored to the client’s priorities and desired business outcomes.</p>
+              <div class="catalogue-meta"><div class="catalogue-meta-row"><span>Lead time</span><strong>5 business days</strong></div><div class="catalogue-meta-row"><span>Available in</span><strong>Hyderabad, Bengaluru</strong></div></div>
+              <div class="catalogue-actions"><button class="btn small" data-action="view-service" data-service="Innovation studio showcase">View details</button><button class="btn small primary" data-action="add-library-service">Add to visit</button></div>
+            </article>
+            <article class="catalogue-card" data-library-card data-category="food" data-locations="Hyderabad Bengaluru Mumbai" data-lead="2">
+              <span class="catalogue-icon">◌</span><span class="badge amber">Food & refreshments</span>
+              <h2 style="margin-top:13px">In-room refreshments</h2>
+              <p>Tea, coffee and light refreshments timed to the session schedule and attendee requirements.</p>
+              <div class="catalogue-meta"><div class="catalogue-meta-row"><span>Lead time</span><strong>2 business days</strong></div><div class="catalogue-meta-row"><span>Available in</span><strong>All major offices</strong></div></div>
+              <div class="catalogue-actions"><button class="btn small" data-action="view-service" data-service="In-room refreshments">View details</button><button class="btn small primary" data-action="add-library-service">Add to visit</button></div>
+            </article>
+          </section>
+
+          <section class="bundle-section card">
+            <div class="section-head"><div><div class="eyebrow">Need inspiration?</div><h2>Start with a curated visit bundle</h2><p class="subtle">Common service combinations that can be customized for each session.</p></div></div>
+            <div class="bundle-grid">
+              <article class="bundle"><div><span class="badge green">5 services</span><h2 style="margin-top:12px">Leadership visit essentials</h2></div><p>Meeting space, AV readiness, visitor access, refreshments and an experience host.</p></article>
+              <article class="bundle"><div><span class="badge green">4 services</span><h2 style="margin-top:12px">Executive workshop</h2></div><p>Flexible collaboration room, facilitation supplies, technology and working lunch.</p></article>
+              <article class="bundle"><div><span class="badge amber">6 services</span><h2 style="margin-top:12px">Client immersion day</h2></div><p>A full-day journey combining leadership sessions, showcases and curated hospitality.</p></article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="help">
+      <section class="help-hero card">
+        <div class="eyebrow" style="color:var(--lime)">Captivate support</div>
+        <h1>How can we help?</h1>
+        <p>Find clear answers, resolve visit tasks and contact the right team with context.</p>
+        <div class="help-search">
+          <input data-help-search aria-label="Search help" placeholder="Search visitor badge, dietary requirements, change visit date...">
+          <button class="btn primary">Search help</button>
+        </div>
+        <div class="help-shortcuts">
+          <button data-help-query="Plan a new visit">Plan a new visit</button>
+          <button data-help-query="Update a submitted request">Update a submitted request</button>
+          <button data-help-query="Understand service statuses">Understand service statuses</button>
+          <button data-help-query="Urgent request">Urgent request</button>
+        </div>
+      </section>
+
+      <section class="context-help card">
+        <div>
+          <div class="eyebrow">Help for your active visit</div>
+          <h2>Dell Technologies leadership visit</h2>
+          <p class="subtle">We found three items where guidance may help you move the visit forward.</p>
+          <button class="link-btn" data-screen-link="workspace">Open visit workspace →</button>
+        </div>
+        <div class="context-actions">
+          <button class="context-action" data-screen-link="services"><span><strong>Complete service details</strong><small class="meta" style="display:block">Video platform and dietary information</small></span><span>→</span></button>
+          <button class="context-action" data-screen-link="attendees"><span><strong>Resolve badge information</strong><small class="meta" style="display:block">One visitor profile is incomplete</small></span><span>→</span></button>
+          <button class="context-action" data-action="open-conversation"><span><strong>Answer technology team</strong><small class="meta" style="display:block">A focused clarification is waiting</small></span><span>→</span></button>
+        </div>
+      </section>
+
+      <div class="section-head"><div><div class="eyebrow">Browse by task</div><h2>What are you trying to do?</h2></div></div>
+      <section class="help-category-grid">
+        <article class="help-category card" data-help-item="planning visit preliminary submission locations dates"><span class="catalogue-icon">＋</span><h2>Planning a visit</h2><p>Required initial information, timelines, multi-location visits and preliminary support.</p><button class="link-btn" data-action="open-guide" data-guide="Planning a visit">View guides →</button></article>
+        <article class="help-category card" data-help-item="attendees visitors access badge identification upload"><span class="catalogue-icon">♙</span><h2>Attendees & visitor access</h2><p>Guest details, badging, identification requirements and bulk attendee uploads.</p><button class="link-btn" data-action="open-guide" data-guide="Attendees and visitor access">View guides →</button></article>
+        <article class="help-category card" data-help-item="locations sessions itinerary meeting schedule people"><span class="catalogue-icon">▦</span><h2>Locations & sessions</h2><p>Create an itinerary, assign attendees and organize multi-city leadership meetings.</p><button class="link-btn" data-action="open-guide" data-guide="Locations and sessions">View guides →</button></article>
+        <article class="help-category card" data-help-item="services availability lead time confirmation owner"><span class="catalogue-icon">◇</span><h2>Services & availability</h2><p>Select services, understand lead times and know when support is actually confirmed.</p><button class="link-btn" data-action="open-guide" data-guide="Services and availability">View guides →</button></article>
+        <article class="help-category card" data-help-item="change edit cancel confirmed visit reopen approval"><span class="catalogue-icon">↻</span><h2>Changes & cancellations</h2><p>Edit submitted information and understand which services need to be reconfirmed.</p><button class="link-btn" data-action="open-guide" data-guide="Changes and cancellations">View guides →</button></article>
+        <article class="help-category card" data-help-item="tracking notifications status email question progress"><span class="catalogue-icon">◎</span><h2>Tracking & notifications</h2><p>Follow service progress, answer questions and manage email or dashboard updates.</p><button class="link-btn" data-action="open-guide" data-guide="Tracking and notifications">View guides →</button></article>
+      </section>
+
+      <div class="guide-layout">
+        <section class="guide-list card">
+          <div class="section-head"><div><div class="eyebrow">Popular guides</div><h2>Answers that prevent extra calls</h2></div></div>
+          <article class="guide-item" data-help-item="preliminary submission what happens"><div><strong>What happens after preliminary submission?</strong><div class="meta">3 minute read · Planning a visit</div></div><button class="btn small" data-action="open-guide" data-guide="What happens after preliminary submission?">Read →</button></article>
+          <article class="guide-item" data-help-item="service confirmed status"><div><strong>When is a service actually confirmed?</strong><div class="meta">2 minute read · Services</div></div><button class="btn small" data-action="open-guide" data-guide="When is a service actually confirmed?">Read →</button></article>
+          <article class="guide-item" data-help-item="change reopen approval service"><div><strong>Which changes reopen service approval?</strong><div class="meta">4 minute read · Changes</div></div><button class="btn small" data-action="open-guide" data-guide="Which changes reopen service approval?">Read →</button></article>
+          <article class="guide-item" data-help-item="multi location visit"><div><strong>How do multi-location visits work?</strong><div class="meta">3 minute read · Locations</div></div><button class="btn small" data-action="open-guide" data-guide="How do multi-location visits work?">Read →</button></article>
+        </section>
+
+        <aside class="contact-card card">
+          <div class="eyebrow">Still need help?</div><h2>Contact the right team</h2><p class="subtle">Choose a structured option so the support team receives the relevant visit context.</p>
+          <div class="contact-option"><strong>Ask inside a visit</strong><p class="meta">Best for questions about a service or active request.</p><button class="link-btn" data-action="open-conversation">Open conversation →</button></div>
+          <div class="contact-option"><strong>Request consultation</strong><p class="meta">For genuinely complex or unusual visit plans.</p><button class="link-btn" data-action="request-consultation">Request consultation →</button></div>
+          <div class="contact-option"><strong>Report a technical issue</strong><p class="meta">For access, upload or application errors.</p><button class="link-btn" data-action="report-issue">Report issue →</button></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="screen" id="workspace">
+      <section class="visit-context card">
+        <div class="visit-context-main"><button class="back" data-screen-link="dashboard">←</button><div><strong>Dell Technologies leadership visit</strong><div class="meta">CX-100908 · Hyderabad and Bengaluru · 05–08 July 2026</div></div></div>
+        <span class="badge amber">Action needed</span>
+      </section>
+
+      <nav class="tabs">
+        <button class="active">Overview</button>
+        <button data-screen-link="attendees">Attendees</button>
+        <button data-screen-link="sessions">Locations & sessions</button>
+        <button data-screen-link="services">Services</button>
+        <button data-screen-link="review">Review & send</button>
+      </nav>
+
+      <section class="workspace-head tab-head card">
+        <div class="workspace-title">
+          <div><div class="eyebrow">Preliminary support requested</div><h1>Visit overview</h1><p class="subtle">Track information readiness, service confirmation and next actions.</p></div>
+        </div>
+        <div class="workspace-stats">
+          <div class="mini-stat"><span class="cell-label">Information readiness</span><strong>80%</strong><div class="progress-track"><span style="width:80%"></span></div></div>
+          <div class="mini-stat"><span class="cell-label">Service confirmation</span><strong>3 of 8</strong><div class="progress-track"><span style="width:37%"></span></div></div>
+          <div class="mini-stat"><span class="cell-label">Visit status</span><strong style="font-size:15px;margin-top:3px">Upcoming</strong><span class="badge amber" style="margin-top:7px">Action needed</span></div>
+        </div>
+      </section>
+
+      <div class="layout-2">
+        <section class="section-card card">
+          <div class="section-head"><div><h2>Next steps</h2><p class="subtle">Complete these items to send final requirements for confirmation.</p></div><span class="badge amber">2 items remaining</span></div>
+          <div class="task-list">
+            <div class="task"><div class="task-left"><span class="check done">✓</span><div><strong>Preliminary visit details</strong><div class="meta">Submitted 19 Jun by Ramesh S.</div></div></div><button class="link-btn">View</button></div>
+            <div class="task"><div class="task-left"><span class="check done">✓</span><div><strong>Attendee information</strong><div class="meta">13 visitors and 8 internal attendees added</div></div></div><button class="link-btn" data-screen-link="attendees">Edit</button></div>
+            <div class="task"><div class="task-left"><span class="check">3</span><div><strong>Complete service requirements</strong><div class="meta">Dietary details and VC platform are still required</div></div></div><button class="btn small primary" data-screen-link="services">Continue</button></div>
+            <div class="task"><div class="task-left"><span class="check">4</span><div><strong>Review and send final requirements</strong><div class="meta">Available after required information is complete</div></div></div><button class="btn small" disabled>Review</button></div>
+          </div>
+        </section>
+
+        <aside class="section-card card">
+          <div class="section-head"><div><h2>Recent activity</h2><p class="subtle">Updates from everyone involved</p></div></div>
+          <div class="timeline">
+            <div class="timeline-item"><strong>Technology team asked a question</strong><p class="meta">Is a non-Zoom VC bridge required for the Bengaluru session?</p><time>Today, 10:42 AM</time></div>
+            <div class="timeline-item"><strong>Meeting space confirmed</strong><p class="meta">Hyderabad · Leadership alignment session</p><time>Yesterday, 4:18 PM</time></div>
+            <div class="timeline-item"><strong>Preliminary request received</strong><p class="meta">Coordination team assigned: Priya Rao</p><time>19 Jun, 11:05 AM</time></div>
+          </div>
+          <button class="btn" style="width:100%">Open conversation</button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="screen" id="attendees">
+      <section class="visit-context card">
+        <div class="visit-context-main"><button class="back" data-screen-link="dashboard">←</button><div><strong>Dell Technologies leadership visit</strong><div class="meta">CX-100908 · Hyderabad and Bengaluru · 05–08 July 2026</div></div></div>
+        <span class="badge amber">Action needed</span>
+      </section>
+      <nav class="tabs"><button data-screen-link="workspace">Overview</button><button class="active">Attendees</button><button data-screen-link="sessions">Locations & sessions</button><button data-screen-link="services">Services</button><button data-screen-link="review">Review & send</button></nav>
+      <section class="workspace-head tab-head card">
+        <div class="workspace-title"><div><div class="eyebrow">People and access</div><h1>Attendees</h1><p class="subtle">Manage visitor, host and local attendee details in one place.</p></div></div>
+        <button class="btn primary" data-action="add-attendee">＋ Add attendee</button>
+      </section>
+      <section class="section-card card">
+        <div class="attendee-toolbar">
+          <div class="segmented" data-attendee-filters><button class="active" data-filter="all">All 21</button><button data-filter="visitor">Visitors 13</button><button data-filter="internal">Internal 8</button><button data-filter="host">Hosts 3</button></div>
+          <div style="display:flex;gap:8px"><button class="btn small" data-action="import-attendees">Import spreadsheet</button><button class="btn small" data-action="copy-attendees">Copy from another visit</button></div>
+        </div>
+        <table class="person-table">
+          <thead><tr><th>Person</th><th>Type</th><th>Attending</th><th>Access readiness</th><th></th></tr></thead>
+          <tbody>
+            <tr data-person-type="visitor"><td><div class="person"><span class="person-avatar">AK</span><div><strong>Arjun Khanna</strong><div class="meta">Chief Strategy Officer</div></div></div></td><td>Client visitor</td><td>Hyderabad + Bengaluru</td><td><span class="badge green">Complete</span></td><td><button class="link-btn" data-action="edit-attendee">Edit</button></td></tr>
+            <tr data-person-type="visitor"><td><div class="person"><span class="person-avatar">LM</span><div><strong>Leena Mehta</strong><div class="meta">VP, Transformation</div></div></div></td><td>Client visitor</td><td>Hyderabad</td><td><span class="badge amber">ID detail needed</span></td><td><button class="link-btn" data-action="edit-attendee">Complete</button></td></tr>
+            <tr data-person-type="host"><td><div class="person"><span class="person-avatar">AM</span><div><strong>Anita Menon</strong><div class="meta">Managing Director</div></div></div></td><td>Executive host</td><td>All sessions</td><td><span class="badge blue">Internal</span></td><td><button class="link-btn" data-action="edit-attendee">Edit</button></td></tr>
+            <tr data-person-type="internal"><td><div class="person"><span class="person-avatar">RS</span><div><strong>Ramesh Sivakumar</strong><div class="meta">Audit & Assurance</div></div></div></td><td>Visit organiser</td><td>All sessions</td><td><span class="badge blue">Internal</span></td><td><button class="link-btn" data-action="edit-attendee">Edit</button></td></tr>
+          </tbody>
+        </table>
+        <div class="notice" style="margin-top:18px"><strong>Tip</strong><span>Assigning attendees to sessions lets Captivate calculate room capacity, catering quantities and badge requirements automatically.</span></div>
+      </section>
+    </section>
+
+    <section class="screen" id="sessions">
+      <section class="visit-context card">
+        <div class="visit-context-main"><button class="back" data-screen-link="dashboard">←</button><div><strong>Dell Technologies leadership visit</strong><div class="meta">CX-100908 · Hyderabad and Bengaluru · 05–08 July 2026</div></div></div>
+        <span class="badge amber">Action needed</span>
+      </section>
+      <nav class="tabs"><button data-screen-link="workspace">Overview</button><button data-screen-link="attendees">Attendees</button><button class="active">Locations & sessions</button><button data-screen-link="services">Services</button><button data-screen-link="review">Review & send</button></nav>
+      <section class="workspace-head tab-head card">
+        <div class="workspace-title"><div><div class="eyebrow">Visit itinerary</div><h1>Locations & sessions</h1><p class="subtle">Build the visit itinerary before configuring support.</p></div></div>
+        <button class="btn primary" data-action="add-session">＋ Add session</button>
+      </section>
+      <div class="location-tabs">
+        <button class="active" data-location="Hyderabad"><strong>Hyderabad</strong><div class="meta">05–06 Jul · 3 sessions</div></button>
+        <button data-location="Bengaluru"><strong>Bengaluru</strong><div class="meta">07–08 Jul · 2 sessions</div></button>
+        <button style="border-style:dashed" data-action="add-location">＋ Add location</button>
+      </div>
+      <section class="section-card card">
+        <div class="section-head"><div><h2 data-itinerary-title>Hyderabad itinerary</h2><p class="subtle" data-itinerary-meta>Towers 1 & 2 · Local coordinator: Neha Kapoor</p></div><button class="btn small" data-action="upload-schedule">Upload schedule</button></div>
+        <div class="session-list">
+          <article class="session"><div class="date-tile"><span class="meta">SUN</span><strong>05 Jul</strong><span class="meta">09:30–11:00</span></div><div><strong>Leadership welcome & alignment</strong><div class="meta">15 attendees · Executive conference room</div></div><div class="service-chips"><span class="chip">Meeting room</span><span class="chip">AV support</span><span class="chip">Refreshments</span></div><button class="btn small" data-screen-link="services">Configure →</button></article>
+          <article class="session"><div class="date-tile"><span class="meta">SUN</span><strong>05 Jul</strong><span class="meta">12:30–14:00</span></div><div><strong>Hosted leadership lunch</strong><div class="meta">22 attendees · Executive dining</div></div><div class="service-chips"><span class="chip">Lunch</span><span class="chip">Dietary needs</span><span class="chip">Experience host</span></div><button class="btn small">Configure →</button></article>
+          <article class="session"><div class="date-tile"><span class="meta">MON</span><strong>06 Jul</strong><span class="meta">10:00–12:00</span></div><div><strong>Technology capability showcase</strong><div class="meta">18 attendees · Innovation studio</div></div><div class="service-chips"><span class="chip">Collaboration space</span><span class="chip">Demo support</span><span class="chip">Badging</span></div><button class="btn small">Configure →</button></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="screen" id="services">
+      <section class="visit-context card">
+        <div class="visit-context-main"><button class="back" data-screen-link="dashboard">←</button><div><strong>Dell Technologies leadership visit</strong><div class="meta">CX-100908 · Hyderabad and Bengaluru · 05–08 July 2026</div></div></div>
+        <span class="badge amber">Action needed</span>
+      </section>
+      <nav class="tabs"><button data-screen-link="workspace">Overview</button><button data-screen-link="attendees">Attendees</button><button data-screen-link="sessions">Locations & sessions</button><button class="active">Services</button><button data-screen-link="review">Review & send</button></nav>
+      <section class="workspace-head tab-head card">
+        <div class="workspace-title"><div><div class="eyebrow">Hyderabad · 05 July</div><h1>Leadership welcome & alignment</h1><p class="subtle">09:30–11:00 · 15 attendees · Executive conference room</p></div></div>
+        <span class="badge amber">2 details required</span>
+      </section>
+      <div class="service-layout">
+        <aside class="session-summary card">
+          <div class="eyebrow">Session summary</div><h2>Welcome & alignment</h2>
+          <div class="summary-row"><div class="cell-label">When</div><strong>05 Jul · 09:30–11:00</strong></div>
+          <div class="summary-row"><div class="cell-label">People</div><strong>15 attendees</strong></div>
+          <div class="summary-row"><div class="cell-label">Office</div><strong>Hyderabad · Tower 1</strong></div>
+          <div class="summary-row"><div class="cell-label">Services</div><strong>4 selected</strong></div>
+          <button class="btn" style="width:100%;margin-top:12px">Change session</button>
+        </aside>
+        <section class="service-list">
+          <article class="service-row">
+            <div class="service-top"><div class="service-name"><span class="service-icon">▣</span><div><h2>Meeting space</h2><p class="subtle">Recommended from attendee count and session format.</p></div></div><span class="badge green">Confirmed</span></div>
+            <div class="service-config"><div><label>Room style</label><select><option>Executive conference room</option></select></div><div><label>Capacity</label><input value="18 people"></div><div><label>Layout</label><select><option>Boardroom</option></select></div></div>
+          </article>
+          <article class="service-row">
+            <div class="service-top"><div class="service-name"><span class="service-icon">◉</span><div><h2>Technology support</h2><p class="subtle">AV readiness and collaboration support.</p></div></div><span class="badge amber">Information needed</span></div>
+            <div class="service-config"><div><label>Presentation setup</label><select><option>Room display + clicker</option></select></div><div><label>Video platform</label><select data-required-service><option value="">Select platform</option><option>Zoom</option><option>Microsoft Teams</option><option>Other</option></select></div><div><label>On-site technician</label><select><option>First 30 minutes</option></select></div></div>
+            <div class="recommendation"><strong>Why we’re asking:</strong> The technology team needs the video platform to confirm room compatibility and avoid a separate scoping call.</div>
+          </article>
+          <article class="service-row">
+            <div class="service-top"><div class="service-name"><span class="service-icon">☕</span><div><h2>In-room refreshments</h2><p class="subtle">Suggested because this session begins before 10:00 AM.</p></div></div><span class="badge blue">Under review</span></div>
+            <div class="service-config"><div><label>Package</label><select><option>Tea, coffee + light breakfast</option></select></div><div><label>Quantity</label><input value="15"></div><div><label>Dietary requirements</label><input data-required-service placeholder="Add requirements"></div></div>
+          </article>
+          <article class="service-row">
+            <div class="service-top"><div class="service-name"><span class="service-icon">⌁</span><div><h2>Visitor access</h2><p class="subtle">Generated automatically from the visitor list.</p></div></div><span class="badge green">Ready</span></div>
+            <div class="recommendation">13 visitor badges will be prepared. 1 attendee still needs to provide identification details.</div>
+          </article>
+          <div class="form-actions"><button class="btn" data-action="save-services">Save changes</button><button class="btn primary" data-action="validate-services">Review final requirements →</button></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="screen" id="review">
+      <section class="visit-context card">
+        <div class="visit-context-main"><button class="back" data-screen-link="dashboard">←</button><div><strong>Dell Technologies leadership visit</strong><div class="meta">CX-100908 · Hyderabad and Bengaluru · 05–08 July 2026</div></div></div>
+        <span class="badge amber">Action needed</span>
+      </section>
+      <nav class="tabs"><button data-screen-link="workspace">Overview</button><button data-screen-link="attendees">Attendees</button><button data-screen-link="sessions">Locations & sessions</button><button data-screen-link="services">Services</button><button class="active">Review & send</button></nav>
+      <section class="workspace-head tab-head card">
+        <div class="workspace-title"><div><div class="eyebrow">Final review</div><h1>Send requirements for confirmation</h1><p class="subtle">Service teams will confirm availability independently. You can continue tracking every service here.</p></div></div>
+      </section>
+      <div class="review-layout">
+        <div>
+          <section class="review-section"><div class="review-title"><div><h2>Visit details</h2><span class="meta">Dell Technologies · Leadership visit</span></div><button class="link-btn">Edit</button></div><div class="review-content"><div class="review-grid"><div class="review-cell"><div class="cell-label">Dates</div><strong>05–08 Jul 2026</strong></div><div class="review-cell"><div class="cell-label">Locations</div><strong>Hyderabad + Bengaluru</strong></div><div class="review-cell"><div class="cell-label">Executive sponsor</div><strong>Anita Menon</strong></div></div></div></section>
+          <section class="review-section"><div class="review-title"><div><h2>Attendees</h2><span class="meta">13 visitors · 8 internal attendees</span></div><span class="badge green">Complete</span></div></section>
+          <section class="review-section"><div class="review-title"><div><h2>Hyderabad</h2><span class="meta">3 sessions · 05–06 July</span></div><button class="link-btn">Edit sessions</button></div><div class="review-content"><div class="task-list"><div class="task"><div><strong>Leadership welcome & alignment</strong><div class="meta">4 services · 15 attendees</div></div><span class="badge green">Ready</span></div><div class="task"><div><strong>Hosted leadership lunch</strong><div class="meta">3 services · 22 attendees</div></div><span class="badge green">Ready</span></div><div class="task"><div><strong>Technology capability showcase</strong><div class="meta">4 services · 18 attendees</div></div><span class="badge green">Ready</span></div></div></div></section>
+          <section class="review-section"><div class="review-title"><div><h2>Bengaluru</h2><span class="meta">2 sessions · 07–08 July</span></div><button class="link-btn">Edit sessions</button></div><div class="review-content"><div class="task-list"><div class="task"><div><strong>Executive strategy workshop</strong><div class="meta">5 services · 18 attendees</div></div><span class="badge green">Ready</span></div><div class="task"><div><strong>Closing discussion</strong><div class="meta">3 services · 12 attendees</div></div><span class="badge green">Ready</span></div></div></div></section>
+        </div>
+        <aside class="review-aside card">
+          <div class="ready-box"><strong>Ready to send</strong>All information required for service review has been provided.</div>
+          <h3>What happens next</h3>
+          <ul class="checklist">
+            <li><b>✓</b><span>Each service request is routed to its responsible team.</span></li>
+            <li><b>✓</b><span>Teams confirm availability or ask questions inside Captivate.</span></li>
+            <li><b>✓</b><span>You receive updates by email and in your visit workspace.</span></li>
+            <li><b>✓</b><span>Important later changes reopen only the affected services.</span></li>
+          </ul>
+          <button class="btn primary" style="width:100%" data-action="submit-final">Send for service confirmation</button>
+          <button class="btn" style="width:100%;margin-top:9px" data-action="save-exit">Save and exit</button>
+          <p class="hint" style="text-align:center;margin-top:12px">Expected first response by 23 Jun 2026</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <button class="mobile-switcher" data-screen-link="dashboard">⌂</button>
+  <div class="toast-stack" aria-live="polite"></div>
+  <div class="drawer-backdrop" id="service-drawer">
+    <aside class="drawer">
+      <div class="drawer-head"><div><div class="eyebrow">Service details</div><h1 data-drawer-title>Service</h1></div><button class="modal-close" data-action="close-drawer" aria-label="Close">×</button></div>
+      <div class="drawer-section"><span class="badge green">Available for your upcoming visit</span><p class="subtle" style="margin-top:12px">This service can be requested for sessions in Hyderabad and Bengaluru, subject to team availability.</p></div>
+      <div class="drawer-section"><h2>What’s included</h2><ul><li>Planning and coordination by the responsible service team</li><li>Location-specific setup before the session</li><li>Status tracking and focused clarification inside Captivate</li></ul></div>
+      <div class="drawer-section"><h2>Information you’ll need</h2><ul><li>Session date, time and office location</li><li>Expected number of attendees</li><li>Relevant preferences or accessibility requirements</li></ul></div>
+      <div class="drawer-section"><div class="review-grid"><div class="review-cell"><div class="cell-label">Minimum lead time</div><strong>2 business days</strong></div><div class="review-cell"><div class="cell-label">Service owner</div><strong>Office Experience</strong></div></div></div>
+      <button class="btn primary" style="width:100%;margin-top:22px" data-action="add-library-service">Add to a visit</button>
+    </aside>
+  </div>
+  <div class="modal-backdrop" id="prototype-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <div class="modal-head"><div><div class="eyebrow" data-modal-eyebrow>Captivate</div><h2 id="modal-title">Dialog</h2></div><button class="modal-close" data-action="close-modal" aria-label="Close">×</button></div>
+      <div class="modal-body" data-modal-body></div>
+      <div class="modal-actions" data-modal-actions></div>
+    </div>
+  </div>
+</div>
+<script>
+  const screens = [...document.querySelectorAll('.screen')];
+  const links = [...document.querySelectorAll('[data-screen-link]')];
+  const modal = document.querySelector('#prototype-modal');
+  const serviceDrawer = document.querySelector('#service-drawer');
+  const toastStack = document.querySelector('.toast-stack');
+  const previewParams = new URLSearchParams(window.location.search);
+  const isPreview = previewParams.get('preview') === '1';
+  const isEmbedded = previewParams.get('embedded') === '1';
+  const previewScreen = previewParams.get('screen');
+  const state = isPreview
+    ? { screen: previewScreen || 'dashboard', submitted: false }
+    : JSON.parse(localStorage.getItem('captivatePrototype') || '{"screen":"dashboard","submitted":false}');
+
+  function saveState() {
+    if (isPreview) return;
+    localStorage.setItem('captivatePrototype', JSON.stringify(state));
+  }
+
+  if (isEmbedded) {
+    const reportEmbeddedScroll = () => {
+      const root = document.documentElement;
+      window.parent.postMessage({
+        type: 'captivate-scroll-state',
+        scrollTop: window.scrollY,
+        scrollHeight: root.scrollHeight,
+        clientHeight: root.clientHeight
+      }, window.location.origin);
+    };
+
+    window.addEventListener('message', event => {
+      if (event.origin !== window.location.origin) return;
+      if (event.data?.type === 'captivate-scroll-request') reportEmbeddedScroll();
+      if (event.data?.type === 'captivate-scroll-to') {
+        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        window.scrollTo({ top: maxScroll * Math.min(1, Math.max(0, event.data.ratio || 0)) });
+      }
+    });
+
+    window.addEventListener('scroll', reportEmbeddedScroll, { passive: true });
+    window.addEventListener('resize', reportEmbeddedScroll);
+    window.addEventListener('load', reportEmbeddedScroll);
+    new ResizeObserver(reportEmbeddedScroll).observe(document.documentElement);
+  }
+  function showScreen(id) {
+    screens.forEach(screen => screen.classList.toggle('active', screen.id === id));
+    const visitScreens = ['dashboard', 'workspace', 'attendees', 'sessions', 'services', 'review'];
+    document.querySelectorAll('.global-nav button').forEach(button => {
+      button.classList.toggle('active', button.dataset.screenLink === id || (visitScreens.includes(id) && button.dataset.screenLink === 'dashboard'));
+    });
+    state.screen = id;
+    saveState();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.addEventListener('click', event => {
+    const link = event.target.closest('[data-screen-link]');
+    if (!link) return;
+    event.stopPropagation();
+    showScreen(link.dataset.screenLink);
+  });
+
+  function toast(message, type = 'success') {
+    const element = document.createElement('div');
+    element.className = `toast ${type}`;
+    element.innerHTML = `<strong>${type === 'warning' ? '!' : '✓'}</strong><span>${message}</span>`;
+    toastStack.appendChild(element);
+    setTimeout(() => element.remove(), 3200);
+  }
+
+  function openModal({ title, eyebrow = 'Captivate', body, actions }) {
+    modal.querySelector('#modal-title').textContent = title;
+    modal.querySelector('[data-modal-eyebrow]').textContent = eyebrow;
+    modal.querySelector('[data-modal-body]').innerHTML = body;
+    modal.querySelector('[data-modal-actions]').innerHTML = actions;
+    modal.classList.add('open');
+  }
+  function closeModal() { modal.classList.remove('open'); }
+
+  function filterLibrary() {
+    const query = (document.querySelector('[data-library-search]')?.value || '').toLowerCase();
+    const category = document.querySelector('[data-library-categories] .active')?.dataset.category || 'all';
+    const locations = [...document.querySelectorAll('[data-library-location]:checked')].map(item => item.value);
+    let visible = 0;
+    document.querySelectorAll('[data-library-card]').forEach(card => {
+      const matchesQuery = card.textContent.toLowerCase().includes(query);
+      const matchesCategory = category === 'all' || card.dataset.category === category;
+      const matchesLocation = !locations.length || locations.some(location => card.dataset.locations.includes(location));
+      const show = matchesQuery && matchesCategory && matchesLocation;
+      card.classList.toggle('row-hidden', !show);
+      if (show) visible += 1;
+    });
+    const count = document.querySelector('[data-library-count]');
+    if (count) count.textContent = `${visible} service${visible === 1 ? '' : 's'}`;
+  }
+
+  document.querySelector('[data-library-search]')?.addEventListener('input', filterLibrary);
+  document.querySelectorAll('[data-library-location]').forEach(input => input.addEventListener('change', filterLibrary));
+  document.querySelectorAll('[data-library-categories] button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('[data-library-categories] button').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      filterLibrary();
+    });
+  });
+
+  function filterHelp() {
+    const query = (document.querySelector('[data-help-search]')?.value || '').toLowerCase();
+    document.querySelectorAll('[data-help-item]').forEach(item => {
+      const searchText = `${item.dataset.helpItem || ''} ${item.textContent}`.toLowerCase();
+      item.classList.toggle('row-hidden', query && !searchText.includes(query));
+    });
+  }
+  document.querySelector('[data-help-search]')?.addEventListener('input', filterHelp);
+  document.querySelectorAll('[data-help-query]').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelector('[data-help-search]').value = button.dataset.helpQuery;
+      filterHelp();
+    });
+  });
+
+  document.addEventListener('input', event => {
+    if (!event.target.matches('input, textarea, select')) return;
+    state.formTouched = true;
+    saveState();
+    const autosave = document.querySelector('#new-request .badge.blue');
+    if (autosave) autosave.textContent = 'Autosaved just now';
+  });
+
+  document.querySelectorAll('#new-request .service-chips .badge').forEach(chip => {
+    chip.classList.add('interactive-chip');
+    chip.addEventListener('click', () => {
+      const selected = chip.classList.toggle('green');
+      chip.textContent = `${selected ? '✓' : '＋'} ${chip.textContent.replace(/^[✓＋]\s*/, '')}`;
+      toast(selected ? 'Support category added.' : 'Support category removed.');
+    });
+  });
+
+  document.querySelectorAll('[data-attendee-filters] button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('[data-attendee-filters] button').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      const filter = button.dataset.filter;
+      document.querySelectorAll('[data-person-type]').forEach(row => {
+        row.classList.toggle('row-hidden', filter !== 'all' && row.dataset.personType !== filter);
+      });
+    });
+  });
+
+  document.querySelectorAll('.location-tabs [data-location]').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.location-tabs [data-location]').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      const isHyderabad = button.dataset.location === 'Hyderabad';
+      document.querySelector('[data-itinerary-title]').textContent = `${button.dataset.location} itinerary`;
+      document.querySelector('[data-itinerary-meta]').textContent = isHyderabad ? 'Towers 1 & 2 · Local coordinator: Neha Kapoor' : 'Vista · Local coordinator: Karthik Rao';
+      toast(`${button.dataset.location} itinerary selected.`);
+    });
+  });
+
+  document.addEventListener('click', event => {
+    const action = event.target.closest('[data-action]')?.dataset.action;
+    if (!action) return;
+    if (action === 'close-modal') closeModal();
+    if (action === 'close-drawer') serviceDrawer.classList.remove('open');
+    if (action === 'view-service') {
+      document.querySelector('[data-drawer-title]').textContent = event.target.closest('[data-service]').dataset.service;
+      serviceDrawer.classList.add('open');
+    }
+    if (action === 'add-library-service') {
+      serviceDrawer.classList.remove('open');
+      openModal({
+        eyebrow: 'Add service',
+        title: 'Choose a visit',
+        body: `<p>Select where this service should be configured.</p><div class="task-list"><button class="task" data-action="choose-library-visit" style="width:100%;text-align:left;background:white"><div><strong>Dell Technologies leadership visit</strong><div class="meta">05–08 Jul · Hyderabad and Bengaluru</div></div><span>→</span></button><button class="task" style="width:100%;text-align:left;background:white"><div><strong>ABC Technologies executive workshop</strong><div class="meta">14 Jul · Mumbai</div></div><span>→</span></button></div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button>`
+      });
+    }
+    if (action === 'choose-library-visit') {
+      closeModal();
+      showScreen('sessions');
+      toast('Service selected. Choose a session to configure it.');
+    }
+    if (action === 'clear-library') {
+      document.querySelector('[data-library-search]').value = '';
+      document.querySelectorAll('[data-library-location]').forEach(input => input.checked = false);
+      document.querySelectorAll('[data-library-categories] button').forEach(item => item.classList.toggle('active', item.dataset.category === 'all'));
+      filterLibrary();
+    }
+    if (action === 'open-guide') {
+      const guide = event.target.closest('[data-guide]').dataset.guide;
+      openModal({
+        eyebrow: 'Help guide',
+        title: guide,
+        body: `<p>Captivate keeps the request flexible while making ownership and next steps explicit.</p><div class="task-list">
+          <div class="task"><div><strong>1. Start with the information you know</strong><div class="meta">Basic client, date, location and attendee estimates create the visit workspace.</div></div></div>
+          <div class="task"><div><strong>2. Complete details progressively</strong><div class="meta">Attendees, sessions and service requirements can be added as they become available.</div></div></div>
+          <div class="task"><div><strong>3. Track services independently</strong><div class="meta">Each service team confirms availability or asks a focused question inside Captivate.</div></div></div>
+        </div>`,
+        actions: `<button class="btn" data-action="close-modal">Close</button><button class="btn primary" data-screen-link="workspace">Open my visit</button>`
+      });
+    }
+    if (action === 'open-conversation') {
+      openModal({
+        eyebrow: 'Dell Technologies visit',
+        title: 'Ask the coordination team',
+        body: `<div><label>Topic</label><select><option>Technology support question</option><option>Attendee or badge information</option><option>Service availability</option><option>Other</option></select></div><div style="margin-top:14px"><label>Your question</label><textarea placeholder="Describe what you need help with..."></textarea></div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="send-help-message">Send question</button>`
+      });
+    }
+    if (action === 'send-help-message') {
+      closeModal();
+      toast('Question added to the Dell Technologies visit conversation.');
+    }
+    if (action === 'request-consultation') {
+      openModal({
+        eyebrow: 'Complex visit support',
+        title: 'Request a consultation',
+        body: `<p>Consultations are intended for unusual or highly complex visits that cannot be planned through structured service details.</p><div><label>Related visit</label><select><option>Dell Technologies leadership visit</option><option>New visit not yet created</option></select></div><div style="margin-top:14px"><label>What makes this visit complex?</label><textarea placeholder="Describe the situation..."></textarea></div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="submit-consultation">Request consultation</button>`
+      });
+    }
+    if (action === 'submit-consultation') {
+      closeModal();
+      toast('Consultation request saved for review.');
+    }
+    if (action === 'report-issue') {
+      openModal({
+        eyebrow: 'Technical support',
+        title: 'Report an issue',
+        body: `<div><label>Issue type</label><select><option>Unable to access a visit</option><option>Upload failed</option><option>Page or button is not working</option><option>Other</option></select></div><div style="margin-top:14px"><label>What happened?</label><textarea placeholder="Describe the issue and what you expected..."></textarea></div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="submit-issue">Submit issue</button>`
+      });
+    }
+    if (action === 'submit-issue') {
+      closeModal();
+      toast('Technical issue submitted.');
+    }
+    if (action === 'save-exit') {
+      toast('Your progress has been saved.');
+      setTimeout(() => showScreen('dashboard'), 450);
+    }
+    if (action === 'save-services') toast('Service requirements saved.');
+    if (action === 'import-attendees') toast('Spreadsheet import is represented in this prototype.');
+    if (action === 'copy-attendees') toast('Attendees copied from the most recent Dell visit.');
+    if (action === 'upload-schedule') toast('Schedule uploaded and matched to three sessions.');
+    if (action === 'add-location') toast('A new location can be added in the next prototype iteration.');
+    if (action === 'submit-preliminary') {
+      openModal({
+        eyebrow: 'Preliminary request',
+        title: 'Create the visit workspace?',
+        body: `<p>This sends the basic visit information to the coordination team and creates a shared workspace. Attendee and service details can still be added later.</p><div class="notice"><strong>Not yet confirmed</strong><span>No individual service is reserved until its service team reviews and confirms availability.</span></div>`,
+        actions: `<button class="btn" data-action="close-modal">Go back</button><button class="btn primary" data-action="confirm-preliminary">Create workspace</button>`
+      });
+    }
+    if (action === 'confirm-preliminary') {
+      closeModal();
+      showScreen('workspace');
+      toast('Preliminary support requested. Workspace CX-100908 created.');
+    }
+
+    if (action === 'add-attendee' || action === 'edit-attendee') {
+      const editing = action === 'edit-attendee';
+      openModal({
+        eyebrow: editing ? 'Attendee details' : 'New attendee',
+        title: editing ? 'Edit attendee' : 'Add an attendee',
+        body: `<div class="form-grid">
+          <div><label>First name</label><input id="modal-first" value="${editing ? 'Leena' : ''}" placeholder="First name"></div>
+          <div><label>Last name</label><input id="modal-last" value="${editing ? 'Mehta' : ''}" placeholder="Last name"></div>
+          <div><label>Attendee type</label><select id="modal-type"><option value="visitor">Client visitor</option><option value="internal">Internal attendee</option><option value="host">Executive host</option></select></div>
+          <div><label>Role</label><input id="modal-role" value="${editing ? 'VP, Transformation' : ''}" placeholder="Job title or role"></div>
+          <div class="field full"><label>Attending</label><select id="modal-location"><option>Hyderabad + Bengaluru</option><option>Hyderabad</option><option>Bengaluru</option></select></div>
+        </div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="${editing ? 'update-attendee' : 'create-attendee'}">${editing ? 'Save changes' : 'Add attendee'}</button>`
+      });
+    }
+    if (action === 'create-attendee') {
+      const first = document.querySelector('#modal-first').value.trim() || 'New';
+      const last = document.querySelector('#modal-last').value.trim() || 'Attendee';
+      const role = document.querySelector('#modal-role').value.trim() || 'Client representative';
+      const type = document.querySelector('#modal-type').value;
+      const typeLabel = document.querySelector('#modal-type').selectedOptions[0].text;
+      const location = document.querySelector('#modal-location').value;
+      const initials = `${first[0]}${last[0]}`.toUpperCase();
+      document.querySelector('.person-table tbody').insertAdjacentHTML('beforeend', `<tr data-person-type="${type}"><td><div class="person"><span class="person-avatar">${initials}</span><div><strong>${first} ${last}</strong><div class="meta">${role}</div></div></div></td><td>${typeLabel}</td><td>${location}</td><td><span class="badge amber">Details to review</span></td><td><button class="link-btn" data-action="edit-attendee">Edit</button></td></tr>`);
+      closeModal();
+      toast(`${first} ${last} added to the visit.`);
+    }
+    if (action === 'update-attendee') {
+      closeModal();
+      toast('Attendee details updated.');
+    }
+
+    if (action === 'add-session') {
+      openModal({
+        eyebrow: 'Hyderabad itinerary',
+        title: 'Add a session',
+        body: `<div class="form-grid">
+          <div class="field full"><label>Session name</label><input id="session-name" placeholder="e.g. Leadership roundtable"></div>
+          <div><label>Date</label><input id="session-date" type="date" value="2026-07-06"></div>
+          <div><label>Time</label><input id="session-time" value="02:30 PM – 04:00 PM"></div>
+          <div><label>Attendees</label><input id="session-people" type="number" value="15"></div>
+          <div><label>Format</label><select><option>Discussion</option><option>Presentation</option><option>Meal</option><option>Tour</option></select></div>
+        </div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="create-session">Add session</button>`
+      });
+    }
+    if (action === 'create-session') {
+      const name = document.querySelector('#session-name').value.trim() || 'New visit session';
+      const people = document.querySelector('#session-people').value || '15';
+      const time = document.querySelector('#session-time').value;
+      document.querySelector('.session-list').insertAdjacentHTML('beforeend', `<article class="session"><div class="date-tile"><span class="meta">MON</span><strong>06 Jul</strong><span class="meta">${time}</span></div><div><strong>${name}</strong><div class="meta">${people} attendees · Room to be assigned</div></div><div class="service-chips"><span class="chip">Services not configured</span></div><button class="btn small" data-screen-link="services">Configure →</button></article>`);
+      closeModal();
+      toast(`${name} added to the itinerary.`);
+    }
+
+    if (action === 'validate-services') {
+      const missing = [...document.querySelectorAll('[data-required-service]')].filter(field => !field.value.trim());
+      if (missing.length) {
+        missing.forEach(field => field.style.borderColor = 'var(--red)');
+        toast(`Complete ${missing.length} required service details before review.`, 'warning');
+        missing[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        showScreen('review');
+      }
+    }
+    if (action === 'submit-final') {
+      openModal({
+        eyebrow: 'Ready to coordinate',
+        title: 'Requirements sent successfully',
+        body: `<div class="confirmation-mark">✓</div><p>Your final requirements have been routed to eight service teams. Each team will confirm availability or ask a focused question inside the visit workspace.</p><div class="notice"><strong>Next</strong><span>Expected first response by 23 June 2026. Important changes will reopen only the affected services.</span></div>`,
+        actions: `<button class="btn primary" data-action="finish-submission">View visit status</button>`
+      });
+    }
+    if (action === 'finish-submission') {
+      state.submitted = true;
+      saveState();
+      closeModal();
+      const headline = document.querySelector('#workspace .eyebrow');
+      if (headline) headline.textContent = 'CX-100908 · Final requirements sent';
+      showScreen('workspace');
+      toast('Service teams have been notified.');
+    }
+  });
+
+  modal.addEventListener('click', event => {
+    if (event.target === modal) closeModal();
+  });
+  serviceDrawer.addEventListener('click', event => {
+    if (event.target === serviceDrawer) serviceDrawer.classList.remove('open');
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeModal();
+  });
+  showScreen(state.screen && document.getElementById(state.screen) ? state.screen : 'dashboard');
+</script>
+</body>
+</html>

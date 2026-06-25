@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0879bc">
+  <title>Travel Insurance Portal</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #fff; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+    button, input { font: inherit; }
+    .app {
+      width: min(100%, 1366px);
+      margin: 0 auto;
+      background: #fff;
+    }
+    .screen {
+      position: relative;
+      width: 100%;
+      line-height: 0;
+    }
+    .screen-art {
+      width: 100%;
+      height: auto;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .hotspot {
+      position: absolute;
+      display: block;
+      padding: 0;
+      border: 0;
+      border-radius: 3px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .hotspot:hover { background: rgba(255, 174, 0, .08); }
+    .hotspot:focus-visible {
+      outline: 3px solid rgba(255, 174, 0, .9);
+      outline-offset: 2px;
+    }
+    .login-input {
+      position: absolute;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #fff;
+      font-size: clamp(10px, 1.02vw, 14px);
+      line-height: 1;
+    }
+    .login-input::placeholder { color: transparent; }
+    .login-input:focus { box-shadow: inset 0 -2px rgba(255,255,255,.7); }
+    .remember {
+      position: absolute;
+      margin: 0;
+      accent-color: #fff;
+      cursor: pointer;
+    }
+    .loading {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: #0879bc;
+      font-size: 14px;
+    }
+    .screen-indicator {
+      position: fixed;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    @media (max-width: 700px) {
+      .app {
+        min-width: 900px;
+        margin: 0;
+      }
+      body { overflow-x: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app" aria-live="polite">
+    <div class="loading">Loading travel portal…</div>
+  </main>
+  <p class="screen-indicator" id="screen-indicator"></p>
+
+  <script>
+    const screens = {
+      login: {
+        art: "travel-portal-assets/screen-01-clean.png",
+        width: 1366, height: 768,
+        label: "Sign in",
+        inputs: true,
+        hotspots: [
+          { label: "Log in", x: 182, y: 494, w: 350, h: 50, go: "dashboard" }
+        ]
+      },
+      dashboard: {
+        art: "travel-portal-assets/screen-02-clean.png",
+        width: 1366, height: 812,
+        label: "Dashboard",
+        hotspots: [
+          { label: "Issue Policy", x: 33, y: 473, w: 309, h: 225, go: "products" },
+          { label: "Profile and notifications", x: 1275, y: 7, w: 72, h: 56, go: "menus" }
+        ]
+      },
+      products: {
+        art: "travel-portal-assets/screen-03-clean.png",
+        width: 1366, height: 1055,
+        label: "Insurance products",
+        hotspots: [
+          { label: "Travel Insurance new policy", x: 33, y: 474, w: 310, h: 226, go: "quote" },
+          { label: "Home", x: 298, y: 5, w: 65, h: 62, go: "dashboard" },
+          { label: "Profile and notifications", x: 1275, y: 7, w: 72, h: 56, go: "menus" }
+        ]
+      },
+      menus: {
+        art: "travel-portal-assets/screen-04-clean.png",
+        width: 1366, height: 1055,
+        label: "Profile and notification menus",
+        hotspots: [
+          { label: "Close menus", x: 0, y: 70, w: 1366, h: 985, go: "products" },
+          { label: "Logout", x: 1080, y: 100, w: 135, h: 42, go: "login" }
+        ]
+      },
+      quote: {
+        art: "travel-portal-assets/screen-05-clean.png",
+        width: 1366, height: 1458,
+        label: "Generate quote",
+        hotspots: [
+          { label: "Show Available Plans", x: 1130, y: 1238, w: 202, h: 48, go: "plans" },
+          { label: "Home", x: 296, y: 5, w: 69, h: 62, go: "dashboard" }
+        ]
+      },
+      plans: {
+        art: "travel-portal-assets/screen-06-clean.png",
+        width: 1366, height: 2170,
+        label: "Available plans",
+        hotspots: [
+          { label: "Choose Additional Covers", x: 55, y: 1668, w: 270, h: 60, go: "covers" },
+          { label: "View Premium Breakup", x: 55, y: 1578, w: 250, h: 55, go: "premium" },
+          { label: "Share Quote", x: 1055, y: 1980, w: 135, h: 54, go: "share" },
+          { label: "Save and Next", x: 1200, y: 1980, w: 134, h: 54, go: "traveller" },
+          { label: "Back to quote details", x: 1130, y: 1238, w: 202, h: 48, go: "quote" },
+          { label: "Home", x: 296, y: 5, w: 69, h: 62, go: "dashboard" }
+        ]
+      },
+      covers: {
+        art: "travel-portal-assets/screen-07-clean.png",
+        width: 1366, height: 941,
+        label: "Additional covers",
+        hotspots: [
+          { label: "Add selected covers", x: 1190, y: 820, w: 110, h: 55, go: "plans" },
+          { label: "Close", x: 1285, y: 125, w: 50, h: 50, go: "plans" }
+        ]
+      },
+      premium: {
+        art: "travel-portal-assets/screen-08-clean.png",
+        width: 1366, height: 941,
+        label: "Premium breakup",
+        hotspots: [
+          { label: "Close", x: 1285, y: 125, w: 50, h: 50, go: "plans" }
+        ]
+      },
+      share: {
+        art: "travel-portal-assets/screen-09-clean.png",
+        width: 1366, height: 941,
+        label: "Share quote",
+        hotspots: [
+          { label: "Share quote", x: 1130, y: 520, w: 120, h: 55, go: "plans" },
+          { label: "Cancel", x: 1000, y: 520, w: 115, h: 55, go: "plans" },
+          { label: "Close", x: 1240, y: 330, w: 50, h: 50, go: "plans" }
+        ]
+      },
+      traveller: {
+        art: "travel-portal-assets/screen-10-clean.png",
+        width: 1366, height: 1495,
+        label: "Traveller details",
+        hotspots: [
+          { label: "Proceed to payment", x: 1230, y: 1275, w: 102, h: 48, go: "payment" },
+          { label: "Back to plans", x: 1065, y: 1275, w: 70, h: 48, go: "plans" },
+          { label: "Home", x: 296, y: 5, w: 69, h: 62, go: "dashboard" }
+        ]
+      },
+      payment: {
+        art: "travel-portal-assets/screen-11-clean.png",
+        width: 1366, height: 851,
+        label: "Payment",
+        hotspots: [
+          { label: "Review Application", x: 1155, y: 235, w: 180, h: 50, go: "review" },
+          { label: "Submit payment", x: 1235, y: 595, w: 98, h: 48, go: "review" },
+          { label: "Back to traveller details", x: 1150, y: 595, w: 76, h: 48, go: "traveller" },
+          { label: "Home", x: 296, y: 5, w: 69, h: 62, go: "dashboard" }
+        ]
+      },
+      review: {
+        art: "travel-portal-assets/screen-12-clean.png",
+        width: 1366, height: 1481,
+        label: "Review application",
+        hotspots: [
+          { label: "Submit application", x: 1234, y: 1270, w: 99, h: 48, go: "success" },
+          { label: "Back to payment", x: 1150, y: 1270, w: 76, h: 48, go: "payment" },
+          { label: "Collapse Review Application", x: 1150, y: 235, w: 185, h: 50, go: "payment" },
+          { label: "Home", x: 296, y: 5, w: 69, h: 62, go: "dashboard" }
+        ]
+      },
+      success: {
+        art: "travel-portal-assets/screen-13-clean.png",
+        width: 1366, height: 870,
+        label: "Payment successful",
+        hotspots: [
+          { label: "Issue Another Policy", x: 980, y: 650, w: 140, h: 48, go: "quote" },
+          { label: "Share Policy", x: 1125, y: 650, w: 100, h: 48, go: "success" },
+          { label: "Download Certificate", x: 1230, y: 650, w: 110, h: 48, go: "success" },
+          { label: "Home", x: 296, y: 5, w: 69, h: 62, go: "dashboard" }
+        ]
+      }
+    };
+
+    const app = document.getElementById("app");
+    const indicator = document.getElementById("screen-indicator");
+
+    function percent(value, total) {
+      return `${(value / total) * 100}%`;
+    }
+
+    function createHotspot(item, screen) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "hotspot";
+      button.setAttribute("aria-label", item.label);
+      button.style.left = percent(item.x, screen.width);
+      button.style.top = percent(item.y, screen.height);
+      button.style.width = percent(item.w, screen.width);
+      button.style.height = percent(item.h, screen.height);
+      button.addEventListener("click", () => showScreen(item.go));
+      return button;
+    }
+
+    function addLoginControls(stage, screen) {
+      const username = document.createElement("input");
+      username.className = "login-input";
+      username.setAttribute("aria-label", "Username");
+      username.autocomplete = "username";
+      username.style.left = percent(216, screen.width);
+      username.style.top = percent(177, screen.height);
+      username.style.width = percent(300, screen.width);
+      username.style.height = percent(43, screen.height);
+
+      const password = document.createElement("input");
+      password.type = "password";
+      password.className = "login-input";
+      password.setAttribute("aria-label", "Password");
+      password.autocomplete = "current-password";
+      password.style.left = percent(216, screen.width);
+      password.style.top = percent(244, screen.height);
+      password.style.width = percent(300, screen.width);
+      password.style.height = percent(43, screen.height);
+
+      const remember = document.createElement("input");
+      remember.type = "checkbox";
+      remember.className = "remember";
+      remember.setAttribute("aria-label", "Remember Password");
+      remember.style.left = percent(179, screen.width);
+      remember.style.top = percent(309, screen.height);
+      remember.style.width = percent(20, screen.width);
+      remember.style.height = percent(20, screen.height);
+
+      password.addEventListener("keydown", event => {
+        if (event.key === "Enter") showScreen("dashboard");
+      });
+      stage.append(username, password, remember);
+    }
+
+    function showScreen(id, pushState = true) {
+      const screen = screens[id] || screens.login;
+      app.replaceChildren();
+
+      const stage = document.createElement("section");
+      stage.className = "screen";
+      stage.setAttribute("aria-label", screen.label);
+
+      const image = document.createElement("img");
+      image.className = "screen-art";
+      image.src = screen.art;
+      image.alt = "";
+      image.width = screen.width * 2;
+      image.height = screen.height * 2;
+      image.draggable = false;
+      stage.appendChild(image);
+
+      if (screen.inputs) addLoginControls(stage, screen);
+      screen.hotspots.forEach(item => stage.appendChild(createHotspot(item, screen)));
+      app.appendChild(stage);
+
+      indicator.textContent = screen.label;
+      document.title = `${screen.label} - Travel Insurance Portal`;
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+      if (pushState && location.hash !== `#${id}`) history.pushState({ screen: id }, "", `#${id}`);
+    }
+
+    window.addEventListener("popstate", event => {
+      showScreen(event.state?.screen || location.hash.slice(1) || "login", false);
+    });
+
+    const initial = location.hash.slice(1);
+    showScreen(screens[initial] ? initial : "login", false);
+  </script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Captivate enterprise visit coordination UX case study by Sivakumar Ravi.">
+  <meta name="theme-color" content="#f7f5f2">
+  <title>Captivate — Enterprise Visit Coordination Case Study</title>
+  <style>
+    :root {
+      --canvas:#f7f5f2; --surface:#fff; --ink:#171717; --muted:#62666a; --line:#ddd9d3;
+      --green:#1b7444; --green-deep:#105333; --green-soft:#e5f1e9; --blue:#415d9d;
+      --blue-soft:#e8edf7; --amber:#9a600a; --amber-soft:#f7edd3; --red-soft:#f7e4df;
+      --max:1120px; --reading:790px; --radius:16px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--canvas);color:var(--ink);font:16px/1.7 Arial,Helvetica,sans-serif;text-rendering:optimizeLegibility}
+    img{display:block;max-width:100%} a{color:inherit}
+    :focus-visible{outline:3px solid rgba(27,116,68,.28);outline-offset:4px}
+    .skip-link{position:fixed;top:12px;left:12px;z-index:1000;padding:10px 16px;background:var(--ink);color:#fff;transform:translateY(-150%)}
+    .skip-link:focus{transform:translateY(0)}
+    .container{width:min(calc(100% - 48px),var(--max));margin-inline:auto}
+    .reading{width:min(100%,var(--reading))}
+    .site-header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(221,217,211,.85);background:rgba(247,245,242,.92);backdrop-filter:blur(16px)}
+    .nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font-family:Arial,Helvetica,sans-serif;font-size:1.08rem;font-weight:600;letter-spacing:-.02em;text-decoration:none}.nav-note{color:var(--muted);font-size:.9rem}
+    .eyebrow{margin:0 0 16px;color:var(--green);font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0} h1,h2{font-family:Arial,Helvetica,sans-serif;font-weight:600;letter-spacing:-.02em}
+    h1{max-width:940px;margin-bottom:24px;font-size:clamp(2.7rem,5vw,4.6rem);line-height:1.06}
+    h2{margin-bottom:20px;font-size:clamp(1.8rem,3vw,2.65rem);line-height:1.15}
+    h3{margin-bottom:10px;font-size:1.15rem;line-height:1.35} p{color:var(--muted)} strong{color:var(--ink)}
+    .hero{padding-block:clamp(68px,9vw,116px) 70px}
+    .hero-intro{max-width:790px;color:var(--muted);font-size:1.09rem}
+    .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px}
+    .fact{padding-top:15px;border-top:1px solid var(--line)}.fact small{display:block;margin-bottom:5px;color:var(--muted);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}.fact strong{font-weight:500}
+    .hero-visual{margin-top:58px;padding:clamp(28px,5vw,58px) clamp(18px,4vw,48px) clamp(22px,4vw,42px);border:1px solid #d7d9d6;border-radius:var(--radius);background:radial-gradient(circle at 50% 18%,#fff 0,#edf0ed 48%,#dfe4e0 100%);overflow:hidden}
+    .imac{position:relative;width:min(100%,1040px);margin-inline:auto;aspect-ratio:2788/2315}
+    .imac-frame{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;pointer-events:none}
+    .imac-screen{position:absolute;left:3.95%;top:5.14%;z-index:2;width:91.68%;height:62.25%;overflow:hidden;background:#f4f6f3}
+    .imac-screen img{width:100%;height:100%;object-fit:cover}
+    .mock-button{padding:9px 13px;border-radius:8px;background:var(--green);color:#fff;font-size:.75rem;font-weight:700}
+    .mock-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.mock-metric,.mock-row{padding:14px;border:1px solid #dfe5e0;border-radius:10px;background:#fff}.mock-metric b{font-size:1.35rem}.mock-metric span{display:block;color:#6b756e;font-size:.66rem}.mock-row{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:12px;margin-top:8px;font-size:.72rem}.mock-row strong{font-size:.78rem}.mock-pill{width:max-content;padding:4px 7px;border-radius:99px;background:#fff0d4;color:#865400;font-size:.62rem;font-weight:700}
+    .section{padding-block:clamp(68px,8vw,104px);border-top:1px solid var(--line)}
+    .section-label{display:grid;grid-template-columns:170px minmax(0,1fr);gap:52px;align-items:start}.section-label>div{min-width:0}
+    .section-index{position:sticky;top:100px;color:var(--green);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .subsection+.subsection,.research-plan+.subsection,.solution-block+.subsection{margin-top:72px}.copy{max-width:var(--reading)}.copy ul,.copy ol{padding-left:22px;color:var(--muted)}.copy li+li{margin-top:8px}
+    .quote{margin:42px 0;padding:28px clamp(24px,5vw,48px);border-left:3px solid var(--green);background:var(--green-soft);color:var(--ink);font:clamp(1.35rem,2.2vw,1.8rem)/1.4 Arial,Helvetica,sans-serif}.quote p{margin:0;color:var(--ink)}
+    .research-plan{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}.research-card{min-height:210px;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.research-card .number{display:grid;place-items:center;width:34px;height:34px;margin-bottom:22px;border-radius:50%;background:var(--green-soft);color:var(--green-deep);font-weight:700}.research-card p{font-size:.92rem}
+    .walkthrough{margin-top:34px;padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:22px}.flow-step{position:relative;padding:16px 12px;border-radius:10px;background:#eef3ef;text-align:center;font-size:.8rem}.flow-step:not(:last-child)::after{content:"→";position:absolute;right:-8px;top:50%;z-index:2;transform:translateY(-50%);color:var(--green);font-weight:700}
+    .evidence-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:30px}.evidence{padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.evidence .tag{display:inline-block;margin-bottom:14px;padding:4px 8px;border-radius:99px;background:var(--amber-soft);color:var(--amber);font-size:.7rem;font-weight:700;text-transform:uppercase}.evidence p{margin-bottom:0}
+    .heuristic-table{margin-top:30px;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.heuristic-row{display:grid;grid-template-columns:1fr 1.35fr 1.35fr;border-top:1px solid var(--line)}.heuristic-row:first-child{border-top:0;background:#edf4ef;font-weight:700;color:var(--green-deep)}.heuristic-row>div{padding:16px;border-left:1px solid var(--line)}.heuristic-row>div:first-child{border-left:0}.heuristic-row p{margin:0;font-size:.9rem}
+    .themes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}.theme{min-height:132px;display:grid;place-items:center;padding:20px;border:1px solid #c8d9cd;background:var(--green-soft);color:var(--green-deep);text-align:center;font:1.08rem/1.25 Arial,Helvetica,sans-serif}
+    .problem-map{margin-top:34px;display:grid;gap:14px}.problem-row{display:grid;grid-template-columns:1fr 34px 1fr;align-items:stretch}.problem-side{padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.problem-side.solution{background:var(--blue-soft);border-color:#ccd6e7}.arrow{display:grid;place-items:center;color:var(--green);font-weight:700}
+    .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}.principle{padding:25px;border-top:4px solid var(--green);background:var(--surface);box-shadow:0 8px 24px rgba(20,35,25,.05)}.principle span{display:block;margin-bottom:13px;color:var(--green);font-size:.75rem;font-weight:700;letter-spacing:.08em}
+    .blueprint-figure,.architecture-figure{width:100%;margin:72px 0 0}.blueprint-frame,.architecture-frame{border:1px solid var(--line);border-radius:var(--radius);background:#f7f5f2}.blueprint-frame{overflow-x:auto}.architecture-frame{overflow:hidden}.blueprint-frame img{display:block;width:1400px;max-width:none;height:auto}.architecture-frame img{width:100%;height:auto}.blueprint-figure figcaption,.architecture-figure figcaption{max-width:var(--reading);margin:14px 0 0;color:var(--muted);font-size:.88rem}.blueprint-disclosure{max-width:var(--reading);margin:24px 0 0;padding:22px 24px;border-left:3px solid var(--green);background:var(--green-soft)}.blueprint-disclosure h4{margin:0 0 8px;font-size:1rem}.blueprint-disclosure p{margin-bottom:10px}.blueprint-disclosure ul{margin:0;padding-left:20px;color:var(--muted)}
+    .solution-block{margin-top:54px}.solution-head{display:grid;grid-template-columns:65px minmax(0,1fr);gap:18px}.solution-number{width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:#fff;font:1.2rem Arial,Helvetica,sans-serif}
+    .decision{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.decision>div{padding:18px;border-radius:10px;background:#fff;border:1px solid var(--line)}.decision small{display:block;margin-bottom:6px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.08em}.decision p{margin:0;font-size:.9rem}
+    .ui-visual{margin-top:28px;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:#eef2ef}.ui-top{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:15px;border-radius:10px;background:#18211b;color:#fff}.ui-tabs{display:flex;gap:6px;margin:12px 0}.ui-tabs span{padding:8px 11px;border:1px solid #d6ded8;border-radius:8px;background:#fff;font-size:.72rem}.ui-tabs span.active{background:#18211b;color:#fff}.ui-content{padding:20px;border:1px solid #d9e0da;border-radius:12px;background:#fff}.ui-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.ui-card{padding:14px;border-radius:9px;background:#f5f7f5;font-size:.72rem}.ui-card b{display:block;font-size:.85rem}.ui-card .status{display:inline-block;margin-top:8px;padding:3px 6px;border-radius:99px;background:var(--green-soft);color:var(--green-deep);font-size:.62rem;font-weight:700}
+    .mapping-table{margin-top:34px;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.mapping-row{display:grid;grid-template-columns:1.15fr 1.1fr 1.4fr;border-top:1px solid var(--line)}.mapping-row:first-child{border-top:0;background:#18211b;color:#fff;font-weight:700}.mapping-row>div{padding:17px;border-left:1px solid var(--line)}.mapping-row>div:first-child{border-left:0}.mapping-row p{margin:0;font-size:.88rem}
+    .prototype{width:100%;margin-top:34px;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.prototype iframe{position:absolute;inset:0;display:block;width:1440px;height:900px;border:0;transform-origin:top left}.prototype-window{position:relative;width:100%;overflow:hidden;background:#f4f6f3;--scroll-thumb-size:20%;--scroll-thumb-top:0%}.prototype-scrollbar{position:absolute;top:8px;right:5px;bottom:8px;z-index:5;width:8px;border-radius:999px;background:rgba(23,33,27,.08);opacity:0;transition:opacity .16s ease;pointer-events:none}.prototype-scrollbar-thumb{position:absolute;top:var(--scroll-thumb-top);right:0;width:100%;height:var(--scroll-thumb-size);min-height:34px;border-radius:999px;background:#858b87;pointer-events:auto;cursor:grab}.prototype-scrollbar-thumb:active{cursor:grabbing}.prototype-window:hover .prototype-scrollbar,.prototype-window:focus-within .prototype-scrollbar,.prototype-window.is-dragging .prototype-scrollbar{opacity:1}.prototype-footer{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:16px 20px;border-top:1px solid var(--line);font-size:.85rem}.prototype-footer a{color:var(--green);font-weight:700}
+    .outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}.outcome{padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.outcome strong{display:block;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:1.2rem}.outcome p{margin:0}
+    .next-steps{margin-top:36px;padding:28px;border-radius:var(--radius);background:#18211b;color:#fff}.next-steps h3,.next-steps strong{color:#fff}.next-steps p,.next-steps li{color:#d3dbd5}
+    .case-next{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:48px;padding-top:34px;border-top:1px solid var(--line)}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-weight:600;text-decoration:none;transition:border-color .18s ease,color .18s ease,background .18s ease}
+    .button:hover{border-color:var(--green);color:var(--green)}
+    .button-primary{border-color:var(--green);background:var(--green);color:#fff}
+    .button-primary:hover{border-color:var(--green-deep);background:var(--green-deep);color:#fff}
+    .back-to-top{position:fixed;right:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:60;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:var(--green);color:#fff;font-size:0;font-weight:600;line-height:1;text-decoration:none;box-shadow:0 14px 34px rgba(32,28,24,.16);transition:transform .18s,background .18s}.back-to-top svg{width:24px;height:24px;display:block;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}.back-to-top:hover{transform:translateY(-2px);background:var(--green-deep)}
+    footer{padding-block:26px;background:var(--ink);color:#aaa;font-size:.86rem}
+    @media(max-width:860px){.section-label{grid-template-columns:1fr;gap:18px}.section-index{position:static}.facts{grid-template-columns:repeat(2,1fr)}.research-plan,.principles,.outcome-grid{grid-template-columns:1fr}.themes{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr}.flow-step:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-16px}.decision{grid-template-columns:1fr}.blueprint-figure,.architecture-figure{width:100%;margin-left:0}.blueprint-figure figcaption,.architecture-figure figcaption{margin-left:0}.prototype{width:100%;margin-left:0}}
+    @media(max-width:620px){.container{width:min(calc(100% - 30px),var(--max))}.nav-note{display:none}.hero{padding-block:54px 52px}.hero-visual{padding:18px 10px}.section{padding-block:56px}.facts,.evidence-grid,.themes,.ui-grid,.outcome-grid{grid-template-columns:1fr}.heuristic-row,.mapping-row{grid-template-columns:1fr}.heuristic-row>div,.mapping-row>div{border-left:0;border-top:1px solid var(--line)}.heuristic-row>div:first-child,.mapping-row>div:first-child{border-top:0}.problem-row{grid-template-columns:1fr}.problem-side{padding:18px}.arrow{min-height:36px;transform:rotate(90deg)}.mock-metrics{grid-template-columns:1fr}.mock-row{grid-template-columns:1fr}.blueprint-frame img{width:min(1100px,300vw)}.blueprint-disclosure,.next-steps,.ui-visual{padding:20px}.solution-head{grid-template-columns:48px minmax(0,1fr);gap:14px}.solution-number{width:42px;height:42px}.ui-tabs{overflow-x:auto}.prototype-footer{align-items:flex-start;flex-direction:column;gap:8px}.case-next{flex-direction:column}.button{width:100%}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="container nav">
+    <a class="brand" href="index.html">Sivakumar Ravi</a>
+    <span class="nav-note">UX Research · Service Design · Enterprise Product Design</span>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Enterprise service design case study</p>
+      <h1>Captivate: turning a static visit request form into a shared coordination workspace.</h1>
+      <p class="hero-intro">Captivate is an internal enterprise platform used to plan client and leadership visits across office locations. I combined stakeholder walkthroughs, heuristic evaluation and workflow research to identify why users relied on calls, email and chat—and translated those findings into a progressive, multi-location planning and service-tracking experience.</p>
+      <div class="facts">
+        <div class="fact"><small>Role</small><strong>UX Researcher / Interaction Designer</strong></div>
+        <div class="fact"><small>Methods</small><strong>Stakeholder interviews, walkthrough, heuristic evaluation</strong></div>
+        <div class="fact"><small>Scope</small><strong>Requester journey and shared visit coordination</strong></div>
+        <div class="fact"><small>Deliverable</small><strong>Information architecture, user flows and prototype</strong></div>
+      </div>
+      <div class="hero-visual" aria-label="Captivate home screen shown on an iMac monitor">
+        <div class="imac">
+          <div class="imac-screen"><img src="captivate-assets/captivate-homepage-16x9.png" alt="Captivate homepage dashboard"></div>
+          <img class="imac-frame" src="captivate-assets/apple-imac.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="challenge">
+    <div class="container section-label">
+      <div class="section-index">01 · Challenge</div>
+      <div>
+        <div class="copy">
+          <p class="eyebrow">The context</p>
+          <h2>A visit looked like one request, but operationally behaved like a network of changing dependencies.</h2>
+          <p>Client and leadership visits require several independent teams to coordinate spaces, technology, badging, food and refreshments, stationery and experience support. A visit may involve one office, multiple offices in the same city, or several cities. Each meeting can have different attendees, timings, rooms and service requirements.</p>
+          <p>The existing experience treated this complexity as a single, largely tabular form. Users were expected to provide information before it was available, while service providers continued coordinating through email, official chat channels and scoping calls.</p>
+        </div>
+        <blockquote class="quote"><p>The design challenge was to make an evolving visit understandable and actionable for everyone involved, while keeping the request light enough to start before every detail was known.</p></blockquote>
+        <div class="copy">
+          <h3>Business and user tension</h3>
+          <ul>
+            <li>Requesters wanted to reserve support early, even when guest lists and agendas were incomplete.</li>
+            <li>Service teams needed reliable details before confirming availability.</li>
+            <li>Coordinators needed a complete view across locations and service owners.</li>
+            <li>The organization wanted to reduce manual follow-up and avoid unnecessary scoping calls.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="research">
+    <div class="container section-label">
+      <div class="section-index">02 · Research process</div>
+      <div>
+        <div class="copy">
+          <p class="eyebrow">Triangulating the problem</p>
+          <h2>I studied the product from three complementary angles.</h2>
+          <p>No single method could explain both the interface friction and the operational breakdown behind it. I combined behavioural evidence from stakeholders with an interface-level evaluation and an end-to-end walkthrough of the existing process.</p>
+        </div>
+        <div class="research-plan">
+          <article class="research-card"><span class="number">1</span><h3>Stakeholder interviews</h3><p>Understood how requesters, coordinators and service teams exchange information, make decisions and recover when information changes.</p></article>
+          <article class="research-card"><span class="number">2</span><h3>Existing product walkthrough</h3><p>Mapped the request lifecycle from initial entry to assignment, service monitoring, notifications and visit completion.</p></article>
+          <article class="research-card"><span class="number">3</span><h3>Heuristic evaluation</h3><p>Assessed navigation, visibility of status, error prevention, content hierarchy, accessibility and consistency with brand standards.</p></article>
+        </div>
+
+        <div class="subsection">
+          <div class="copy"><h3>Stakeholder walkthrough: how the work actually happened</h3><p>The walkthrough exposed a gap between the system’s apparent linearity and the real operational lifecycle. The request was only the beginning; coordination continued across several people and channels.</p></div>
+          <div class="walkthrough">
+            <strong>Existing workflow</strong>
+            <div class="flow">
+              <div class="flow-step">Account team enters all available visit details</div>
+              <div class="flow-step">Coordinator schedules a scoping call</div>
+              <div class="flow-step">Request is assigned to service owners</div>
+              <div class="flow-step">Teams update Captivate, email and chat</div>
+              <div class="flow-step">Requester manually tracks confirmation</div>
+            </div>
+          </div>
+          <div class="evidence-grid">
+            <article class="evidence"><span class="tag">Timing</span><h3>Requests arrived anywhere from two months to two days before a visit.</h3><p>The workflow needed to support both early planning and time-sensitive requests without pretending all information would be known at the start.</p></article>
+            <article class="evidence"><span class="tag">Operations</span><h3>Service teams worked to a 48-hour review expectation.</h3><p>The product did not clearly distinguish response time from the minimum lead time required to deliver an individual service.</p></article>
+            <article class="evidence"><span class="tag">Behaviour</span><h3>Users entered dummy data to finish the form.</h3><p>This pointed to premature data requirements rather than carelessness or lack of compliance.</p></article>
+            <article class="evidence"><span class="tag">Coordination</span><h3>Status updates lived across chat, email and the admin tool.</h3><p>Captivate lacked action-driven status updates and a reliable shared summary.</p></article>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="copy"><h3>Heuristic evaluation</h3><p>The interface review showed that visual and interaction issues reinforced the workflow problems. Users could not clearly understand where they were, what was required now, what could wait, or what would happen after submission.</p></div>
+          <div class="heuristic-table">
+            <div class="heuristic-row"><div>Heuristic</div><div>Observed issue</div><div>Consequence</div></div>
+            <div class="heuristic-row"><div><strong>Visibility of system status</strong></div><div><p>No reliable request summary or service-level progress after submission.</p></div><div><p>Users returned to email and chat to ask whether support was confirmed.</p></div></div>
+            <div class="heuristic-row"><div><strong>Match with the real world</strong></div><div><p>A multi-location, multi-meeting visit was represented as one flat form.</p></div><div><p>Services became difficult to associate with the correct office, date or audience.</p></div></div>
+            <div class="heuristic-row"><div><strong>User control and freedom</strong></div><div><p>Editing time, venue, catering or attendee details was not sufficiently supported.</p></div><div><p>Changes generated manual follow-up and uncertainty about affected teams.</p></div></div>
+            <div class="heuristic-row"><div><strong>Error prevention</strong></div><div><p>Errors appeared late and required information was not explained contextually.</p></div><div><p>Users supplied placeholders or discovered blockers close to submission.</p></div></div>
+            <div class="heuristic-row"><div><strong>Recognition over recall</strong></div><div><p>Users could not see current booking information while configuring later steps.</p></div><div><p>They had to remember dates, locations and counts while selecting services.</p></div></div>
+            <div class="heuristic-row"><div><strong>Accessibility and consistency</strong></div><div><p>Content hierarchy, contrast, imagery, icon use and brand patterns needed improvement.</p></div><div><p>The dense tabular presentation increased cognitive load and reduced scanability.</p></div></div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="copy"><h3>Synthesis: the recurring themes</h3><p>I grouped the findings by underlying cause rather than by screen. This prevented the redesign from becoming a collection of isolated interface fixes.</p></div>
+          <div class="themes">
+            <div class="theme">Information arrives progressively</div>
+            <div class="theme">A visit contains locations and sessions</div>
+            <div class="theme">Services have independent owners and statuses</div>
+            <div class="theme">Changes are normal, not exceptional</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="problems">
+    <div class="container section-label">
+      <div class="section-index">03 · Problems identified</div>
+      <div>
+        <div class="copy">
+          <p class="eyebrow">From observations to design challenges</p>
+          <h2>The findings resolved into six connected product problems.</h2>
+          <p>Each problem was written in operational terms so that the design response could improve both requester usability and service-team coordination.</p>
+        </div>
+        <div class="problem-map">
+          <div class="problem-row"><div class="problem-side"><h3>1. Premature completeness</h3><p>Users had to provide detailed guest and service information before it was known.</p></div><div class="arrow">→</div><div class="problem-side solution"><h3>Progressive commitment</h3><p>Separate a preliminary support request from later attendee and service details.</p></div></div>
+          <div class="problem-row"><div class="problem-side"><h3>2. Flat information model</h3><p>One form could not elegantly represent several cities, offices and meetings.</p></div><div class="arrow">→</div><div class="problem-side solution"><h3>Visit hierarchy</h3><p>Structure information as Visit → Location → Session → Service.</p></div></div>
+          <div class="problem-row"><div class="problem-side"><h3>3. Generic service capture</h3><p>All services were requested in one place despite requiring different details.</p></div><div class="arrow">→</div><div class="problem-side solution"><h3>Conditional configuration</h3><p>Show questions appropriate to rooms, technology, catering and access.</p></div></div>
+          <div class="problem-row"><div class="problem-side"><h3>4. One headcount for everything</h3><p>Meeting room, lunch and refreshments could involve different numbers of people.</p></div><div class="arrow">→</div><div class="problem-side solution"><h3>Session-level attendance</h3><p>Assign attendees and quantities to specific sessions and services.</p></div></div>
+          <div class="problem-row"><div class="problem-side"><h3>5. Fragmented status</h3><p>Overall progress depended on manual email and chat updates.</p></div><div class="arrow">→</div><div class="problem-side solution"><h3>Service-level tracking</h3><p>Expose owner, status, questions and confirmation for every service request.</p></div></div>
+          <div class="problem-row"><div class="problem-side"><h3>6. Changes broke the process</h3><p>Updates after submission were difficult to communicate and revalidate.</p></div><div class="arrow">→</div><div class="problem-side solution"><h3>Targeted revalidation</h3><p>Reopen only the services affected by a material change.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="strategy">
+    <div class="container section-label">
+      <div class="section-index">04 · Design strategy</div>
+      <div>
+        <div class="copy">
+          <p class="eyebrow">Reframing the product</p>
+          <h2>The redesign positioned Captivate as a shared visit workspace.</h2>
+          <p>The redesign needed to support the lifecycle before, during and after submission. I used three principles to maintain this direction across screens.</p>
+        </div>
+        <div class="principles">
+          <article class="principle"><span>PRINCIPLE 01</span><h3>Ask for the right detail at the right time.</h3><p>Make early submission possible, then use clear deadlines and readiness indicators for information that can follow.</p></article>
+          <article class="principle"><span>PRINCIPLE 02</span><h3>Organize the interface like the visit itself.</h3><p>Keep locations, sessions, attendees and services connected so users can understand dependencies without a scoping call.</p></article>
+          <article class="principle"><span>PRINCIPLE 03</span><h3>Make ownership and consequence visible.</h3><p>Every action should explain what was sent, who is reviewing it and whether a change affects confirmation.</p></article>
+        </div>
+        <blockquote class="quote"><p>The new model separates information readiness, service confirmation and actual visit status, so progress is tied to the work happening behind the scenes.</p></blockquote>
+        <figure class="blueprint-figure">
+          <div class="copy">
+            <p class="eyebrow">Proposed operating model</p>
+            <h3>Future-state service blueprint hypothesis</h3>
+            <p>I used the research findings and proposed interaction model to show how the redesigned service could operate across requesters, Captivate, coordinators, service teams and supporting systems.</p>
+          </div>
+          <div class="blueprint-disclosure">
+            <h4>How to interpret this blueprint</h4>
+            <p>This is a research-informed hypothesis—not a validated description of future operations. The frontstage journey is grounded in the walkthrough and prototype; backstage processes, ownership, integrations and measures require further validation.</p>
+            <ul>
+              <li>Validate service-team responsibilities and escalation rules.</li>
+              <li>Confirm integration and change-impact feasibility with engineering.</li>
+              <li>Establish operational baselines before using the proposed measures.</li>
+            </ul>
+          </div>
+          <div class="blueprint-frame">
+            <a href="captivate-assets/captivate-service-blueprint.svg" target="_blank" rel="noopener">
+              <img src="captivate-assets/captivate-service-blueprint.svg" alt="Future-state Captivate service blueprint hypothesis showing six lifecycle phases, requester actions, frontstage interactions, backstage operations, systems, risks, opportunities and measures">
+            </a>
+          </div>
+          <figcaption>Scroll horizontally to review the detailed blueprint, or select it to open the full-resolution version. Confidence tags distinguish research-backed, inferred, proposed and validation-needed content.</figcaption>
+        </figure>
+        <figure class="architecture-figure">
+          <div class="copy"><h3>Information architecture and omnichannel interaction model</h3><p>The architecture connects the visible navigation to the underlying visit hierarchy and shows how actions move between requesters, coordinators, service teams and supporting channels.</p></div>
+          <div class="architecture-frame">
+            <a href="captivate-assets/captivate-information-architecture.svg" target="_blank" rel="noopener">
+              <img src="captivate-assets/captivate-information-architecture.svg" alt="Captivate information architecture showing actors and channels, global navigation, the shared visit workspace, Visit to Location to Session to Service data hierarchy, and the service confirmation lifecycle">
+            </a>
+          </div>
+          <figcaption>Select the diagram to open the full-resolution version. Solid green paths show primary workflow; dashed paths show feedback, notifications and change loops.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="solution">
+    <div class="container section-label">
+      <div class="section-index">05 · Design solution</div>
+      <div>
+        <div class="copy"><p class="eyebrow">Research translated into interaction</p><h2>Each major interface decision directly addressed a research finding.</h2></div>
+
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">1</span><div><h3>A task-oriented “My visits” dashboard</h3><p>The old experience did not give requesters a useful summary after submission. The new dashboard prioritizes visits requiring attention, services awaiting teams and confirmed visits.</p></div></div>
+          <div class="decision"><div><small>Evidence</small><p>Status updates were fragmented across email and chat.</p></div><div><small>Design decision</small><p>Show attention required, confirmation progress and the next primary action.</p></div><div><small>Expected effect</small><p>Reduce “What is happening with my request?” follow-ups.</p></div></div>
+          <div class="ui-visual"><div class="ui-top"><strong>My visits</strong><span class="mock-button">+ Plan a new visit</span></div><div class="ui-grid"><div class="ui-card"><b>3 need attention</b>Two due this week</div><div class="ui-card"><b>4 awaiting teams</b>Within response time</div><div class="ui-card"><b>2 confirmed</b>Next visit in 12 days</div></div></div>
+        </div>
+
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">2</span><div><h3>Preliminary request before detailed planning</h3><p>Users can create a workspace with basic client, purpose, dates, locations, approximate attendance and broad support categories. The interface explicitly states that services are not yet confirmed.</p></div></div>
+          <div class="decision"><div><small>Evidence</small><p>Users entered dummy data when details were unavailable.</p></div><div><small>Design decision</small><p>Distinguish “required now” from “can be completed later.”</p></div><div><small>Expected effect</small><p>Improve data quality without delaying early coordination.</p></div></div>
+        </div>
+
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">3</span><div><h3>A persistent visit workspace with clear navigation</h3><p>A compact visit context remains visible above tabs for Overview, Attendees, Locations & sessions, Services, and Review & send. Each tab then presents its own header and action.</p></div></div>
+          <div class="ui-visual"><div class="ui-top"><strong>Dell Technologies leadership visit</strong><span class="mock-pill">Action needed</span></div><div class="ui-tabs"><span>Overview</span><span class="active">Attendees</span><span>Locations & sessions</span><span>Services</span><span>Review & send</span></div><div class="ui-content"><h3>Attendees</h3><p>Manage visitor, host and local attendee details in one place.</p></div></div>
+        </div>
+
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">4</span><div><h3>Locations and sessions as the planning backbone</h3><p>The itinerary introduces the missing session layer beneath each office. Rooms, catering, attendees and technology can now belong to the meeting where they are actually needed.</p></div></div>
+          <div class="decision"><div><small>Evidence</small><p>“Multiple touchpoints” meant leadership meetings across offices and cities.</p></div><div><small>Design decision</small><p>Represent every session with date, time, attendance, format and services.</p></div><div><small>Expected effect</small><p>Remove ambiguity that previously required a scoping call.</p></div></div>
+        </div>
+
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">5</span><div><h3>Conditional service configuration</h3><p>Selected services reveal only their relevant details. Technology asks for conferencing platform and technician support. Catering asks for quantity and dietary requirements. Visitor access is generated from the guest list.</p></div></div>
+          <div class="decision"><div><small>Evidence</small><p>Service teams needed different operational information.</p></div><div><small>Design decision</small><p>Explain why a question is required and recommend services from visit context.</p></div><div><small>Expected effect</small><p>Capture micro-details accurately while keeping the interface manageable.</p></div></div>
+        </div>
+
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">6</span><div><h3>Independent service statuses and focused questions</h3><p>Service confirmation is separated from information completeness. Teams can confirm, review, request information or decline support at the service level.</p></div></div>
+          <div class="decision"><div><small>Evidence</small><p>Different teams approved and updated their own services.</p></div><div><small>Design decision</small><p>Calculate overall progress from the status of individual services.</p></div><div><small>Expected effect</small><p>Create a reliable shared source of truth without hiding partial progress.</p></div></div>
+        </div>
+
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">7</span><div><h3>Service Library and contextual Help</h3><p>The global Service Library explains availability, lead time and required information. Help is organized around user tasks and surfaces unresolved items from the active visit before offering escalation.</p></div></div>
+          <div class="decision"><div><small>Evidence</small><p>Users needed inspiration and clarification without leaving the planning flow.</p></div><div><small>Design decision</small><p>Connect learning content directly to visit and session actions.</p></div><div><small>Expected effect</small><p>Reduce broad consultations while preserving support for genuinely complex visits.</p></div></div>
+        </div>
+
+        <div class="subsection">
+          <div class="copy"><h3>Research-to-design traceability</h3><p>The table below captures the central logic of the redesign.</p></div>
+          <div class="mapping-table">
+            <div class="mapping-row"><div>Research finding</div><div>Underlying need</div><div>Design response</div></div>
+            <div class="mapping-row"><div><p>Information becomes available gradually.</p></div><div><p>Start coordination without inventing details.</p></div><div><p>Preliminary support request, autosave and progressive completion.</p></div></div>
+            <div class="mapping-row"><div><p>Visits span offices and leadership meetings.</p></div><div><p>Understand where and when each requirement applies.</p></div><div><p>Visit → Location → Session → Service hierarchy.</p></div></div>
+            <div class="mapping-row"><div><p>Pax varies by room, meal and activity.</p></div><div><p>Capture the correct quantity for each service.</p></div><div><p>Session assignments and service-specific attendee counts.</p></div></div>
+            <div class="mapping-row"><div><p>Scoping calls compensate for missing structured detail.</p></div><div><p>Ask precise follow-up questions asynchronously.</p></div><div><p>Conditional forms, rationale text and visit conversations.</p></div></div>
+            <div class="mapping-row"><div><p>Updates occur outside the tool.</p></div><div><p>See one reliable, shared status.</p></div><div><p>Activity history, service owners, questions and independent statuses.</p></div></div>
+            <div class="mapping-row"><div><p>Dates, venues and catering change after submission.</p></div><div><p>Edit without restarting the entire request.</p></div><div><p>Persistent workspace and targeted service revalidation.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="prototype">
+    <div class="container section-label">
+      <div class="section-index">06 · Prototype</div>
+      <div>
+        <div class="copy"><p class="eyebrow">Clickable experience</p><h2>The prototype covers the requester journey from discovery to service confirmation.</h2><p>It includes the visit dashboard, preliminary support request, workspace, attendee management, location and session planning, conditional services, final review, Service Library and Help centre.</p></div>
+        <div class="prototype">
+          <div class="prototype-window">
+            <iframe src="captivate-design.html?embedded=1" title="Captivate clickable prototype"></iframe>
+            <div class="prototype-scrollbar" aria-hidden="true"><div class="prototype-scrollbar-thumb"></div></div>
+          </div>
+          <div class="prototype-footer"><span>Responsive interactive prototype, scaled to fit the available width.</span><a href="captivate-design.html">Open full-screen prototype →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="outcome">
+    <div class="container section-label">
+      <div class="section-index">07 · Outcome & next steps</div>
+      <div>
+        <div class="copy">
+          <p class="eyebrow">What changed</p>
+          <h2>The redesign converted operational ambiguity into visible structure, ownership and next actions.</h2>
+          <p>The current outcome is a detailed interaction model and clickable prototype. Because the product has not yet been measured in production, I frame impact as design improvements and testable hypotheses rather than claiming unverified business results.</p>
+        </div>
+        <div class="outcome-grid">
+          <article class="outcome"><strong>Progressive planning</strong><p>Requesters can begin with known details and complete the visit plan as information becomes available.</p></article>
+          <article class="outcome"><strong>Shared status and ownership</strong><p>The visit workspace brings service progress, responsibilities and next actions into one place.</p></article>
+          <article class="outcome"><strong>More focused follow-up</strong><p>Contextual questions and structured service details reduce the need for broad scoping conversations.</p></article>
+        </div>
+        <div class="next-steps">
+          <h3>Next steps</h3>
+          <ul>
+            <li>Run task-based usability testing with requesters planning both single-location and multi-city visits.</li>
+            <li>Test whether service teams receive enough information to avoid a scoping call.</li>
+            <li>Validate terminology such as preliminary support, service confirmation and visit status.</li>
+            <li>Measure completion quality, clarification volume, time to first service response and status-related follow-up.</li>
+            <li>Define the integration boundary between Captivate and the backend admin tool before engineering handoff.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="case-next">
+        <a class="button" href="index.html#featured-work">← Back to selected work</a>
+        <a class="button button-primary" href="deloitte-dmod-case-study.html">Next: DMOD modernization →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5 12 8.5l6.5 6"/></svg>
+</a>
+
+<footer><div class="container">© 2026 Sivakumar Ravi · Captivate case study</div></footer>
+<script>
+  const nativePrototype = { width: 1440, height: 900 };
+
+  function fitEmbeddedPrototype(viewport, maximumScale = 1) {
+    const frame = viewport.querySelector('iframe');
+    if (!frame) return;
+    const scale = Math.min(maximumScale, viewport.clientWidth / nativePrototype.width);
+    frame.style.transform = `scale(${scale})`;
+    frame.style.left = '0';
+    frame.style.top = '0';
+    viewport.style.height = `${nativePrototype.height * scale}px`;
+  }
+
+  function fitAllEmbeddedPrototypes() {
+    document.querySelectorAll('.prototype-window').forEach(viewport => fitEmbeddedPrototype(viewport, .72));
+  }
+
+  document.querySelectorAll('.prototype-window').forEach(viewport => {
+    const frame = viewport.querySelector('iframe');
+    const thumb = viewport.querySelector('.prototype-scrollbar-thumb');
+    if (!frame) return;
+    frame.addEventListener('load', () => {
+      frame.contentWindow?.postMessage({ type: 'captivate-scroll-request' }, window.location.origin);
+    });
+
+    if (!thumb) return;
+    let dragStartY = 0;
+    let dragStartRatio = 0;
+
+    thumb.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      viewport.classList.add('is-dragging');
+      thumb.setPointerCapture(event.pointerId);
+      dragStartY = event.clientY;
+      dragStartRatio = Number(viewport.dataset.scrollRatio || 0);
+    });
+    thumb.addEventListener('pointermove', event => {
+      if (!viewport.classList.contains('is-dragging')) return;
+      const track = thumb.parentElement;
+      const travel = Math.max(1, track.clientHeight - thumb.clientHeight);
+      const ratio = Math.min(1, Math.max(0, dragStartRatio + (event.clientY - dragStartY) / travel));
+      frame.contentWindow?.postMessage({ type: 'captivate-scroll-to', ratio }, window.location.origin);
+    });
+    thumb.addEventListener('pointerup', event => {
+      viewport.classList.remove('is-dragging');
+      thumb.releasePointerCapture(event.pointerId);
+    });
+  });
+
+  window.addEventListener('message', event => {
+    if (event.origin !== window.location.origin || event.data?.type !== 'captivate-scroll-state') return;
+    document.querySelectorAll('.prototype-window').forEach(viewport => {
+      const frame = viewport.querySelector('iframe');
+      if (frame?.contentWindow !== event.source) return;
+      const { scrollTop, scrollHeight, clientHeight } = event.data;
+      const maxScroll = Math.max(1, scrollHeight - clientHeight);
+      const visibleRatio = Math.min(1, clientHeight / Math.max(clientHeight, scrollHeight));
+      const scrollRatio = Math.min(1, Math.max(0, scrollTop / maxScroll));
+      viewport.dataset.scrollRatio = scrollRatio;
+      viewport.style.setProperty('--scroll-thumb-size', `${visibleRatio * 100}%`);
+      viewport.style.setProperty('--scroll-thumb-top', `${scrollRatio * (1 - visibleRatio) * 100}%`);
+    });
+  });
+
+  fitAllEmbeddedPrototypes();
+  new ResizeObserver(fitAllEmbeddedPrototypes).observe(document.documentElement);
+</script>
+</body>
+</html>

@@ -1,0 +1,1110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Sivakumar Ravi, a UX design leader combining product strategy, systems thinking, hands-on craft, and engineering fluency.">
+  <meta name="theme-color" content="#f7f5f2">
+  <title>Sivakumar Ravi — UX Design Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas: #f7f5f2;
+      --surface: #fff;
+      --ink: #171717;
+      --muted: #5f6368;
+      --line: #ddd9d3;
+      --blue: #1b7444;
+      --blue-dark: #105333;
+      --blue-soft: #e5f1e9;
+      --blue-pale: #f4faf6;
+      --shadow: 0 18px 50px rgba(32, 28, 24, .08);
+      --radius: 18px;
+      --max: 1160px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+    }
+    body.locked { overflow: hidden; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    :focus-visible {
+      outline: 3px solid rgba(27, 116, 68, .28);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      padding: 10px 16px;
+      background: var(--ink);
+      color: #fff;
+      transform: translateY(-150%);
+      transition: transform .2s;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .container { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--blue);
+      font-size: .76rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 {
+      font-family: "DM Sans", sans-serif;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      line-height: 1.04;
+    }
+    h1 { font-size: clamp(2.6rem, 4.8vw, 4.5rem); margin-bottom: 24px; }
+    h2 { font-size: clamp(1.9rem, 3vw, 3rem); margin-bottom: 16px; }
+    h3 { font-size: 1.16rem; line-height: 1.3; }
+    .lede { max-width: 720px; color: var(--muted); font-size: clamp(1rem, 1.25vw, 1.12rem); }
+    .section { padding-block: clamp(68px, 8vw, 106px); }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .section-head > div { max-width: 730px; }
+    .text-link {
+      color: var(--blue);
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(221, 217, 211, .85);
+      background: rgba(247, 245, 242, .92);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: -.02em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--ink); }
+    .nav-cta {
+      padding: 9px 15px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      color: var(--ink) !important;
+    }
+    .menu-button { display: none; background: none; border: 0; padding: 8px; }
+
+    .hero { padding-block: clamp(64px, 9vw, 120px) 72px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(260px, .6fr);
+      gap: clamp(44px, 8vw, 110px);
+      align-items: center;
+    }
+    .hero h1 span { color: var(--blue); }
+    .hero-copy { max-width: 700px; font-size: 1.04rem; color: var(--muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 11px 19px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .18s, background .18s, border-color .18s, color .18s;
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--ink); }
+    .button-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .button-primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+    .portrait {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--blue-soft);
+      box-shadow: var(--shadow);
+    }
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 52% 32%;
+    }
+    .portrait-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      color: #746c64;
+    }
+    .portrait-monogram {
+      width: 112px;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      border: 1px solid rgba(23, 23, 23, .15);
+      border-radius: 50%;
+      font-family: "DM Sans", sans-serif;
+      font-size: 2.6rem;
+    }
+    .portrait-placeholder small { max-width: 170px; }
+
+    .outcomes { padding-block: 34px; border-block: 1px solid var(--line); }
+    .outcome-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .outcome { padding: 12px clamp(18px, 3vw, 36px); border-right: 1px solid var(--line); text-align: center; }
+    .outcome:first-child { padding-left: 0; }
+    .outcome:last-child { border-right: 0; }
+    .outcome-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--blue);
+    }
+    .outcome-icon svg { width: 26px; height: 26px; }
+    .outcome strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: "DM Sans", sans-serif;
+      font-size: clamp(1.7rem, 2.4vw, 2.35rem);
+      line-height: 1;
+    }
+    .outcome span { color: var(--muted); font-size: .9rem; line-height: 1.35; }
+
+    .work-section { background: var(--surface); }
+    .work-list { display: grid; gap: 28px; }
+    .project-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+      min-height: 440px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--canvas);
+      text-decoration: none;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .project-visual {
+      position: relative;
+      min-height: 440px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: clamp(24px, 4vw, 52px);
+    }
+    .project-visual.blue { background: var(--blue-soft); }
+    .project-shot {
+      --shot-padding: clamp(10px, 1.2vw, 16px);
+      position: relative;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border: 1px solid rgba(23, 23, 23, .1);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 18px 42px rgba(32, 28, 24, .14);
+    }
+    .project-image {
+      position: absolute;
+      inset: var(--shot-padding);
+      width: calc(100% - (var(--shot-padding) * 2));
+      height: calc(100% - (var(--shot-padding) * 2));
+      object-fit: contain;
+    }
+    .card-imac {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(64%, 440px);
+      aspect-ratio: 2788 / 2315;
+      transform: translate(-50%, -50%);
+    }
+    .card-imac-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+    .card-imac-screen {
+      position: absolute;
+      left: 3.95%;
+      top: 5.14%;
+      z-index: 2;
+      width: 91.68%;
+      height: 62.25%;
+      overflow: hidden;
+      background: #f4f6f3;
+    }
+    .card-imac-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .browser-frame {
+      position: absolute;
+      width: 84%;
+      right: -4%;
+      bottom: -4%;
+      aspect-ratio: 16 / 11;
+      overflow: hidden;
+      border: 8px solid #242424;
+      border-bottom: 0;
+      border-radius: 15px 15px 0 0;
+      background: #fff;
+      box-shadow: 0 24px 50px rgba(23, 23, 23, .2);
+    }
+    .browser-bar { height: 28px; border-bottom: 1px solid #e7e7e7; background: #f6f6f6; }
+    .browser-body { display: grid; grid-template-columns: 22% 1fr; height: calc(100% - 28px); }
+    .mock-nav { background: #162b55; }
+    .mock-content { padding: 8%; }
+    .mock-line { height: 8px; margin-bottom: 12px; border-radius: 8px; background: #d8ddea; }
+    .mock-line.short { width: 55%; }
+    .mock-panels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+    .mock-panel { height: 74px; border-radius: 9px; background: #e9ecf4; }
+    .ad-stack { position: absolute; inset: 12% 8%; }
+    .ad {
+      position: absolute;
+      width: 68%;
+      padding: 22px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 18px 40px rgba(27, 116, 68, .14);
+    }
+    .ad:nth-child(2) { top: 28%; left: 22%; }
+    .ad:nth-child(3) { top: 56%; left: 8%; }
+    .ad-mark { width: 28px; height: 28px; margin-bottom: 14px; border-radius: 50%; background: var(--blue); }
+    .plugin-window {
+      position: absolute;
+      width: 72%;
+      right: 8%;
+      top: 10%;
+      bottom: -5%;
+      padding: 26px;
+      border-radius: 16px 16px 0 0;
+      background: #292929;
+      color: #fff;
+      box-shadow: 0 20px 45px rgba(53, 39, 28, .22);
+    }
+    .plugin-title { margin-bottom: 28px; font-weight: 600; }
+    .plugin-row { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid #454545; }
+    .swatch { width: 34px; height: 34px; border-radius: 8px; }
+    .swatch.blue { background: #0f62fe; }
+    .swatch.purple { background: #8a3ffc; }
+    .swatch.red { background: #da1e28; }
+    .dmod-workflow-card {
+      width: min(100%, 420px);
+      padding: clamp(18px, 3vw, 30px);
+      border: 1px solid rgba(23, 23, 23, .1);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .82);
+      box-shadow: 0 18px 42px rgba(32, 28, 24, .12);
+    }
+    .dmod-workflow-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(23, 23, 23, .1);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .dmod-badge {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .dmod-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .dmod-step {
+      min-height: 78px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      padding: 11px;
+      border: 1px solid rgba(23, 23, 23, .08);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .dmod-step span {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+    }
+    .dmod-step strong {
+      color: var(--ink);
+      font-size: .78rem;
+      line-height: 1.2;
+    }
+    .dmod-template {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #171717;
+      color: #fff;
+    }
+    .dmod-template-label {
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, .72);
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .dmod-template-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 30px;
+      margin-bottom: 8px;
+      padding: 0 10px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .78);
+      font-size: .68rem;
+      font-weight: 600;
+    }
+    .dmod-template-line::after {
+      content: "";
+      width: 32%;
+      height: 6px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .22);
+    }
+    .dmod-template-line.primary {
+      background: rgba(211, 228, 216, .16);
+      color: #d3e4d8;
+    }
+    .dmod-template-line.primary::after { background: #d3e4d8; }
+    .dmod-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 14px;
+    }
+    .dmod-metric {
+      padding: 10px;
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .project-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(34px, 5vw, 64px); }
+    .project-meta { margin-bottom: 20px; color: var(--blue); font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+    .project-copy h3 { margin-bottom: 14px; font-family: "DM Sans", sans-serif; font-size: clamp(1.7rem, 2.5vw, 2.45rem); }
+    .project-copy p { color: var(--muted); }
+    .result { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--ink) !important; font-weight: 600; }
+    .card-link { margin-top: 24px; color: var(--blue); font-weight: 600; }
+
+    .other-work { margin-top: 54px; }
+    .mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .mini-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+    .mini-card .tag { color: var(--blue); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .mini-card h3 { margin: 38px 0 9px; }
+    .mini-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .principles-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(48px, 8vw, 110px); }
+    .principle-list { border-top: 1px solid var(--line); }
+    .principle { display: grid; grid-template-columns: 52px 1fr; gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+    .principle-number { color: var(--blue); font-weight: 600; }
+    .principle h3 { margin-bottom: 8px; }
+    .principle p { margin: 0; color: var(--muted); }
+
+    .writing-section { background: var(--ink); color: #fff; }
+    .writing-section .eyebrow, .writing-section .text-link { color: #bde2c8; }
+    .writing-section .lede { color: #bdbdbd; }
+    .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .article-card {
+      min-height: 430px;
+      display: grid;
+      grid-template-rows: 210px 1fr;
+      overflow: hidden;
+      border: 1px solid #3d3d3d;
+      border-radius: var(--radius);
+      color: #fff;
+      text-decoration: none;
+      transition: border-color .2s, transform .2s;
+    }
+    .article-card:hover { transform: translateY(-3px); border-color: #bde2c8; }
+    .article-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #262626;
+    }
+    .article-content { display: flex; flex-direction: column; padding: 28px 30px 30px; }
+    .article-meta { color: #a9a9a9; font-size: .82rem; }
+    .article-card h3 { margin: 22px 0 14px; font-family: "DM Sans", sans-serif; font-size: clamp(1.55rem, 2.4vw, 2.15rem); }
+    .article-card p { margin-bottom: 0; color: #bdbdbd; }
+
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(50px, 8vw, 120px); }
+    .about-copy { color: var(--muted); font-size: 1.08rem; }
+    .capabilities { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 36px; }
+    .capability { padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); font-weight: 500; }
+    .timeline { margin-top: 38px; border-top: 1px solid var(--line); }
+    .timeline-item { display: grid; grid-template-columns: 145px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .timeline-item time { color: var(--muted); font-size: .9rem; }
+    .timeline-item strong { display: block; }
+    .timeline-item span { color: var(--muted); }
+
+    .contact-section { background: var(--blue); color: #fff; }
+    .contact-wrap { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 50px; }
+    .contact-section .eyebrow { color: #d3e4d8; }
+    .contact-section h2 { max-width: 760px; }
+    .contact-section .button { border-color: rgba(255,255,255,.45); color: #fff; }
+    .contact-section .button:hover { background: #fff; color: var(--blue); }
+    .contact-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+
+    .back-to-top {
+      position: fixed;
+      right: clamp(16px, 3vw, 28px);
+      bottom: clamp(16px, 3vw, 28px);
+      z-index: 90;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0;
+      font-weight: 600;
+      line-height: 1;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform .18s, background .18s;
+    }
+    .back-to-top svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .back-to-top:hover { transform: translateY(-2px); background: var(--blue-dark); }
+    footer { padding-block: 28px; background: var(--ink); color: #aaa; }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 24px; font-size: .9rem; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+
+    .detail-view {
+      display: none;
+      min-height: 100vh;
+      background: var(--surface);
+    }
+    .detail-view.active { display: block; }
+    .case-hero { padding-block: clamp(70px, 10vw, 130px) 65px; }
+    .back-link { display: inline-block; margin-bottom: 50px; color: var(--blue); font-weight: 600; text-decoration: none; }
+    .case-hero h1 { max-width: 900px; font-size: clamp(2.5rem, 5vw, 4.6rem); }
+    .case-summary { max-width: 760px; color: var(--muted); font-size: 1.08rem; }
+    .case-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 50px; }
+    .case-fact { padding-top: 16px; border-top: 1px solid var(--line); }
+    .case-fact small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .case-fact strong { display: block; margin-top: 7px; }
+    .case-banner { min-height: 520px; display: grid; place-items: center; overflow: hidden; }
+    .case-banner.blue { background: var(--blue-soft); }
+    .case-banner-note {
+      width: min(88%, 780px);
+      padding: clamp(35px, 6vw, 70px);
+      border: 1px solid rgba(23,23,23,.12);
+      border-radius: 20px;
+      background: rgba(255,255,255,.72);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .case-banner-note strong { display: block; margin-bottom: 10px; font-family: "DM Sans", sans-serif; font-size: 1.65rem; }
+    .case-body { width: min(calc(100% - 48px), 900px); margin-inline: auto; padding-block: 90px 120px; }
+    .case-section { display: grid; grid-template-columns: 200px 1fr; gap: 54px; padding: 52px 0; border-bottom: 1px solid var(--line); }
+    .case-section h2 { font-family: "DM Sans", sans-serif; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
+    .case-section h3 { font-family: "DM Sans", sans-serif; font-size: clamp(1.65rem, 3vw, 2.45rem); }
+    .case-section p, .case-section li { color: var(--muted); }
+    .case-section li + li { margin-top: 8px; }
+    .decision { margin: 28px 0; padding: 24px; border-left: 4px solid var(--blue); background: var(--blue-soft); }
+    .decision strong { display: block; margin-bottom: 5px; }
+    .case-next { display: flex; justify-content: space-between; gap: 30px; padding-top: 70px; }
+
+    .resume-view { display: none; background: #fff; }
+    .resume-view.active { display: block; }
+    .resume-sheet { width: min(calc(100% - 48px), 920px); margin: 60px auto; padding: clamp(30px, 6vw, 72px); border: 1px solid var(--line); }
+    .resume-top { display: flex; justify-content: space-between; gap: 40px; border-bottom: 2px solid var(--ink); padding-bottom: 28px; }
+    .resume-top h1 { margin: 0 0 6px; font-size: 2.5rem; }
+    .resume-contact { text-align: right; font-size: .9rem; }
+    .resume-section { padding: 28px 0; border-bottom: 1px solid var(--line); }
+    .resume-section h2 { font-family: "DM Sans", sans-serif; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+    .resume-role { display: grid; grid-template-columns: 155px 1fr; gap: 24px; padding: 14px 0; }
+    .resume-role p { margin: 5px 0 0; color: var(--muted); }
+    .resume-actions { position: sticky; top: 86px; z-index: 20; display: flex; justify-content: center; gap: 10px; padding: 12px; }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 18px; }
+      .hero-grid, .principles-grid, .about-grid { grid-template-columns: 1fr; }
+      .portrait { width: min(68vw, 360px); justify-self: center; margin-inline: auto; }
+      .outcome-grid { grid-template-columns: repeat(2, 1fr); }
+      .outcome:nth-child(2) { border-right: 0; }
+      .outcome:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .outcome:nth-child(3) { padding-left: 0; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-visual { min-height: 390px; }
+      .mini-grid { grid-template-columns: 1fr 1fr; }
+      .case-facts { grid-template-columns: repeat(2, 1fr); }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .contact-actions { justify-content: flex-start; }
+      .article-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 720px) {
+      .container, .case-body { width: min(calc(100% - 32px), var(--max)); }
+      .nav { min-height: 66px; }
+      .menu-button { display: block; }
+      .nav-links {
+        position: fixed;
+        inset: 66px 0 auto;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 18px 16px 24px;
+        border-bottom: 1px solid var(--line);
+        background: var(--canvas);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { display: block; padding: 12px; font-size: 1rem; }
+      .nav-cta { border: 0; border-radius: 0; }
+      .section-head { align-items: start; flex-direction: column; margin-bottom: 34px; }
+      h1 { font-size: clamp(2.45rem, 11vw, 3.65rem); }
+      .hero { padding-top: 54px; }
+      .portrait { width: min(82vw, 340px); }
+      .outcomes { padding-block: 12px; }
+      .outcome { padding: 20px 14px; }
+      .project-visual { min-height: 300px; }
+      .project-copy { padding: 30px 24px; }
+      .mini-grid, .article-grid, .capabilities { grid-template-columns: 1fr; }
+      .principle { grid-template-columns: 38px 1fr; }
+      .timeline-item, .resume-role { grid-template-columns: 1fr; gap: 5px; }
+      .case-facts { grid-template-columns: 1fr 1fr; }
+      .case-banner { min-height: 390px; }
+      .case-section { grid-template-columns: 1fr; gap: 12px; padding: 38px 0; }
+      .case-next, .footer-wrap, .resume-top { flex-direction: column; }
+      .resume-contact { text-align: left; }
+      .footer-links { flex-wrap: wrap; }
+    }
+
+    @media print {
+      body { background: #fff; font-size: 11pt; }
+      .site-header, .resume-actions, .back-to-top, footer { display: none !important; }
+      #site-content, .detail-view { display: none !important; }
+      .resume-view.active { display: block !important; }
+      .resume-sheet { width: 100%; margin: 0; padding: 0; border: 0; }
+      .resume-section { break-inside: avoid; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand route-link" href="#work">Sivakumar Ravi</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a class="route-link" href="#work">Work</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="portfolio-assets/Sivakumar_Resume_June2026.pdf" target="_blank" rel="noopener">Resume</a></li>
+        <li><a class="nav-cta" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div id="site-content">
+      <section class="hero" id="work">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">UX design leader · Bengaluru, India</p>
+            <h1>Crafting meaningful <span>digital experiences.</span></h1>
+            <p class="hero-copy">I lead teams and design user-centered solutions that bridge business goals with user needs, transforming complex problems into intuitive digital products.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#featured-work">Explore selected work <span aria-hidden="true">↓</span></a>
+              <a class="button" href="portfolio-assets/Sivakumar_Resume_June2026.pdf" target="_blank" rel="noopener">View resume</a>
+            </div>
+          </div>
+          <div class="portrait">
+            <img src="portfolio-assets/sivakumar-ravi-profile.jpg" alt="Sivakumar Ravi, UX design leader">
+          </div>
+        </div>
+      </section>
+
+      <section class="outcomes" aria-label="Selected career outcomes">
+        <div class="container outcome-grid">
+          <div class="outcome">
+            <span class="outcome-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="m8.8 11.1-1.1 8 4.3-2.5 4.3 2.5-1.1-8"/></svg></span>
+            <strong>10+</strong><span>Years Experience</span>
+          </div>
+          <div class="outcome">
+            <span class="outcome-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/><path d="M12 4V2m8 10h2"/></svg></span>
+            <strong>50+</strong><span>Projects Delivered</span>
+          </div>
+          <div class="outcome">
+            <span class="outcome-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3.5 19v-2.2A4.8 4.8 0 0 1 8.3 12h1.4a4.8 4.8 0 0 1 4.8 4.8V19"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 13a4.5 4.5 0 0 1 3.5 4.4V19"/></svg></span>
+            <strong>20+</strong><span>Clients Worldwide</span>
+          </div>
+          <div class="outcome">
+            <span class="outcome-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6m-5 3h4"/><path d="M8.5 14.5A6 6 0 1 1 15.5 14.5c-.9.7-1.5 1.5-1.5 2.5h-4c0-1-.6-1.8-1.5-2.5Z"/></svg></span>
+            <strong>5</strong><span>Design Awards</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section work-section" id="featured-work">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Selected work</p>
+              <h2>A selection of recent work.</h2>
+              <p class="lede">Selected work across enterprise transformation, service design, and hands-on product craft.</p>
+            </div>
+          </div>
+
+          <div class="work-list">
+            <a class="project-card" href="case-study-1.html">
+              <div class="project-visual blue" aria-hidden="true">
+                <div class="project-shot">
+                  <img class="project-image" src="case-study-1-assets/hero-portal.webp" alt="">
+                </div>
+              </div>
+              <div class="project-copy">
+                <div class="project-meta">Enterprise UX · Insurance · Digital transformation</div>
+                <h3>Insurance agent portal transformation</h3>
+                <p>A responsive redesign that unified fragmented workflows across Health, Motor, Travel, Marine and four other insurance products.</p>
+                <p class="result">Research, information architecture and interaction design for a 12-month enterprise transformation.</p>
+                <span class="card-link">Read the case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card" href="captivate-case-study.html">
+              <div class="project-visual blue" aria-hidden="true">
+                <div class="project-shot">
+                  <div class="card-imac">
+                    <div class="card-imac-screen">
+                      <img src="captivate-assets/captivate-homepage-16x9.png" alt="">
+                    </div>
+                    <img class="card-imac-frame" src="captivate-assets/apple-imac.png" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="project-copy">
+                <div class="project-meta">Service design · Enterprise coordination · UX research</div>
+                <h3>Captivate: a shared visit coordination workspace</h3>
+                <p>Reframing a static request form as a progressive workspace for requesters, coordinators and independent service teams.</p>
+                <p class="result">A research-led information architecture and prototype for complex, multi-location visits.</p>
+                <span class="card-link">Read the case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card" href="deloitte-dmod-case-study.html">
+              <div class="project-visual blue" aria-hidden="true">
+                <div class="dmod-workflow-card">
+                  <div class="dmod-workflow-head">
+                    <span>DMOD delivery model</span>
+                    <span class="dmod-badge">UX-led</span>
+                  </div>
+                  <div class="dmod-steps">
+                    <div class="dmod-step"><span>1</span><strong>Intake & strategy</strong></div>
+                    <div class="dmod-step"><span>2</span><strong>Template mapping</strong></div>
+                    <div class="dmod-step"><span>3</span><strong>Measure & refine</strong></div>
+                  </div>
+                  <div class="dmod-template">
+                    <div class="dmod-template-label">Page blueprint</div>
+                    <div class="dmod-template-line primary"><span>Hero message</span></div>
+                    <div class="dmod-template-line"><span>Content modules</span></div>
+                    <div class="dmod-template-line"><span>CTA path</span></div>
+                    <div class="dmod-template-line primary"><span>Analytics tags</span></div>
+                  </div>
+                  <div class="dmod-metrics">
+                    <div class="dmod-metric">~30% faster</div>
+                    <div class="dmod-metric">40+ aligned</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-copy">
+                <div class="project-meta">UX leadership · Design systems · Process design</div>
+                <h3>Deloitte.com modernization</h3>
+                <p>Establishing a UX-led process for a 40+ member marketing organization to adopt DMOD and deliver more consistent Deloitte.com pages.</p>
+                <p class="result">A 1.5-year transformation across process creation, team adoption, analytics readiness and workflow refinement.</p>
+                <span class="card-link">Read the case study →</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="other-work" hidden>
+            <div class="section-head">
+              <div><p class="eyebrow">Other projects & experiments</p><h2>Additional work.</h2></div>
+            </div>
+            <div class="mini-grid">
+              <article class="mini-card"><span class="tag">Research & design</span><h3>Captivate</h3><p>Enterprise UX work spanning research, synthesis, and product design.</p></article>
+              <article class="mini-card"><span class="tag">Product design</span><h3>Showtime</h3><p>A product-design engagement focused on simplifying discovery and action.</p></article>
+              <article class="mini-card"><span class="tag">Mobile experiment</span><h3>Chandra</h3><p>An independent mobile application project published on Google Play.</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="principles-title">
+        <div class="container principles-grid">
+          <div>
+            <p class="eyebrow">How I lead</p>
+            <h2 id="principles-title">How I work with teams.</h2>
+            <p class="lede">Good teams need enough structure to move with confidence, without taking ownership away from the people closest to the work.</p>
+          </div>
+          <div class="principle-list">
+            <article class="principle"><span class="principle-number">01</span><div><h3>Start with what needs to change</h3><p>The work starts with the user and business outcome, defines success measures early, and keeps everyday decisions connected to a clear purpose.</p></div></article>
+            <article class="principle"><span class="principle-number">02</span><div><h3>Make ownership visible</h3><p>Decision rights and handoffs are made explicit, so designers and partners have the clarity and space to lead their part of the problem.</p></div></article>
+            <article class="principle"><span class="principle-number">03</span><div><h3>Reduce risk through learning</h3><p>Research, engineering and delivery constraints are brought into the conversation early, with short learning loops to test assumptions before they become expensive commitments.</p></div></article>
+            <article class="principle"><span class="principle-number">04</span><div><h3>Raise the quality of the room</h3><p>Healthy challenge, clear reasoning and coaching through questions help the team become more capable instead of more dependent on one person.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section writing-section" id="writing">
+        <div class="container">
+          <div class="section-head">
+            <div><p class="eyebrow">Selected writing</p><h2>Articles and notes.</h2><p class="lede">Writing about AI-assisted design, team practices, and applying research.</p></div>
+            <a class="text-link" href="https://medium.com/@siva1790" target="_blank" rel="noopener">All articles ↗</a>
+          </div>
+          <div class="article-grid">
+            <a class="article-card" href="https://medium.com/design-bootcamp/i-built-a-figma-plugin-with-claude-heres-the-honest-messy-deeply-satisfying-story-325390a88618?sk=6d227f57e9b55bb1aad93400bfaf9020" target="_blank" rel="noopener">
+              <img class="article-image" src="portfolio-assets/article-figma-plugin.png" alt="">
+              <div class="article-content">
+                <span class="article-meta">Bootcamp · May 2026 · 16 min</span>
+                <h3>I built a Figma plugin with Claude</h3>
+                <p>The honest, messy story behind taking an AI-assisted idea from frustration to a published plugin.</p>
+              </div>
+            </a>
+            <a class="article-card" href="https://medium.com/design-bootcamp/from-monotony-to-momentum-how-repurposing-a-team-changed-everything-2de06b9013df" target="_blank" rel="noopener">
+              <img class="article-image" src="portfolio-assets/article-team-momentum.png" alt="">
+              <div class="article-content">
+                <span class="article-meta">Bootcamp · January 2026 · 3 min</span>
+                <h3>From monotony to momentum</h3>
+                <p>What redesigning a team’s work taught me about engagement, efficiency, and leadership.</p>
+              </div>
+            </a>
+            <a class="article-card" href="https://medium.com/design-bootcamp/turning-research-into-design-why-the-bridge-matters-in-ux-ddf85877f659" target="_blank" rel="noopener">
+              <img class="article-image" src="portfolio-assets/article-research-to-design.png" alt="">
+              <div class="article-content">
+                <span class="article-meta">Bootcamp · August 2025 · 3 min</span>
+                <h3>Bridging the gap: Turning UX research into effective design</h3>
+                <p>Why research becomes valuable only when insights are translated into meaningful, defensible design decisions.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container about-grid">
+          <div>
+            <p class="eyebrow">About</p>
+            <h2>Background and experience.</h2>
+          </div>
+          <div>
+            <div class="about-copy">
+              <p>I’m a UX design leader with 11+ years across backend engineering, product design, research, and team management. At Deloitte USI, I lead cross-functional delivery across web platforms, performance dashboards, and AI-powered internal tools—while remaining close to the craft.</p>
+              <p>Starting as a backend developer shaped how I design: I look for the system behind the screen, make constraints explicit, and work comfortably with both designers and engineers. An M.Des in Product Design added human-centred inquiry to that technical foundation.</p>
+            </div>
+            <div class="capabilities" aria-label="Core capabilities">
+              <div class="capability">Product strategy & discovery</div>
+              <div class="capability">Design leadership</div>
+              <div class="capability">Enterprise UX & accessibility</div>
+              <div class="capability">Design systems</div>
+              <div class="capability">AI-enabled workflows</div>
+              <div class="capability">Technical prototyping</div>
+            </div>
+            <div class="timeline" aria-label="Selected experience">
+              <div class="timeline-item"><time>2023—Present</time><div><strong>Specialist Assistant Manager, Design</strong><span>Deloitte USI</span></div></div>
+              <div class="timeline-item"><time>2018—2023</time><div><strong>UX Designer / Researcher</strong><span>Tata Consultancy Services</span></div></div>
+              <div class="timeline-item"><time>2017—2018</time><div><strong>Experience Designer</strong><span>OYO Rooms</span></div></div>
+              <div class="timeline-item"><time>2012—2015</time><div><strong>Backend Developer</strong><span>Triad Software</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div class="container contact-wrap">
+          <div><p class="eyebrow">Contact</p><h2>I’m open to conversations about design leadership and product roles.</h2></div>
+          <div class="contact-actions">
+            <a class="button" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=siva1790@gmail.com&amp;su=Portfolio%20enquiry" target="_blank" rel="noopener">Email me</a>
+            <a class="button" href="https://linkedin.com/in/sivakumar-ravi" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <article class="detail-view" id="case-bajaj" data-title="Bajaj Allianz Agent Portal">
+      <header class="case-hero container">
+        <a class="back-link route-link" href="#featured-work">← Back to selected work</a>
+        <p class="eyebrow">UX transformation · BFSI</p>
+        <h1>Redesigning policy issuance for insurance agents.</h1>
+        <p class="case-summary">An enterprise UX project focused on simplifying the workflow, improving usability, and aligning a cross-functional team.</p>
+        <div class="case-facts">
+          <div class="case-fact"><small>Role</small><strong>UX lead</strong></div>
+          <div class="case-fact"><small>Organisation</small><strong>TCS / Bajaj Allianz</strong></div>
+          <div class="case-fact"><small>Focus</small><strong>Research, strategy, design</strong></div>
+          <div class="case-fact"><small>Outcome</small><strong>300% engagement growth</strong></div>
+        </div>
+      </header>
+      <div class="case-banner blue"><div class="case-banner-note"><strong>Replace with a redacted workflow or product hero</strong><span>Use one image that makes the transformation legible before explaining the process.</span></div></div>
+      <div class="case-body">
+        <section class="case-section"><h2>Problem</h2><div><h3>A complex policy-issuance workflow.</h3><p>Agents needed to complete policy issuance quickly and with confidence. The team first needed a shared view of the workflow, its business rules, and the points where users encountered difficulty.</p></div></section>
+        <section class="case-section"><h2>My role</h2><div><h3>UX lead within a cross-functional team.</h3><p>I connected research findings, product constraints, stakeholder priorities, and delivery decisions throughout the project.</p><ul><li>Structured the research and evaluation approach.</li><li>Aligned stakeholders around priority workflow issues.</li><li>Guided the design direction and validation.</li><li>Helped translate findings into implementable changes.</li></ul></div></section>
+        <section class="case-section"><h2>Key decision</h2><div><h3>Evaluate the end-to-end journey.</h3><div class="decision"><strong>Design decision</strong>Use time-to-issue and task confidence as primary measures, rather than evaluating screens in isolation.</div><p>This gave business and technical teams a shared basis for discussing priorities and trade-offs.</p></div></section>
+        <section class="case-section"><h2>Outcome</h2><div><h3>Changes in time and adoption.</h3><p>The redesigned experience reduced policy issuance time to approximately one minute and contributed to a reported 300% increase in agent digital engagement.</p><p><strong>Add before-and-after task metrics, usability evidence, and a stakeholder quote when available.</strong></p></div></section>
+        <section class="case-section"><h2>Reflection</h2><div><h3>Further measurement.</h3><p>I would add workflow instrumentation earlier and connect usability findings with operational metrics throughout delivery.</p></div></section>
+        <div class="case-next"><a class="button route-link" href="#featured-work">All work</a><a class="button button-primary route-link" href="#case-ad-generator">Next: Ad Generator →</a></div>
+      </div>
+    </article>
+
+    <article class="detail-view" id="case-ad-generator" data-title="Programmatic Ad Generator">
+      <header class="case-hero container">
+        <a class="back-link route-link" href="#featured-work">← Back to selected work</a>
+        <p class="eyebrow">AI tooling · Delivery transformation</p>
+        <h1>An AI-assisted workflow for digital ad production.</h1>
+        <p class="case-summary">An internal tool designed to reduce repetitive production work while retaining brand controls and human review.</p>
+        <div class="case-facts">
+          <div class="case-fact"><small>Role</small><strong>Design lead / builder</strong></div>
+          <div class="case-fact"><small>Organisation</small><strong>Deloitte USI</strong></div>
+          <div class="case-fact"><small>Focus</small><strong>AI workflow design</strong></div>
+          <div class="case-fact"><small>Outcome</small><strong>~60% less time</strong></div>
+        </div>
+      </header>
+      <div class="case-banner blue"><div class="case-banner-note"><strong>Replace with the real generation workflow</strong><span>Show input, governance checks, generated variants, and the human review point.</span></div></div>
+      <div class="case-body">
+        <section class="case-section"><h2>Opportunity</h2><div><h3>Repetitive production work.</h3><p>Digital ad production required many predictable variations. The process took time away from concept development, review, and other design work.</p></div></section>
+        <section class="case-section"><h2>Approach</h2><div><h3>Identify appropriate points for automation.</h3><p>I mapped repeatable steps, brand constraints, review points, and likely failure conditions. This helped distinguish tasks that could be automated from decisions that still required a designer.</p><div class="decision"><strong>Product principle</strong>Use AI to support production while keeping review and approval with the team.</div></div></section>
+        <section class="case-section"><h2>Adoption</h2><div><h3>Introduce the tool with its controls.</h3><ul><li>Involved users early to understand trust and control concerns.</li><li>Made brand constraints visible in the workflow.</li><li>Positioned the tool as support for existing team practices.</li><li>Compared production time before and after introduction.</li></ul></div></section>
+        <section class="case-section"><h2>Outcome</h2><div><h3>Reduced production time.</h3><p>The tool reduced production time by approximately 60% and provided a reference for evaluating similar workflows.</p><p><strong>Add adoption numbers, an error-rate comparison, and examples of generated output when disclosure permits.</strong></p></div></section>
+        <div class="case-next"><a class="button route-link" href="#featured-work">All work</a><a class="button button-primary route-link" href="#case-plugin">Next: Figma Plugin →</a></div>
+      </div>
+    </article>
+
+    <article class="detail-view" id="case-plugin" data-title="Brand Guidelines Plugin">
+      <header class="case-hero container">
+        <a class="back-link route-link" href="#featured-work">← Back to selected work</a>
+        <p class="eyebrow">Figma plugin · AI-assisted building</p>
+        <h1>A Figma plugin for accessing brand guidance.</h1>
+        <p class="case-summary">A self-initiated project covering product definition, interaction design, AI-assisted development, testing, and publication.</p>
+        <div class="case-facts">
+          <div class="case-fact"><small>Role</small><strong>Designer / developer</strong></div>
+          <div class="case-fact"><small>Context</small><strong>Self-initiated</strong></div>
+          <div class="case-fact"><small>Focus</small><strong>Workflow tooling</strong></div>
+          <div class="case-fact"><small>Evidence</small><strong>Published plugin</strong></div>
+        </div>
+      </header>
+      <div class="case-banner blue"><div class="case-banner-note"><strong>Add plugin screens and a short demo</strong><span>A 20–30 second workflow video would communicate the value faster than a long feature list.</span></div></div>
+      <div class="case-body">
+        <section class="case-section"><h2>Problem</h2><div><h3>Guidance outside the design workflow.</h3><p>Designers often need to leave Figma, search documentation, interpret a rule, and then return to their work. The plugin explores whether common guidance can be made available within that workflow.</p></div></section>
+        <section class="case-section"><h2>Process</h2><div><h3>From concept to a published plugin.</h3><p>I defined the scope, designed the interaction, used AI to assist implementation, tested failure states, and completed the Figma Community review process.</p><div class="decision"><strong>Scope decision</strong>Begin with common brand questions rather than reproduce an entire guidelines website inside Figma.</div></div></section>
+        <section class="case-section"><h2>Learning</h2><div><h3>Designing and implementing the same product.</h3><p>The project gave me practical experience moving from problem definition to interaction design and implementation, including the limitations of AI-assisted development.</p></div></section>
+        <section class="case-section"><h2>Reflection</h2><div><h3>Learning from future usage.</h3><p>A future version could use lightweight analytics and feedback to identify the guidance people use most often and where additional support is needed.</p></div></section>
+        <div class="case-next"><a class="button route-link" href="#featured-work">All work</a><a class="button button-primary" href="https://medium.com/design-bootcamp/i-built-a-figma-plugin-with-claude-heres-the-honest-messy-deeply-satisfying-story-325390a88618?sk=6d227f57e9b55bb1aad93400bfaf9020" target="_blank" rel="noopener">Read the full story ↗</a></div>
+      </div>
+    </article>
+
+    <section class="resume-view" id="resume" data-title="Resume">
+      <div class="resume-actions">
+        <a class="button route-link" href="#work">← Portfolio</a>
+        <button class="button button-primary" type="button" onclick="window.print()">Print / save as PDF</button>
+      </div>
+      <div class="resume-sheet">
+        <header class="resume-top">
+          <div><h1>Sivakumar Ravi</h1><strong>UX design leader</strong><p>Product strategy · Design leadership · AI-enabled workflows</p></div>
+          <div class="resume-contact"><a href="mailto:siva1790@gmail.com">siva1790@gmail.com</a><br>Bengaluru, India<br><a href="https://linkedin.com/in/sivakumar-ravi">linkedin.com/in/sivakumar-ravi</a></div>
+        </header>
+        <section class="resume-section"><h2>Profile</h2><p>UX design leader with 11+ years across backend engineering, product design, research, and team management. Combines systems thinking, hands-on craft, and technical fluency to lead enterprise products and AI-enabled workflows.</p></section>
+        <section class="resume-section">
+          <h2>Experience</h2>
+          <div class="resume-role"><strong>2023—Present</strong><div><strong>Specialist Assistant Manager, Design · Deloitte USI</strong><p>Lead a cross-functional team across web platforms, dashboards, and AI-powered internal tools. Built tools reducing production time by approximately 60% and introduced delivery practices that reduced project timelines by approximately 30%.</p></div></div>
+          <div class="resume-role"><strong>2018—2023</strong><div><strong>UX Designer / Researcher · Tata Consultancy Services</strong><p>Led a 13-member cross-functional team across 60+ usability and accessibility evaluations. Improved defect detection from 75% to 95% and led portal work contributing to a 300% increase in agent digital engagement.</p></div></div>
+          <div class="resume-role"><strong>2017—2018</strong><div><strong>Experience Designer · OYO Rooms</strong><p>Redesigned reception and check-in experiences across business and leisure properties.</p></div></div>
+          <div class="resume-role"><strong>2012—2015</strong><div><strong>Backend Developer · Triad Software</strong><p>Built backend logic for 22 interoperable CAD viewer features for industrial applications.</p></div></div>
+        </section>
+        <section class="resume-section"><h2>Capabilities</h2><p>Product strategy and discovery · Design leadership · Enterprise UX and accessibility · Design systems · AI-enabled workflows · Technical prototyping · Stakeholder alignment · Team mentoring</p></section>
+        <section class="resume-section"><h2>Education</h2><div class="resume-role"><strong>2016—2018</strong><div><strong>M.Des, Product Design</strong><p>MIT Institute of Design, Pune</p></div></div><div class="resume-role"><strong>2007—2012</strong><div><strong>B.E., Production Engineering</strong><p>PSG College of Technology, Coimbatore</p></div></div></section>
+        <section class="resume-section"><h2>Recognition</h2><p>Outstanding Performance Award, Deloitte USI · Spot Awards and Applause Award, Deloitte USI · Innovation Pride Award, TCS / Ericsson · On the Spot Awards, TCS</p></section>
+      </div>
+    </section>
+  </main>
+
+  <a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5 12 8.5l6.5 6"/></svg>
+  </a>
+
+  <footer>
+    <div class="container footer-wrap">
+      <span>© 2026 Sivakumar Ravi</span>
+      <div class="footer-links"><a href="mailto:siva1790@gmail.com">Email</a><a href="https://linkedin.com/in/sivakumar-ravi" target="_blank" rel="noopener">LinkedIn</a><a href="https://medium.com/@siva1790" target="_blank" rel="noopener">Medium</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector(".nav-links");
+    const siteContent = document.getElementById("site-content");
+    const detailViews = [...document.querySelectorAll(".detail-view")];
+    const resumeView = document.getElementById("resume");
+    const footer = document.querySelector("footer");
+    const baseTitle = "Sivakumar Ravi — UX Design Leader";
+
+    function closeMenu() {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Open navigation");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => link.addEventListener("click", closeMenu));
+
+    function route() {
+      const hash = location.hash || "#work";
+      const caseView = detailViews.find(view => `#${view.id}` === hash);
+      const isResume = hash === "#resume";
+      const isSpecialView = Boolean(caseView || isResume);
+
+      detailViews.forEach(view => view.classList.toggle("active", view === caseView));
+      resumeView.classList.toggle("active", isResume);
+      siteContent.style.display = isSpecialView ? "none" : "block";
+      footer.style.display = isSpecialView ? "none" : "block";
+
+      document.querySelectorAll(".nav-links a").forEach(link => {
+        const current = !isSpecialView && link.getAttribute("href") === "#work";
+        if (current) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+
+      if (caseView) document.title = `${caseView.dataset.title} — Sivakumar Ravi`;
+      else if (isResume) document.title = "Resume — Sivakumar Ravi";
+      else document.title = baseTitle;
+
+      if (!isSpecialView) {
+        requestAnimationFrame(() => {
+          const target = document.querySelector(hash);
+          if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+    }
+
+    window.addEventListener("hashchange", route);
+    window.addEventListener("DOMContentLoaded", route);
+  </script>
+</body>
+</html>
