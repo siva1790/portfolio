@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chandra AI-assisted PWA case study by Sivakumar Ravi.">
+  <meta name="theme-color" content="#f7f5f2">
+  <title>Chandra: an AI-assisted Panchang PWA from idea to production</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      padding: 10px 16px;
+      background: var(--color-ink);
+      color: #fff;
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .chandra-hero {
+      display: block;
+    }
+
+    .case-section-layout > div {
+      min-width: 0;
+    }
+
+    .hero-visual-band {
+      width: 100%;
+      display: grid;
+      place-items: center;
+      margin-top: 58px;
+      padding: clamp(26px, 5vw, 54px);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #ffffff 0%, #eef3ef 100%);
+    }
+
+    .hero-visual-band .ds-button {
+      margin-top: var(--space-5);
+    }
+
+    .phone-frame {
+      max-width: 360px;
+      margin-inline: auto;
+      padding: 10px;
+      border: 1px solid rgba(23, 23, 23, .12);
+      border-radius: 28px;
+      background: #0b1020;
+      box-shadow: 0 24px 70px rgba(23, 23, 23, .18);
+    }
+
+    .phone-frame img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+
+    .evidence-grid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .evidence-card {
+      min-height: 100%;
+      padding: var(--space-5);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+    }
+
+    .evidence-card .tag,
+    .roadmap-tag {
+      display: inline-block;
+      margin-bottom: var(--space-3);
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--color-accent-soft);
+      color: var(--color-accent);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .evidence-card p,
+    .evidence-card li {
+      color: var(--color-muted);
+    }
+
+    .evidence-card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .evidence-card li + li {
+      margin-top: 8px;
+    }
+
+    .comparison-table,
+    .timeline-table {
+      margin-top: var(--space-6);
+      overflow: hidden;
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+    }
+
+    .comparison-row,
+    .timeline-row {
+      display: grid;
+      border-top: 1px solid var(--color-line);
+    }
+
+    .comparison-row {
+      grid-template-columns: 1fr 1.25fr 1.2fr;
+    }
+
+    .timeline-row {
+      grid-template-columns: 150px minmax(0, 1fr);
+    }
+
+    .comparison-row:first-child,
+    .timeline-row:first-child {
+      border-top: 0;
+    }
+
+    .comparison-row.header {
+      background: var(--color-primary-soft);
+      color: var(--color-primary-deep);
+      font-weight: 700;
+    }
+
+    .comparison-row > div,
+    .timeline-row > div {
+      padding: 16px;
+      border-left: 1px solid var(--color-line);
+    }
+
+    .comparison-row > div:first-child,
+    .timeline-row > div:first-child {
+      border-left: 0;
+    }
+
+    .comparison-row p,
+    .timeline-row p {
+      margin: 0;
+      color: var(--color-muted);
+    }
+
+    .timeline-row strong {
+      color: var(--color-ink);
+    }
+
+    .artifact-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: var(--space-3);
+      width: 100%;
+      max-width: 100%;
+      margin-top: var(--space-6);
+      overflow-x: visible;
+    }
+
+    .artifact {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .artifact img {
+      width: 100%;
+      border: 1px solid rgba(23, 23, 23, .12);
+      border-radius: var(--radius-md);
+      background: #0b1020;
+    }
+
+    .artifact figcaption {
+      margin-top: var(--space-2);
+      color: var(--color-muted);
+      font-size: .78rem;
+      line-height: 1.45;
+    }
+
+    .system-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resource-link {
+      width: fit-content;
+      margin-top: auto;
+      padding-top: var(--space-5);
+      color: var(--color-primary);
+      font-weight: 700;
+      line-height: 1.2;
+      text-decoration: none;
+    }
+
+    .resource-link:hover {
+      color: var(--color-primary-deep);
+      text-decoration: underline;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: clamp(16px, 3vw, 28px);
+      bottom: clamp(16px, 3vw, 28px);
+      z-index: 60;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0;
+      font-weight: 600;
+      line-height: 1;
+      text-decoration: none;
+      box-shadow: 0 14px 34px rgba(32, 28, 24, .16);
+      transition: transform .18s, background .18s;
+    }
+
+    .back-to-top svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-2px);
+      background: var(--color-primary-deep);
+    }
+
+    .ai-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .ai-step {
+      position: relative;
+      padding: var(--space-5);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      background: var(--color-secondary-soft);
+    }
+
+    .ai-step span {
+      display: block;
+      margin-bottom: var(--space-3);
+      color: var(--color-secondary);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .ai-step p {
+      margin: 0;
+      color: var(--color-muted);
+    }
+
+    .roadmap-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+
+    .roadmap-list .ds-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--color-muted);
+    }
+
+    .roadmap-list li + li {
+      margin-top: 8px;
+    }
+
+    footer {
+      padding-block: 26px;
+      background: var(--color-ink);
+      color: #aaa;
+      font-size: .86rem;
+    }
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-4);
+    }
+
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 860px) {
+      .chandra-hero,
+      .evidence-grid,
+      .evidence-grid.two,
+      .ai-flow,
+      .roadmap-list {
+        grid-template-columns: 1fr;
+      }
+
+      .artifact-strip {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: var(--space-3);
+      }
+
+      .artifact {
+        flex: 0 0 180px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .comparison-row,
+      .timeline-row {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-row > div,
+      .timeline-row > div {
+        border-left: 0;
+        border-top: 1px solid var(--color-line);
+      }
+
+      .comparison-row > div:first-child,
+      .timeline-row > div:first-child {
+        border-top: 0;
+      }
+
+      .phone-frame {
+        max-width: 300px;
+      }
+
+      .footer-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="ds-container site-nav" aria-label="Case study navigation">
+      <a class="site-brand" href="index.html">Sivakumar Ravi</a>
+      <span class="site-note">UX Research &middot; Product Design &middot; AI-Assisted Building</span>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="case-hero">
+      <div class="ds-container chandra-hero">
+        <div>
+          <p class="ds-eyebrow">AI-assisted product case study</p>
+          <h1 class="ds-display-title">Chandra: an AI-assisted Panchang PWA from idea to production</h1>
+          <p class="ds-intro">Chandra began as a one-month experiment to understand how capable AI could be across a complete product cycle. I used Claude for initial research, competitor analysis, accessibility review, design-system direction and product planning, then used Codex to build, debug, test and prepare a Hindu moon-tracking PWA for Google Play store which is currently in closed testing phase.</p>
+          <div class="case-facts">
+            <div class="case-fact"><small>Role</small><strong>UX designer / AI-assisted developer</strong></div>
+            <div class="case-fact"><small>Timeline</small><strong>1 month</strong></div>
+            <div class="case-fact"><small>Methods</small><strong>AI-assisted research, informal discovery, manual testing</strong></div>
+            <div class="case-fact"><small>Platform</small><strong>PWA and Google Play TWA</strong></div>
+          </div>
+          <div class="hero-visual-band">
+            <div class="phone-frame">
+              <img src="chandra-assets/01-day-view_MobileView.png" alt="Chandra Day View showing Amavasya, moonrise, moonset, and today's highlight.">
+            </div>
+            <a class="ds-button ds-button-primary" href="https://chandrapanchang.app/" target="_blank" rel="noopener">View live app</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="challenge">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">01 / Challenge</div>
+        <div>
+          <p class="ds-eyebrow">Starting point</p>
+          <h2 class="ds-section-title">The project was an AI capability experiment inside a culturally complex domain.</h2>
+          <p class="ds-body ds-reading">The core objective was to see how capable AI could be when used across research, product strategy, interface design, accessibility review, coding, testing and launch preparation. Panchang and moon tracking made the experiment demanding because the domain combines astronomy, Hindu calendar conventions, regional practices, Sanskrit terminology and everyday usability.</p>
+          <blockquote class="ds-callout">The design challenge was not simply to show more Panchang data. It was to make accurate cultural information easier to understand for people who either use printed Panchang daily or are curious but intimidated by existing digital tools.</blockquote>
+          <div class="comparison-table" aria-label="Comparison of Panchang information sources">
+            <div class="comparison-row header"><div>Source</div><div>Strength</div><div>Observed gap</div></div>
+            <div class="comparison-row"><div><strong>Printed Pambu Panchang</strong></div><div><p>Trusted by daily Panchang users and familiar for ritual reference.</p></div><div><p>Not interactive, searchable or designed for quick mobile lookup.</p></div></div>
+            <div class="comparison-row"><div><strong>Computer-calculated Panchang</strong></div><div><p>Considered more accurate by expert users for many calculated values.</p></div><div><p>Online versions were described as clumsy and hard to navigate.</p></div></div>
+            <div class="comparison-row"><div><strong>Existing apps</strong></div><div><p>Easy to access from mobile devices.</p></div><div><p>Non-expert users found many of them ad-heavy, noisy and difficult to understand.</p></div></div>
+            <div class="comparison-row"><div><strong>Chandra direction</strong></div><div><p>Mobile-first, focused on daily moon, tithi, events and Panchang basics.</p></div><div><p>Version 1 deliberately stays basic and understandable before adding deeper features.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="research">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">02 / AI Research</div>
+        <div>
+          <p class="ds-eyebrow">Claude as research partner</p>
+          <h2 class="ds-section-title">Claude helped map the opportunity, competitors and platform strategy.</h2>
+          <p class="ds-body ds-reading">The first prompt explored whether a responsive web application could help people track the moon with Indian cultural context, what could be built, what already existed and whether the product should begin as a web app or cross-platform mobile app. Claude's response created a starting landscape and helped frame the PWA-first direction.</p>
+          <div class="evidence-grid">
+            <article class="evidence-card"><span class="tag">Competitor scan</span><h3 class="ds-subtitle">Useful but fragmented tools</h3><p>Claude identified timeanddate.com, DrikPanchang, SomRatri, MoonGazer, My Moon Tracker and ISRO VEDAS as adjacent products with different strengths.</p></article>
+            <article class="evidence-card"><span class="tag">Market gap</span><h3 class="ds-subtitle">Modern UI plus Indian cultural context</h3><p>The opportunity was not raw astronomy data alone. It was the gap between modern moon trackers and dense traditional Panchang tools.</p></article>
+            <article class="evidence-card"><span class="tag">Platform choice</span><h3 class="ds-subtitle">PWA first, native later</h3><p>Claude recommended validating the core product as a PWA before investing in native-only features such as home-screen widgets.</p></article>
+          </div>
+          <div class="ai-flow" aria-label="AI-assisted workflow">
+            <div class="ai-step"><span>Research</span><p>Claude helped structure the product opportunity and competitor landscape.</p></div>
+            <div class="ai-step"><span>Design critique</span><p>Claude supported accessibility review and design-system thinking.</p></div>
+            <div class="ai-step"><span>Build</span><p>Codex implemented screens, calculation logic, PWA behavior and fixes.</p></div>
+            <div class="ai-step"><span>Verification</span><p>Codex helped run builds, backend checks and release-readiness work.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="validation">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">03 / Validation</div>
+        <div>
+          <p class="ds-eyebrow">Human grounding</p>
+          <h2 class="ds-section-title">Informal discovery and manual testing grounded the AI-assisted process.</h2>
+          <p class="ds-body ds-reading">Before development, conversations with 4 to 5 people explored how they use Panchang and what they do with the data. These were not formal research interviews, but the discussions were detailed enough to start the design process. After the PWA was built, 15 people tested it: 3 daily Panchang users and 12 people who were interested but did not know how to use Panchang confidently.</p>
+          <div class="evidence-grid two">
+            <article class="evidence-card"><span class="tag">3 daily users</span><h3 class="ds-subtitle">Accuracy and cultural usage</h3><p>These testers used standard Pambu Panchang books to track moon progress, festivals and auspicious timings. Their feedback helped surface calculation accuracy concerns and the distinction between printed Panchang traditions and computer-calculated Thiru Kanidam.</p></article>
+            <article class="evidence-card"><span class="tag">12 interested users</span><h3 class="ds-subtitle">Usability and clarity</h3><p>These testers validated the beginner problem. They were interested in Panchang information, but existing digital tools felt cluttered, ad-heavy and hard to use.</p></article>
+          </div>
+          <div class="timeline-table" aria-label="Research and validation timeline">
+            <div class="timeline-row"><div><strong>Before build</strong></div><div><p>Informal discussions with 4 to 5 people shaped the initial design direction.</p></div></div>
+            <div class="timeline-row"><div><strong>Version 1 PWA</strong></div><div><p>Claude and Codex supported research, design critique, implementation and debugging.</p></div></div>
+            <div class="timeline-row"><div><strong>After build</strong></div><div><p>15 people manually tested the app, including 3 regular Panchang users.</p></div></div>
+            <div class="timeline-row"><div><strong>Closed testing</strong></div><div><p>Google Play closed testing surfaced platform polish issues such as app icon and splash-screen mismatch.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="strategy">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">04 / Product</div>
+        <div>
+          <p class="ds-eyebrow">Design strategy</p>
+          <h2 class="ds-section-title">Chandra was shaped as a basic, understandable Panchang instead of a complete expert almanac.</h2>
+          <p class="ds-body ds-reading">The first version needed to be useful without overwhelming people. The experience was separated into four clear areas: Day View for the daily ritual moment, Calendar for planning, Panchang for detailed information and Settings for city, calendar system and notification control.</p>
+          <div class="artifact-strip" aria-label="Chandra product screens">
+            <figure class="artifact"><img src="chandra-assets/01-day-view_MobileView.png" alt="Day View screen with moon phase and today's highlight."><figcaption>Day View reduces the daily experience to moon, tithi, moonrise and one highlight.</figcaption></figure>
+            <figure class="artifact"><img src="chandra-assets/02-calendar_MobileView.png" alt="Lunar Calendar screen showing May 2026 events."><figcaption>Calendar supports scanning festivals and lunar days across a month.</figcaption></figure>
+            <figure class="artifact"><img src="chandra-assets/03-panchang_MobileView.png" alt="Panchang screen with Pancha Anga and daily timings."><figcaption>Panchang uses sections so deeper data does not dominate the app.</figcaption></figure>
+            <figure class="artifact"><img src="chandra-assets/04-settings-gps-notifications_MobileView.png" alt="Settings screen with GPS city and push notification preferences."><figcaption>Settings exposes location, calendar system and notification preferences.</figcaption></figure>
+            <figure class="artifact"><img src="chandra-assets/05-social-share-card_MobileView.png" alt="Social share card screen for Chandra daily message."><figcaption>The share card explores a plain-language cultural layer for younger users.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="design-system">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">05 / System</div>
+        <div>
+          <p class="ds-eyebrow">Design consistency and accessibility</p>
+          <h2 class="ds-section-title">Design-system and accessibility work clarified where AI output had drifted.</h2>
+          <p class="ds-body ds-reading">The early AI-generated screens looked consistent at a glance, but detailed review showed different colors, styles and icon choices across the app. A design system defined colors, typography, spacing, cards, toggles and iconography. Lucide icons replaced most UI emojis, while moon phase emojis were retained where they carried semantic meaning.</p>
+          <div class="evidence-grid two">
+            <article class="evidence-card system-card"><span class="tag">Design system</span><h3 class="ds-subtitle">Consistency over generated variation</h3><ul><li>Standardized dark background, gold accent and indigo CTA usage.</li><li>Defined card, toggle, spacing and navigation patterns.</li><li>Established an iconography policy using Lucide React for UI chrome.</li></ul><a class="resource-link" href="file:///C:/Users/Shiv/OneDrive/Desktop/chandra-app/chandra-design-system.html" target="_blank" rel="noopener">Open design system</a></article>
+            <article class="evidence-card system-card"><span class="tag">Accessibility audit</span><h3 class="ds-subtitle">Quality check before launch readiness</h3><ul><li>Claude's audit found 16 issues in version 1.</li><li>Issues included zoom blocking, contrast, keyboard access, labels and modal focus handling.</li><li>Feedback was incorporated through later implementation work.</li></ul><a class="resource-link" href="file:///C:/Users/Shiv/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/52d30d23-6bda-4884-a5d7-dc1ff3415288/b31d742e-9e38-4ad9-a298-cd995ff7d89e/local_3358335a-fb3a-4301-bd16-0a675946e7fa/outputs/chandra-a11y-report.html" target="_blank" rel="noopener">Open accessibility audit</a></article>
+          </div>
+          <blockquote class="ds-callout">AI helped produce and critique the product, but human review was still needed to notice inconsistency, define the design-system work and request accessibility testing before treating the app as launch-ready.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="build">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">06 / Build</div>
+        <div>
+          <p class="ds-eyebrow">Codex as implementation partner</p>
+          <h2 class="ds-section-title">Codex helped turn the research direction into a working, tested PWA.</h2>
+          <p class="ds-body ds-reading">The app required more than screen generation. Codex supported the build across React screens, calculation logic, service worker behavior, Firebase notifications, accessibility remediation, build verification and Google Play TWA preparation.</p>
+          <div class="evidence-grid">
+            <article class="evidence-card"><span class="tag">Astronomy logic</span><h3 class="ds-subtitle">Local calculations</h3><p>Chandra uses browser-side calculations for tithi, nakshatra, moonrise, moonset and Panchang data rather than relying on a remote Panchang API.</p></article>
+            <article class="evidence-card"><span class="tag">Cultural rules</span><h3 class="ds-subtitle">Festival engine</h3><p>The festival engine evolved from simple matching into a rule-based, window-aware system that respects ritual timing and calendar-system differences.</p></article>
+            <article class="evidence-card"><span class="tag">Release readiness</span><h3 class="ds-subtitle">PWA and TWA</h3><p>The project moved from Vercel-hosted PWA to Google Play closed testing through a Trusted Web Activity wrapper.</p></article>
+          </div>
+          <div class="comparison-table" aria-label="Technical reference areas">
+            <div class="comparison-row header"><div>Technical area</div><div>Why it mattered</div><div>Reference behavior</div></div>
+            <div class="comparison-row"><div><strong>Tithi</strong></div><div><p>Daily display had to match Panchang convention.</p></div><div><p>Sample at local sunrise, not midnight.</p></div></div>
+            <div class="comparison-row"><div><strong>Ayanamsha</strong></div><div><p>Sidereal calculations affect Nakshatra, Yoga, Rashi, Masa and Sankranti.</p></div><div><p>Calculate date-sensitive Lahiri-style ayanamsha rather than keep a fixed constant.</p></div></div>
+            <div class="comparison-row"><div><strong>Festivals</strong></div><div><p>Many Hindu festivals depend on ritual windows, not just civil date.</p></div><div><p>Use window-aware rules for sunrise, pradosh, nishita, moonrise and other periods.</p></div></div>
+            <div class="comparison-row"><div><strong>Future precision</strong></div><div><p>Users asked whether Swiss Ephemeris would be more accurate.</p></div><div><p>Treat this as future validation, not a blind engine replacement.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="roadmap">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">07 / Roadmap</div>
+        <div>
+          <p class="ds-eyebrow">Feedback-driven roadmap</p>
+          <h2 class="ds-section-title">Testing helped separate immediate improvements from future platform bets.</h2>
+          <p class="ds-body ds-reading">Not every story point belongs in version 1. The testing feedback helped identify what could be incorporated quickly, what required deeper calculation validation and what depended on a future native application.</p>
+          <div class="roadmap-list">
+            <article class="ds-card"><span class="roadmap-tag">Incorporated or started</span><ul><li>Notification preferences for festivals, eclipses, moonrise and Ekadashi.</li><li>Play Store icon and splash-screen fixes from closed testing feedback.</li><li>Terminology learning guide with deep links.</li><li>Date-sensitive ayanamsha calculation.</li><li>Clearer event labeling and more consistent UI system.</li></ul></article>
+            <article class="ds-card"><span class="roadmap-tag">Future roadmap</span><ul><li>Native home-screen widget.</li><li>More Indian cities and possible country selection after accuracy validation.</li><li>Language-specific festival naming and regional observance logic.</li><li>Sankalpam details, Chandrashtamam, Rashi in Calendar and global search.</li><li>Shadbala, Ishta Phala, Kashta Phala and possible AI prediction layer.</li></ul></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="closed-testing">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">08 / Launch</div>
+        <div>
+          <p class="ds-eyebrow">Google Play closed testing</p>
+          <h2 class="ds-section-title">The PWA moved into closed testing through a Trusted Web Activity wrapper.</h2>
+          <p class="ds-body ds-reading">Chandra is currently in Google Play closed testing. Most product and design updates can continue through the PWA deployment flow, while wrapper-level issues such as launcher icons, splash screens and Android signing require Play Store-specific work.</p>
+          <div class="evidence-grid two">
+            <article class="evidence-card"><span class="tag">Tester-driven change</span><h3 class="ds-subtitle">Icon and splash polish</h3><p>Closed testing revealed a mismatch between the web app identity and the Android wrapper assets. The native launcher, maskable icon, notification and splash assets were regenerated and updated.</p></article>
+            <article class="evidence-card"><span class="tag">Tester-driven change</span><h3 class="ds-subtitle">Notification control</h3><p>Two testers specifically highlighted that users should not receive alerts for every festival. The app now supports separate notification preferences.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="reflection">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">09 / Reflection</div>
+        <div>
+          <p class="ds-eyebrow">What the project showed</p>
+          <h2 class="ds-section-title">AI accelerated the full product cycle, but judgment and user grounding still mattered.</h2>
+          <p class="ds-body ds-reading">The biggest learning was not that AI can simply build an app. It was that AI can accelerate research, planning, critique, implementation and release preparation when the designer actively directs the work, checks the output and validates the product with real people. Chandra became a working test of AI as a capability multiplier, not a replacement for product judgment.</p>
+          <blockquote class="ds-callout">For culturally sensitive products, speed is useful only when paired with trust. AI helped the work move fast, but the product became credible only when Panchang users, interested beginners, accessibility review and Play Store testers shaped the next decisions.</blockquote>
+          <div class="case-next">
+            <a class="ds-button" href="index.html#featured-work">Back to selected work</a>
+            <a class="ds-button ds-button-primary" href="case-study-1.html">Next: Insurance agent portal transformation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5 12 8.5l6.5 6"/></svg>
+  </a>
+
+  <footer>
+    <div class="ds-container footer-wrap">
+      <span>&copy; 2026 Sivakumar Ravi</span>
+      <div class="footer-links"><a href="mailto:siva1790@gmail.com">Email</a><a href="https://linkedin.com/in/sivakumar-ravi" target="_blank" rel="noopener">LinkedIn</a><a href="https://medium.com/@siva1790" target="_blank" rel="noopener">Medium</a></div>
+    </div>
+  </footer>
+</body>
+</html>

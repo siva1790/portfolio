@@ -272,6 +272,41 @@
       height: calc(100% - (var(--shot-padding) * 2));
       object-fit: contain;
     }
+    .chandra-card-shot {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #ffffff 0%, #eef3ef 100%);
+    }
+    .card-phone-mockup {
+      position: relative;
+      width: min(34%, 150px);
+      aspect-ratio: 390 / 844;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 26px;
+      background: #0b1020;
+      box-shadow: 0 22px 46px rgba(23, 23, 23, .24);
+    }
+    .card-phone-mockup::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      z-index: 2;
+      width: 44px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .18);
+      transform: translateX(-50%);
+    }
+    .card-phone-mockup img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 18px;
+      background: #0b1020;
+      object-fit: contain;
+    }
     .card-imac {
       position: absolute;
       top: 50%;
@@ -837,6 +872,23 @@
                 <span class="card-link">Read the case study →</span>
               </div>
             </a>
+
+            <a class="project-card" href="chandra-ai-case-study.html">
+              <div class="project-visual blue" aria-hidden="true">
+                <div class="project-shot chandra-card-shot">
+                  <div class="card-phone-mockup">
+                    <img src="chandra-assets/01-day-view_MobileView.png" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="project-copy">
+                <div class="project-meta">AI-assisted product design · Panchang · PWA and Google Play TWA</div>
+                <h3>Chandra: AI-assisted product design for a Panchang PWA</h3>
+                <p>A one-month product experiment that used AI across research, design-system direction, accessibility review, implementation and Google Play closed testing.</p>
+                <p class="result">A working Hindu moon-tracking PWA shaped by Panchang users, interested beginners and release-readiness testing.</p>
+                <span class="card-link">Read the case study →</span>
+              </div>
+            </a>
           </div>
 
           <div class="other-work" hidden>
@@ -846,7 +898,7 @@
             <div class="mini-grid">
               <article class="mini-card"><span class="tag">Research & design</span><h3>Captivate</h3><p>Enterprise UX work spanning research, synthesis, and product design.</p></article>
               <article class="mini-card"><span class="tag">Product design</span><h3>Showtime</h3><p>A product-design engagement focused on simplifying discovery and action.</p></article>
-              <article class="mini-card"><span class="tag">Mobile experiment</span><h3>Chandra</h3><p>An independent mobile application project published on Google Play.</p></article>
+              <article class="mini-card"><span class="tag">Mobile experiment</span><h3>Chandra</h3><p>An AI-assisted Panchang PWA currently in Google Play closed testing.</p></article>
             </div>
           </div>
         </div>
