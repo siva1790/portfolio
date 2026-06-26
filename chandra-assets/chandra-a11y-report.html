@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chandra App — WCAG AA Accessibility Audit</title>
+<style>
+  :root {
+    --brand: #1A1A2E;
+    --gold: #B8860B;
+    --fail: #C0392B;
+    --failbg: #FDECEA;
+    --partial: #D35400;
+    --partialbg: #FEF5E7;
+    --pass: #1A7C3E;
+    --passbg: #EAFAF1;
+    --border: #DDDDDD;
+    --text: #1A1A2E;
+    --muted: #555;
+    --codebg: #F4F4F4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: #FAFAFA;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 48px 60px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+
+  /* Cover */
+  .cover {
+    text-align: center;
+    padding: 48px 0 56px;
+    border-bottom: 3px solid var(--border);
+    margin-bottom: 48px;
+  }
+  .cover h1 { font-size: 42px; color: var(--brand); margin-bottom: 8px; }
+  .cover h2 { font-size: 26px; color: var(--gold); font-weight: 400; margin-bottom: 6px; }
+  .cover .sub { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+  .verdict-banner {
+    display: inline-block;
+    background: var(--failbg);
+    border: 2px solid var(--fail);
+    border-radius: 8px;
+    padding: 14px 36px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--fail);
+    margin-bottom: 16px;
+  }
+  .cover .stats { font-size: 15px; color: var(--muted); }
+
+  /* Headings */
+  h1.sec { font-size: 22px; color: var(--brand); border-bottom: 2px solid var(--gold); padding-bottom: 6px; margin: 40px 0 16px; }
+  h2.sec { font-size: 17px; color: var(--brand); margin: 28px 0 10px; }
+  h3.sec { font-size: 15px; color: var(--brand); margin: 20px 0 8px; font-weight: 700; }
+  .label-fail    { font-weight: 700; color: var(--fail); }
+  .label-partial { font-weight: 700; color: var(--partial); }
+  .label-pass    { font-weight: 700; color: var(--pass); }
+
+  p { margin-bottom: 10px; }
+  ul { margin: 8px 0 12px 24px; }
+  li { margin-bottom: 5px; }
+
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    background: var(--codebg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #2C3E50;
+  }
+  pre {
+    background: var(--codebg);
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    border-radius: 0 4px 4px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    color: #2C3E50;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 13px; }
+  th {
+    background: #EFEFEF;
+    color: var(--brand);
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+  }
+  td { padding: 7px 10px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: #FAFAFA; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    min-width: 64px;
+  }
+  .badge-fail    { background: var(--failbg);    color: var(--fail); }
+  .badge-partial { background: var(--partialbg); color: var(--partial); }
+  .badge-pass    { background: var(--passbg);    color: var(--pass); }
+
+  /* Priority table */
+  .p0 td:first-child { background: var(--failbg);    font-weight: 700; color: var(--fail);    text-align: center; }
+  .p1 td:first-child { background: var(--partialbg); font-weight: 700; color: var(--partial); text-align: center; }
+  .p2 td:first-child { background: #EAF3FF;          font-weight: 700; color: #1A5276;        text-align: center; }
+  .p3 td:first-child { background: #F5F5F5;          font-weight: 700; color: #777;           text-align: center; }
+
+  .issue-block {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--fail);
+    border-radius: 0 6px 6px 0;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    background: #FFFEFE;
+  }
+  .issue-block.partial { border-left-color: var(--partial); }
+  .issue-block h2.sec { margin-top: 0; }
+  .issue-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .issue-meta strong { color: var(--text); }
+
+  .fix-label { font-weight: 700; color: var(--brand); margin-top: 12px; margin-bottom: 4px; }
+
+  hr.divider { border: none; border-top: 2px solid var(--border); margin: 40px 0; }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; padding: 32px 40px; }
+    .issue-block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Cover -->
+  <div class="cover">
+    <h1>Chandra App</h1>
+    <h2>WCAG AA Accessibility Audit</h2>
+    <p class="sub">May 2026 &nbsp;•&nbsp; Source-code audit &nbsp;•&nbsp; React PWA (Vite + Tailwind CSS)</p>
+    <div class="verdict-banner">Overall Verdict: NOT WCAG AA COMPLIANT</div><br>
+    <span class="stats">16 issues found &nbsp;•&nbsp; 13 FAIL &nbsp;•&nbsp; 1 PARTIAL &nbsp;•&nbsp; Tested against WCAG 2.1 Levels A &amp; AA</span>
+  </div>
+
+  <!-- 1. Overview -->
+  <h1 class="sec">1. Audit Overview</h1>
+  <p>This report covers a static source-code accessibility audit of the Chandra progressive web app. All 13 source files (App.jsx, Home.jsx, Calendar.jsx, Panchang.jsx, Settings.jsx, MoonVisual.jsx, DatePickerSheet.jsx, InstallPrompt.jsx, SettingsContext.jsx, SubscriptionContext.jsx, main.jsx, index.css, App.css, and index.html) were reviewed against WCAG 2.1 Success Criteria at Level A and Level AA.</p>
+  <p>This audit is based on manual code inspection. It covers structural, semantic, contrast, keyboard, and ARIA concerns but does not replace automated scanner testing (axe-core, WAVE) or real assistive technology testing with a screen reader (VoiceOver, NVDA).</p>
+
+  <table>
+    <tr><th>Files Reviewed</th><th>WCAG Level Targeted</th><th>Issues Found</th><th>Result</th></tr>
+    <tr>
+      <td>13 source files (JSX + CSS + HTML)</td>
+      <td>WCAG 2.1 Level AA</td>
+      <td>16 (13 FAIL, 1 PARTIAL)</td>
+      <td class="label-fail">NOT COMPLIANT</td>
+    </tr>
+  </table>
+
+  <hr class="divider">
+
+  <!-- 2. Summary -->
+  <h1 class="sec">2. Issue Summary</h1>
+  <table>
+    <tr>
+      <th style="width:34%">Issue / Criterion</th>
+      <th style="width:22%">File(s) Affected</th>
+      <th style="width:9%">WCAG SC</th>
+      <th style="width:7%">Level</th>
+      <th style="width:10%">Verdict</th>
+    </tr>
+    <tr>
+      <td>Resize Text — viewport blocks user zoom (<code>user-scalable=no</code>)</td>
+      <td>index.html</td><td>1.4.4</td><td>AA</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Color Contrast — <code>text-gray-500</code> at 12 px (~4.3:1 on gray-900, ~3.1:1 on gray-800)</td>
+      <td>Home, Settings, Calendar</td><td>1.4.3</td><td>AA</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Non-text Contrast — Toggle/SubToggle track has no visible boundary against page background</td>
+      <td>Settings.jsx</td><td>1.4.11</td><td>AA</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Keyboard Access — Calendar day cells &amp; festival list use <code>&lt;div onClick&gt;</code></td>
+      <td>Calendar.jsx</td><td>2.1.1</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Focus Visible — city search input applies <code>focus:outline-none</code></td>
+      <td>Settings.jsx</td><td>2.4.7</td><td>AA</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Name, Role, Value — Toggle &amp; SubToggle have no accessible name (aria-label)</td>
+      <td>Settings.jsx</td><td>4.1.2</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Name, Role, Value — prev/next chevron buttons (‹ ›) have no aria-label</td>
+      <td>Panchang, Calendar, DatePickerSheet</td><td>4.1.2</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Labels or Instructions — city search input has no <code>&lt;label&gt;</code></td>
+      <td>Settings.jsx</td><td>3.3.2</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Focus Management — modals/sheets have no focus trap, Escape handler, or auto-focus</td>
+      <td>Calendar, DatePickerSheet</td><td>2.1.2</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Non-text Content — MoonVisual SVG has no <code>role="img"</code> or accessible name</td>
+      <td>MoonVisual.jsx</td><td>1.1.1</td><td>A</td>
+      <td><span class="badge badge-partial">PARTIAL</span></td>
+    </tr>
+    <tr>
+      <td>Bypass Blocks — no skip-to-content link</td>
+      <td>App.jsx</td><td>2.4.1</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Focus Order — active nav tab missing <code>aria-current="page"</code></td>
+      <td>App.jsx</td><td>2.4.3</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Info &amp; Relationships — bottom nav is a plain <code>&lt;div&gt;</code>, no <code>&lt;nav&gt;</code> landmark</td>
+      <td>App.jsx</td><td>1.3.1</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Info &amp; Relationships — calendar grid uses <code>&lt;div&gt;</code>, no grid/table semantics</td>
+      <td>Calendar.jsx</td><td>1.3.1</td><td>A</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Status Messages — loading/error states have no <code>aria-live</code> or <code>role="status"</code></td>
+      <td>Home.jsx, Panchang.jsx</td><td>4.1.3</td><td>AA</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+    <tr>
+      <td>Status Messages — notification preview banner has no <code>role="alert"</code></td>
+      <td>Settings.jsx</td><td>4.1.3</td><td>AA</td>
+      <td><span class="badge badge-fail">FAIL</span></td>
+    </tr>
+  </table>
+
+  <hr class="divider">
+
+  <!-- 3. Detailed Findings -->
+  <h1 class="sec">3. Detailed Findings &amp; Recommendations</h1>
+
+  <!-- 3.1 -->
+  <div class="issue-block">
+    <h2 class="sec">3.1 &nbsp; Text Cannot Be Resized — SC 1.4.4 (AA) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> index.html</p>
+    <p>The viewport meta tag contains <code>maximum-scale=1.0</code> and <code>user-scalable=no</code>. These attributes prevent browser-level pinch-zoom, which means low-vision users who rely on text enlargement to read content cannot use the app at a comfortable size. WCAG 1.4.4 requires text to be resizable up to 200% without loss of content or functionality.</p>
+    <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no" /&gt;   &lt;!-- PROBLEM --&gt;</pre>
+    <p class="fix-label">Recommended fix:</p>
+    <ul>
+      <li>Remove <code>maximum-scale=1.0</code> and <code>user-scalable=no</code>.</li>
+      <li>Replace with: <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</code></li>
+      <li>If the goal was preventing double-tap zoom issues on iOS, use <code>touch-action: manipulation</code> in CSS on interactive elements instead — this stops the 300 ms delay without locking zoom.</li>
+    </ul>
+  </div>
+
+  <!-- 3.2 -->
+  <div class="issue-block">
+    <h2 class="sec">3.2 &nbsp; Insufficient Color Contrast — SC 1.4.3 (AA) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>Files:</strong> Home.jsx, Settings.jsx, Calendar.jsx</p>
+    <p>Multiple instances of Tailwind's <code>text-gray-500</code> (#6B7280) are used as hint text, sublabels, and secondary content at 12 px (<code>text-xs</code>). WCAG 1.4.3 requires at least 4.5:1 contrast for normal-sized text (under 18 pt / 24 px).</p>
+    <table>
+      <tr><th>Text color</th><th>Background</th><th>Ratio</th><th>Required</th><th>Result</th></tr>
+      <tr>
+        <td>text-gray-500 (#6B7280)</td><td>bg-gray-900 (#111827)</td>
+        <td>~4.31:1</td><td>4.5:1</td><td><span class="badge badge-fail">FAIL</span></td>
+      </tr>
+      <tr>
+        <td>text-gray-500 (#6B7280)</td><td>bg-gray-800 (#1F2937)</td>
+        <td>~3.05:1</td><td>4.5:1</td><td><span class="badge badge-fail">FAIL</span></td>
+      </tr>
+      <tr>
+        <td>text-gray-400 (#9CA3AF)</td><td>bg-gray-900 (#111827)</td>
+        <td>~7.34:1</td><td>4.5:1</td><td><span class="badge badge-pass">PASS</span></td>
+      </tr>
+    </table>
+    <p><strong>Affected locations include:</strong></p>
+    <ul>
+      <li><strong>Home.jsx</strong> — Moonrise/Moonset labels: <code>&lt;p className="text-gray-500 text-xs mb-1"&gt;🌙 Moonrise&lt;/p&gt;</code></li>
+      <li><strong>Settings.jsx</strong> — Notification hint lines: "Morning of the festival", "1 hour before eclipse begins", etc.</li>
+      <li><strong>Calendar.jsx</strong> — Tithi/paksha subtitle in upcoming festivals list</li>
+    </ul>
+    <p class="fix-label">Recommended fix:</p>
+    <ul>
+      <li>Upgrade all hint/secondary text from <code>text-gray-500</code> to <code>text-gray-400</code>, which achieves ~7.3:1 on bg-gray-900 and ~5.2:1 on bg-gray-800.</li>
+      <li>Do not use <code>text-gray-500</code> at <code>text-xs</code> (12 px) or smaller on dark backgrounds.</li>
+    </ul>
+  </div>
+
+  <!-- 3.3 -->
+  <div class="issue-block">
+    <h2 class="sec">3.3 &nbsp; Toggle Non-text Contrast — SC 1.4.11 (AA) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> Settings.jsx — Toggle and SubToggle components</p>
+    <p>The toggle track (pill container) has no visible border or outline delineating it from the surrounding card background. WCAG 1.4.11 requires UI component boundaries to achieve at least 3:1 contrast against adjacent colors. The gray-700 toggle background (#374151) against the gray-900 card background (#111827) yields approximately 2.0:1 — well below the 3:1 threshold.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <ul>
+      <li>Add a semi-transparent border to the toggle container: <code>border: '1px solid rgba(255,255,255,0.3)'</code>. This creates a clear boundary that achieves &gt;3:1 contrast against both the on and off backgrounds.</li>
+    </ul>
+  </div>
+
+  <!-- 3.4 -->
+  <div class="issue-block">
+    <h2 class="sec">3.4 &nbsp; Non-Keyboard-Accessible Elements — SC 2.1.1 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> Calendar.jsx</p>
+    <p>Two groups of interactive elements use plain <code>&lt;div&gt;</code> elements with <code>onClick</code> handlers. Keyboard users — including screen reader users who Tab through pages — cannot reach or activate these elements at all because divs are not focusable and have no implicit button role.</p>
+    <ul>
+      <li>Calendar grid day cells — <code>&lt;div onClick={() =&gt; day &amp;&amp; openModal(day)}&gt;</code> — up to 31 cells per month, all unreachable by keyboard</li>
+      <li>Upcoming Festivals list items — <code>&lt;div onClick={() =&gt; openModal(day)}&gt;</code></li>
+    </ul>
+    <p class="fix-label">Recommended fix:</p>
+    <ul>
+      <li>Replace day cell <code>&lt;div&gt;</code> elements with <code>&lt;button&gt;</code> elements, or add <code>role="button"</code> <code>tabIndex={day ? 0 : -1}</code> to the existing divs.</li>
+      <li>Add an <code>onKeyDown</code> handler that calls <code>openModal</code> when <kbd>Enter</kbd> or <kbd>Space</kbd> is pressed.</li>
+      <li>Replace festival list card <code>&lt;div&gt;</code>s with <code>&lt;button&gt;</code> elements styled as cards.</li>
+    </ul>
+  </div>
+
+  <!-- 3.5 -->
+  <div class="issue-block">
+    <h2 class="sec">3.5 &nbsp; Focus Indicator Removed — SC 2.4.7 (AA) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> Settings.jsx — city search input</p>
+    <p>The city search input applies <code>focus:outline-none</code>, removing the browser's default focus ring. The only visual change on focus is a border-color shift (<code>focus:border-yellow-600</code>). A single color change on a border does not constitute a sufficiently visible focus indicator under WCAG 2.4.7.</p>
+    <pre>className="... focus:border-yellow-600 focus:outline-none ..."   // PROBLEM</pre>
+    <p class="fix-label">Recommended fix:</p>
+    <ul>
+      <li>Remove <code>focus:outline-none</code>.</li>
+      <li>Add an explicit focus ring: <code>focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-1 focus-visible:ring-offset-gray-900</code></li>
+      <li>The ring-offset creates a gap between the element and the focus ring, making it clearly visible against the dark background.</li>
+    </ul>
+  </div>
+
+  <!-- 3.6 -->
+  <div class="issue-block">
+    <h2 class="sec">3.6 &nbsp; Toggle Buttons Have No Accessible Name — SC 4.1.2 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> Settings.jsx — Toggle and SubToggle components</p>
+    <p>Both components use <code>aria-pressed</code> correctly but have no textual accessible name. The button contains only an inner <code>&lt;span&gt;</code> for the visual knob with no visible label, <code>aria-label</code>, or <code>aria-labelledby</code>. A screen reader announces only "button" with no context about what is being toggled.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <pre>// Add a `label` prop and apply it as aria-label
+const Toggle = ({ on, onToggle, label }) =&gt; (
+  &lt;button onClick={onToggle} aria-pressed={on} aria-label={label} ...&gt;
+    ...
+  &lt;/button&gt;
+)
+
+// Usage:
+&lt;Toggle on={notifEnabled} onToggle={...} label="Enable all alerts" /&gt;
+&lt;SubToggle on={notifPrefs.festivals} ... label="Festival alerts" /&gt;
+&lt;SubToggle on={notifPrefs.eclipses}  ... label="Eclipse alerts" /&gt;</pre>
+  </div>
+
+  <!-- 3.7 -->
+  <div class="issue-block">
+    <h2 class="sec">3.7 &nbsp; Chevron Buttons Have No Accessible Name — SC 4.1.2 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>Files:</strong> Panchang.jsx, Calendar.jsx, DatePickerSheet.jsx</p>
+    <p>All previous/next navigation uses the single-character glyphs ‹ and › as button content with no <code>aria-label</code>. Screen readers will announce these as "single left-pointing angle quotation mark" — giving the user no indication of what the button does.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <pre>// Panchang.jsx
+&lt;button onClick={() =&gt; changeDate(-1)} aria-label="Previous day" className="..."&gt;‹&lt;/button&gt;
+&lt;button onClick={() =&gt; changeDate(1)}  aria-label="Next day"     className="..."&gt;›&lt;/button&gt;
+
+// Calendar.jsx
+&lt;button onClick={prevMonth} aria-label="Previous month" className="..."&gt;‹&lt;/button&gt;
+&lt;button onClick={nextMonth} aria-label="Next month"     className="..."&gt;›&lt;/button&gt;
+
+// DatePickerSheet.jsx — same pattern for both chevrons</pre>
+  </div>
+
+  <!-- 3.8 -->
+  <div class="issue-block">
+    <h2 class="sec">3.8 &nbsp; City Search Input Has No Label — SC 3.3.2 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> Settings.jsx</p>
+    <p>The city search <code>&lt;input&gt;</code> relies solely on its <code>placeholder</code> attribute ("Search city or state…") for identification. WCAG 3.3.2 requires a persistent label. Placeholder text disappears once the user begins typing and is not reliably announced as a label by all screen readers.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <pre>// Add a visually hidden label (Tailwind's sr-only class)
+&lt;label htmlFor="city-search" className="sr-only"&gt;Search for a city&lt;/label&gt;
+&lt;input
+  id="city-search"
+  type="text"
+  placeholder="Search city or state..."
+  value={citySearch}
+  ...
+/&gt;</pre>
+  </div>
+
+  <!-- 3.9 -->
+  <div class="issue-block">
+    <h2 class="sec">3.9 &nbsp; Modal Sheets Lack Focus Management — SC 2.1.2 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>Files:</strong> Calendar.jsx (day detail modal), DatePickerSheet.jsx</p>
+    <p>When a modal/sheet opens, keyboard focus stays on the trigger element. Users can Tab past the modal backdrop and reach elements underneath. Additionally, there is no <kbd>Escape</kbd> key handler. WCAG 2.1.2 requires that users can move keyboard focus out of any component, and WCAG 2.1.1 requires all functionality to be keyboard operable.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <ul>
+      <li>On modal open, move focus to the first focusable element inside the modal via <code>ref.focus()</code> in a <code>useEffect</code>.</li>
+      <li>Implement a focus trap (e.g., the <code>focus-trap-react</code> library) so Tab cycles only within the open modal.</li>
+      <li>Add a <code>keydown</code> listener that calls <code>closeModal()</code> when <kbd>Escape</kbd> is pressed.</li>
+      <li>On modal close, return focus to the element that opened it (store the trigger's ref before opening).</li>
+    </ul>
+    <pre>// In Calendar.jsx openModal()
+const triggerRef = useRef(null);
+const openModal = (day) =&gt; {
+  triggerRef.current = document.activeElement; // remember where focus was
+  setSelectedDay(day);
+};
+const closeModal = () =&gt; {
+  setSelectedDay(null);
+  triggerRef.current?.focus(); // restore focus
+};</pre>
+  </div>
+
+  <!-- 3.10 -->
+  <div class="issue-block partial">
+    <h2 class="sec">3.10 &nbsp; Moon SVG Has No Accessible Name — SC 1.1.1 (A) &nbsp;<span class="label-partial">PARTIAL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> MoonVisual.jsx</p>
+    <p>The SVG rendering the moon visual has no <code>role="img"</code>, <code>&lt;title&gt;</code>, or <code>aria-label</code>. The phase name text below the SVG does provide a text equivalent nearby, but the SVG itself is exposed to assistive technology as an anonymous container and may cause screen readers to read internal SVG element text verbatim.</p>
+    <p class="fix-label">Recommended fix (simplest — mark as decorative):</p>
+    <pre>&lt;svg
+  width={SIZE} height={SIZE}
+  viewBox={`0 0 ${SIZE} ${SIZE}`}
+  aria-hidden="true"          {/* decorative — phase name text below conveys meaning */}
+  xmlns="http://www.w3.org/2000/svg"
+&gt;</pre>
+    <p class="fix-label">Alternative (if you want the SVG to be the primary description):</p>
+    <pre>&lt;svg role="img" aria-labelledby="moon-title"&gt;
+  &lt;title id="moon-title"&gt;{getPhaseName(phase)} — {Math.round(phase * 100)}% of cycle&lt;/title&gt;
+  ...
+&lt;/svg&gt;</pre>
+  </div>
+
+  <!-- 3.11 -->
+  <div class="issue-block">
+    <h2 class="sec">3.11 &nbsp; No Skip Navigation Link — SC 2.4.1 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> App.jsx</p>
+    <p>There is no "skip to main content" link. Keyboard users must Tab through the persistent top bar and all four bottom navigation tabs on every page before reaching the main content. WCAG 2.4.1 requires a mechanism to bypass repeated navigation blocks.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <pre>// In App.jsx, before the top bar:
+&lt;a
+  href="#main-content"
+  className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2
+             focus:z-50 focus:bg-yellow-400 focus:text-gray-900 focus:px-4
+             focus:py-2 focus:rounded focus:outline-none"
+&gt;
+  Skip to main content
+&lt;/a&gt;
+
+// Add id to the content wrapper:
+&lt;div id="main-content" className="pt-14 pb-20"&gt;</pre>
+  </div>
+
+  <!-- 3.12 -->
+  <div class="issue-block">
+    <h2 class="sec">3.12 &nbsp; Active Nav Tab Missing aria-current — SC 2.4.3 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>File:</strong> App.jsx — bottom navigation</p>
+    <p>The active tab is visually indicated with <code>text-yellow-300</code>, but there is no programmatic indicator. Screen reader users cannot determine which tab is currently active without <code>aria-current="page"</code>.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <pre>&lt;button
+  onClick={() =&gt; navigate('home')}
+  aria-current={screen === 'home' ? 'page' : undefined}
+  className={`flex flex-col items-center gap-1 ...`}
+&gt;</pre>
+    <p>Apply the same pattern to all four tab buttons (home, calendar, panchang, settings).</p>
+  </div>
+
+  <!-- 3.13 -->
+  <div class="issue-block">
+    <h2 class="sec">3.13 &nbsp; Missing Landmark Roles — SC 1.3.1 (A) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>Files:</strong> App.jsx, Calendar.jsx</p>
+    <p><strong>Bottom navigation</strong> is a plain <code>&lt;div&gt;</code>. Screen reader users who navigate by landmark (a very common strategy) cannot jump to the navigation region. Wrap it in a <code>&lt;nav&gt;</code> element.</p>
+    <p><strong>Calendar grid</strong> uses a plain CSS grid with <code>&lt;div&gt;</code> cells. Day-name column headers (Sun, Mon, …) have no programmatic relationship to the cells beneath them, making the calendar unusable for screen reader users.</p>
+    <p class="fix-label">Recommended fix:</p>
+    <pre>// App.jsx — wrap bottom nav
+&lt;nav aria-label="Main navigation" className="fixed bottom-0 ..."&gt;
+  {/* tab buttons */}
+&lt;/nav&gt;
+
+// Calendar.jsx — use role="grid" semantics
+&lt;div role="grid" aria-label="Lunar calendar" className="grid grid-cols-7 gap-1"&gt;
+  {/* header row */}
+  {dayNames.map(day =&gt; (
+    &lt;div key={day} role="columnheader" aria-label={day} className="..."&gt;{day}&lt;/div&gt;
+  ))}
+  {/* day cells */}
+  {calendarDays.map((day, idx) =&gt; (
+    &lt;div key={idx} role="gridcell" ...&gt;
+      &lt;button onClick={...} aria-label={day ? `${day.day} ${monthNames[currentDate.getMonth()]}` : undefined}&gt;
+        ...
+      &lt;/button&gt;
+    &lt;/div&gt;
+  ))}
+&lt;/div&gt;</pre>
+  </div>
+
+  <!-- 3.14 -->
+  <div class="issue-block">
+    <h2 class="sec">3.14 &nbsp; Dynamic State Changes Not Announced — SC 4.1.3 (AA) &nbsp;<span class="label-fail">FAIL</span></h2>
+    <p class="issue-meta"><strong>Files:</strong> Home.jsx, Panchang.jsx, Settings.jsx</p>
+    <p>Several asynchronous state changes are never communicated to screen readers via live regions:</p>
+    <ul>
+      <li><strong>Home.jsx &amp; Panchang.jsx:</strong> "Calculating moon data…" loading state and the subsequent data render have no <code>aria-live</code> region. Screen readers do not announce when loading completes.</li>
+      <li><strong>Home.jsx error:</strong> "Could not load moon data. Please refresh." has no <code>role="alert"</code>.</li>
+      <li><strong>Settings.jsx:</strong> The "Settings saved" toast and the notification preview banner appear visually but are never announced to screen reader users.</li>
+    </ul>
+    <p class="fix-label">Recommended fix:</p>
+    <pre>// Loading / status messages (Home.jsx, Panchang.jsx)
+&lt;div role="status" aria-live="polite" aria-atomic="true"&gt;
+  {loading ? "Calculating moon data, please wait." : ""}
+&lt;/div&gt;
+
+// Error message (Home.jsx)
+&lt;p role="alert" className="text-center text-red-400"&gt;
+  Could not load moon data. Please refresh.
+&lt;/p&gt;
+
+// Settings saved toast (Settings.jsx)
+{saved &amp;&amp; (
+  &lt;div role="status" aria-live="polite" className="..."&gt;
+    &lt;p className="text-green-300 text-sm"&gt;Settings saved&lt;/p&gt;
+  &lt;/div&gt;
+)}
+
+// Notification preview banner (Settings.jsx NotificationPreview component)
+&lt;div role="alert" aria-live="assertive" style={{...}}&gt;</pre>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 4. Additional -->
+  <h1 class="sec">4. Additional Recommendations</h1>
+  <p>The items below are not strict WCAG failures but are accessibility best practices that would meaningfully improve the experience for screen reader users.</p>
+
+  <h2 class="sec">4.1 &nbsp; Emoji in Headings and Navigation</h2>
+  <p>Emoji inside heading and paragraph text (⚙️ Settings, 📿 Panchang, 🌙 Moonrise, etc.) are announced verbosely by screen readers ("gear Settings", "prayer beads Panchang"). When the emoji are decorative and duplicate adjacent visible text, hide them:</p>
+  <pre>&lt;h1&gt;
+  &lt;span aria-hidden="true"&gt;⚙️ &lt;/span&gt;Settings
+&lt;/h1&gt;</pre>
+  <p>When the emoji convey unique meaning (such as the phase emoji in the calendar), use <code>role="img"</code> with an <code>aria-label</code>:</p>
+  <pre>&lt;span role="img" aria-label="Waxing crescent moon"&gt;🌒&lt;/span&gt;</pre>
+
+  <h2 class="sec">4.2 &nbsp; Install Banner Accessibility</h2>
+  <p>The <code>InstallPrompt</code> banner appears at the top of the screen with no ARIA role. Add <code>role="dialog"</code> or <code>role="alertdialog"</code> with an <code>aria-label</code>. The "Later" button should include <code>aria-label="Dismiss install prompt"</code> to provide clear context.</p>
+
+  <h2 class="sec">4.3 &nbsp; Subscription Status Green Dot</h2>
+  <p>The green dot in <code>App.jsx</code> indicating subscription status is a purely visual indicator with no accessible text. The adjacent "Subscribed" label does convey the status, but add <code>aria-hidden="true"</code> to the dot's <code>&lt;span&gt;</code> to prevent it from being announced as an empty element.</p>
+
+  <h2 class="sec">4.4 &nbsp; DatePickerSheet Backdrop Keyboard Dismiss</h2>
+  <p>The backdrop <code>&lt;div&gt;</code> in <code>DatePickerSheet.jsx</code> intercepts pointer clicks to close the sheet but has no keyboard equivalent. Add a <code>keydown</code> listener on the backdrop (or the sheet container) for <kbd>Escape</kbd>.</p>
+
+  <hr class="divider">
+
+  <!-- 5. Priority -->
+  <h1 class="sec">5. Remediation Priority</h1>
+  <table>
+    <tr><th style="width:8%">Priority</th><th style="width:46%">Issues</th><th style="width:46%">Rationale</th></tr>
+    <tr class="p0">
+      <td>P0</td>
+      <td>3.1 Zoom disabled (SC 1.4.4)<br>3.4 Keyboard-inaccessible calendar (SC 2.1.1)<br>3.9 No focus management in modals (SC 2.1.2)</td>
+      <td>Completely blocks access for low-vision users who zoom and for keyboard/switch-access users. One-line fix for zoom; moderate effort for focus management.</td>
+    </tr>
+    <tr class="p1">
+      <td>P1</td>
+      <td>3.6 Toggle accessible name (SC 4.1.2)<br>3.7 Chevron aria-labels (SC 4.1.2)<br>3.8 Input label (SC 3.3.2)<br>3.2 Color contrast (SC 1.4.3)</td>
+      <td>Screen reader users cannot understand or operate key controls. Contrast affects a broad user base. All are quick wins — low effort, high impact.</td>
+    </tr>
+    <tr class="p2">
+      <td>P2</td>
+      <td>3.5 Focus visible (SC 2.4.7)<br>3.11 Skip nav (SC 2.4.1)<br>3.12 aria-current (SC 2.4.3)<br>3.13 Landmark roles (SC 1.3.1)<br>3.14 Live regions (SC 4.1.3)</td>
+      <td>Important for navigation efficiency and dynamic content awareness. Do not block access to core features. Moderate effort.</td>
+    </tr>
+    <tr class="p3">
+      <td>P3</td>
+      <td>3.10 SVG alt text (SC 1.1.1)<br>3.3 Toggle border contrast (SC 1.4.11)<br>Section 4 — additional recommendations</td>
+      <td>Polish-level improvements. Address after higher-priority items are resolved.</td>
+    </tr>
+  </table>
+
+  <hr class="divider">
+
+  <!-- 6. Next Steps -->
+  <h1 class="sec">6. Next Steps</h1>
+  <p>After applying source-code fixes, validate with the following steps:</p>
+  <ol style="margin:12px 0 12px 24px">
+    <li style="margin-bottom:8px"><strong>Automated scan:</strong> Run <code>axe-core</code> (browser extension or <code>axe.run()</code> in the console) against the live PWA to catch issues not visible in source code alone (computed roles, actual rendered contrast).</li>
+    <li style="margin-bottom:8px"><strong>Screen reader testing:</strong> Test with VoiceOver on iOS (the primary mobile PWA platform) and NVDA + Chrome on desktop. Pay particular attention to the calendar grid, toggle controls, and the DatePickerSheet.</li>
+    <li style="margin-bottom:8px"><strong>Contrast validation:</strong> Verify all colour changes using the <a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> before shipping.</li>
+    <li style="margin-bottom:8px"><strong>Keyboard-only session:</strong> Navigate the full app (Today → Calendar → Panchang → Settings) using only Tab, Shift+Tab, Enter, Space, and Escape. Confirm all controls are reachable and operable.</li>
+    <li style="margin-bottom:8px"><strong>Re-audit:</strong> After remediation, re-run this checklist to confirm all issues are resolved and no regressions introduced.</li>
+  </ol>
+
+  <hr class="divider">
+  <p style="text-align:center;color:#999;font-size:12px;margin-top:24px">End of Report &nbsp;—&nbsp; Chandra App WCAG AA Audit &nbsp;•&nbsp; May 2026</p>
+
+</div>
+</body>
+</html>

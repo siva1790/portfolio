@@ -200,17 +200,28 @@
 
     .resource-link {
       width: fit-content;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin-top: auto;
-      padding-top: var(--space-5);
+      padding: 11px 16px;
+      border: 1px solid var(--color-primary);
+      border-radius: 999px;
+      background: transparent;
       color: var(--color-primary);
       font-weight: 700;
       line-height: 1.2;
       text-decoration: none;
+      transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
     }
 
     .resource-link:hover {
+      border-color: var(--color-primary-deep);
+      background: var(--color-primary-soft);
       color: var(--color-primary-deep);
-      text-decoration: underline;
+      text-decoration: none;
+      transform: translateY(-1px);
     }
 
     .back-to-top {
@@ -494,8 +505,8 @@
           <h2 class="ds-section-title">Design-system and accessibility work clarified where AI output had drifted.</h2>
           <p class="ds-body ds-reading">The early AI-generated screens looked consistent at a glance, but detailed review showed different colors, styles and icon choices across the app. A design system defined colors, typography, spacing, cards, toggles and iconography. Lucide icons replaced most UI emojis, while moon phase emojis were retained where they carried semantic meaning.</p>
           <div class="evidence-grid two">
-            <article class="evidence-card system-card"><span class="tag">Design system</span><h3 class="ds-subtitle">Consistency over generated variation</h3><ul><li>Standardized dark background, gold accent and indigo CTA usage.</li><li>Defined card, toggle, spacing and navigation patterns.</li><li>Established an iconography policy using Lucide React for UI chrome.</li></ul><a class="resource-link" href="file:///C:/Users/Shiv/OneDrive/Desktop/chandra-app/chandra-design-system.html" target="_blank" rel="noopener">Open design system</a></article>
-            <article class="evidence-card system-card"><span class="tag">Accessibility audit</span><h3 class="ds-subtitle">Quality check before launch readiness</h3><ul><li>Claude's audit found 16 issues in version 1.</li><li>Issues included zoom blocking, contrast, keyboard access, labels and modal focus handling.</li><li>Feedback was incorporated through later implementation work.</li></ul><a class="resource-link" href="file:///C:/Users/Shiv/AppData/Local/Packages/Claude_pzs8sxrjxfjjc/LocalCache/Roaming/Claude/local-agent-mode-sessions/52d30d23-6bda-4884-a5d7-dc1ff3415288/b31d742e-9e38-4ad9-a298-cd995ff7d89e/local_3358335a-fb3a-4301-bd16-0a675946e7fa/outputs/chandra-a11y-report.html" target="_blank" rel="noopener">Open accessibility audit</a></article>
+            <article class="evidence-card system-card"><span class="tag">Design system</span><h3 class="ds-subtitle">Consistency over generated variation</h3><ul><li>Standardized dark background, gold accent and indigo CTA usage.</li><li>Defined card, toggle, spacing and navigation patterns.</li><li>Established an iconography policy using Lucide React for UI chrome.</li></ul><a class="resource-link" href="chandra-assets/chandra-design-system.html" target="_blank" rel="noopener">Open design system</a></article>
+            <article class="evidence-card system-card"><span class="tag">Accessibility audit</span><h3 class="ds-subtitle">Quality check before launch readiness</h3><ul><li>Claude's audit found 16 issues in version 1.</li><li>Issues included zoom blocking, contrast, keyboard access, labels and modal focus handling.</li><li>Feedback was incorporated through later implementation work.</li></ul><a class="resource-link" href="chandra-assets/chandra-a11y-report.html" target="_blank" rel="noopener">Open accessibility audit</a></article>
           </div>
           <blockquote class="ds-callout">AI helped produce and critique the product, but human review was still needed to notice inconsistency, define the design-system work and request accessibility testing before treating the app as launch-ready.</blockquote>
         </div>
