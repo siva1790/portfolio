@@ -39,7 +39,7 @@
       display: grid;
       place-items: center;
       margin-top: 58px;
-      padding: clamp(26px, 5vw, 54px);
+      padding: clamp(34px, 6vw, 68px) clamp(26px, 5vw, 54px);
       border: 1px solid var(--color-line);
       border-radius: var(--radius-lg);
       background: linear-gradient(180deg, #ffffff 0%, #eef3ef 100%);
@@ -50,7 +50,7 @@
     }
 
     .phone-frame {
-      max-width: 360px;
+      width: min(100%, 340px);
       margin-inline: auto;
       padding: 10px;
       border: 1px solid rgba(23, 23, 23, .12);
@@ -61,7 +61,9 @@
 
     .phone-frame img {
       width: 100%;
+      display: block;
       border-radius: 20px;
+      object-fit: contain;
     }
 
     .evidence-grid {
@@ -366,7 +368,7 @@
       }
 
       .phone-frame {
-        max-width: 300px;
+        width: min(100%, 300px);
       }
 
       .footer-wrap {
@@ -401,7 +403,7 @@
           </div>
           <div class="hero-visual-band">
             <div class="phone-frame">
-              <img src="chandra-assets/01-day-view_MobileView.png" alt="Chandra Day View showing Amavasya, moonrise, moonset, and today's highlight.">
+              <img src="chandra-assets/day-view-live-mobile.jpeg" alt="Chandra Day View showing Dwadashi, Shukla Paksha, moonrise, moonset, and today's message.">
             </div>
             <a class="ds-button ds-button-primary" href="https://chandrapanchang.app/" target="_blank" rel="noopener">View live app</a>
           </div>
