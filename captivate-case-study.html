@@ -68,9 +68,9 @@
     .button-primary{border-color:var(--green);background:var(--green);color:#fff}
     .button-primary:hover{border-color:var(--green-deep);background:var(--green-deep);color:#fff}
     .back-to-top{position:fixed;right:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:60;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:var(--green);color:#fff;font-size:0;font-weight:600;line-height:1;text-decoration:none;box-shadow:0 14px 34px rgba(32,28,24,.16);transition:transform .18s,background .18s}.back-to-top svg{width:24px;height:24px;display:block;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}.back-to-top:hover{transform:translateY(-2px);background:var(--green-deep)}
-    footer{padding-block:26px;background:var(--ink);color:#aaa;font-size:.86rem}
+    footer{padding-block:28px;background:var(--ink);color:#aaa}.footer-wrap{display:flex;justify-content:space-between;gap:24px;font-size:.9rem}.footer-links{display:flex;gap:22px}.footer-links a{text-decoration:none}.footer-links a:hover{color:#fff}
     @media(max-width:860px){.section-label{grid-template-columns:1fr;gap:18px}.section-index{position:static}.facts{grid-template-columns:repeat(2,1fr)}.research-plan,.principles,.outcome-grid{grid-template-columns:1fr}.themes{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr}.flow-step:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-16px}.decision{grid-template-columns:1fr}.blueprint-figure,.architecture-figure{width:100%;margin-left:0}.blueprint-figure figcaption,.architecture-figure figcaption{margin-left:0}.prototype{width:100%;margin-left:0}}
-    @media(max-width:620px){.container{width:min(calc(100% - 30px),var(--max))}.nav-note{display:none}.hero{padding-block:54px 52px}.hero-visual{padding:18px 10px}.section{padding-block:56px}.facts,.evidence-grid,.themes,.ui-grid,.outcome-grid{grid-template-columns:1fr}.heuristic-row,.mapping-row{grid-template-columns:1fr}.heuristic-row>div,.mapping-row>div{border-left:0;border-top:1px solid var(--line)}.heuristic-row>div:first-child,.mapping-row>div:first-child{border-top:0}.problem-row{grid-template-columns:1fr}.problem-side{padding:18px}.arrow{min-height:36px;transform:rotate(90deg)}.mock-metrics{grid-template-columns:1fr}.mock-row{grid-template-columns:1fr}.blueprint-frame img{width:min(1100px,300vw)}.blueprint-disclosure,.next-steps,.ui-visual{padding:20px}.solution-head{grid-template-columns:48px minmax(0,1fr);gap:14px}.solution-number{width:42px;height:42px}.ui-tabs{overflow-x:auto}.prototype-footer{align-items:flex-start;flex-direction:column;gap:8px}.case-next{flex-direction:column}.button{width:100%}}
+    @media(max-width:620px){.container{width:min(calc(100% - 30px),var(--max))}.nav-note{display:none}.hero{padding-block:54px 52px}.hero-visual{padding:18px 10px}.section{padding-block:56px}.facts,.evidence-grid,.themes,.ui-grid,.outcome-grid{grid-template-columns:1fr}.heuristic-row,.mapping-row{grid-template-columns:1fr}.heuristic-row>div,.mapping-row>div{border-left:0;border-top:1px solid var(--line)}.heuristic-row>div:first-child,.mapping-row>div:first-child{border-top:0}.problem-row{grid-template-columns:1fr}.problem-side{padding:18px}.arrow{min-height:36px;transform:rotate(90deg)}.mock-metrics{grid-template-columns:1fr}.mock-row{grid-template-columns:1fr}.blueprint-frame img{width:min(1100px,300vw)}.blueprint-disclosure,.next-steps,.ui-visual{padding:20px}.solution-head{grid-template-columns:48px minmax(0,1fr);gap:14px}.solution-number{width:42px;height:42px}.ui-tabs{overflow-x:auto}.prototype-footer{align-items:flex-start;flex-direction:column;gap:8px}.case-next,.footer-wrap{flex-direction:column}.footer-links{flex-wrap:wrap}.button{width:100%}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
@@ -376,7 +376,12 @@
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5 12 8.5l6.5 6"/></svg>
 </a>
 
-<footer><div class="container">© 2026 Sivakumar Ravi · Captivate case study</div></footer>
+<footer>
+  <div class="container footer-wrap">
+    <span>© 2026 Sivakumar Ravi</span>
+    <div class="footer-links"><a href="mailto:siva1790@gmail.com">Email</a><a href="https://linkedin.com/in/sivakumar-ravi" target="_blank" rel="noopener">LinkedIn</a><a href="https://medium.com/@siva1790" target="_blank" rel="noopener">Medium</a></div>
+  </div>
+</footer>
 <script>
   const nativePrototype = { width: 1440, height: 900 };
 

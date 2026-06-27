@@ -313,7 +313,7 @@
     }
 
     footer {
-      padding-block: 26px;
+      padding-block: 28px;
       background: var(--color-ink);
       color: #aaa;
       font-size: .86rem;
@@ -322,13 +322,14 @@
     .footer-wrap {
       display: flex;
       justify-content: space-between;
-      gap: var(--space-4);
+      gap: 24px;
       align-items: center;
+      font-size: .9rem;
     }
 
     .footer-links {
       display: flex;
-      gap: var(--space-4);
+      gap: 22px;
     }
 
     .footer-links a {
@@ -490,12 +491,13 @@
           <p class="ds-eyebrow">Design strategy</p>
           <h2 class="ds-section-title">Chandra was shaped as a basic, understandable Panchang instead of a complete expert almanac.</h2>
           <p class="ds-body ds-reading">The first version needed to be useful without overwhelming people. The experience was separated into four clear areas: Day View for the daily ritual moment, Calendar for planning, Panchang for detailed information and Settings for city, calendar system and notification control.</p>
+          <p class="ds-body ds-reading">Before building the app, I used Codex connected to Figma through MCP as a brainstorming partner. Based on the research direction, Panchang user needs and product constraints, I prompted Codex to generate the right low-fidelity screen set and detailed user flows in Figma. The screens helped shape the daily moon moment, calendar scan, Panchang detail view, settings controls and shareable daily message, while the user flows clarified the navigation model, decision points and edge cases before the PWA was developed.</p>
           <div class="artifact-strip" aria-label="Chandra product screens">
             <figure class="artifact"><img src="chandra-assets/01-day-view_MobileView.png" alt="Day View screen with moon phase and today's highlight."><figcaption>Day View reduces the daily experience to moon, tithi, moonrise and one highlight.</figcaption></figure>
             <figure class="artifact"><img src="chandra-assets/02-calendar_MobileView.png" alt="Lunar Calendar screen showing May 2026 events."><figcaption>Calendar supports scanning festivals and lunar days across a month.</figcaption></figure>
             <figure class="artifact"><img src="chandra-assets/03-panchang_MobileView.png" alt="Panchang screen with Pancha Anga and daily timings."><figcaption>Panchang uses sections so deeper data does not dominate the app.</figcaption></figure>
             <figure class="artifact"><img src="chandra-assets/04-settings-gps-notifications_MobileView.png" alt="Settings screen with GPS city and push notification preferences."><figcaption>Settings exposes location, calendar system and notification preferences.</figcaption></figure>
-            <figure class="artifact"><img src="chandra-assets/05-social-share-card_MobileView.png" alt="Social share card screen for Chandra daily message."><figcaption>The share card explores a plain-language cultural layer for younger users.</figcaption></figure>
+            <figure class="artifact"><img src="chandra-assets/05-social-share-card_MobileView.png" alt="Today's message screen with a shareable Chandra card."><figcaption>Today's message explores a plain-language cultural layer and a shareable card for younger users.</figcaption></figure>
           </div>
         </div>
       </div>
@@ -507,7 +509,7 @@
         <div>
           <p class="ds-eyebrow">Design consistency and accessibility</p>
           <h2 class="ds-section-title">Design-system and accessibility work clarified where AI output had drifted.</h2>
-          <p class="ds-body ds-reading">The early AI-generated screens looked consistent at a glance, but detailed review showed different colors, styles and icon choices across the app. A design system defined colors, typography, spacing, cards, toggles and iconography. Lucide icons replaced most UI emojis, while moon phase emojis were retained where they carried semantic meaning.</p>
+          <p class="ds-body ds-reading">Using the low-fidelity screens and user flows as the starting point, I began developing the application. The first version of the developed screens looked consistent at a glance, but detailed review showed different colors, styles and icon choices across the app. A design system defined colors, typography, spacing, cards, toggles and iconography. Lucide icons replaced most UI emojis, while moon phase emojis were retained where they carried semantic meaning. The first version was also tested for accessibility, which helped identify usability gaps before launch readiness.</p>
           <div class="evidence-grid two">
             <article class="evidence-card system-card"><span class="tag">Design system</span><h3 class="ds-subtitle">Consistency over generated variation</h3><ul><li>Standardized dark background, gold accent and indigo CTA usage.</li><li>Defined card, toggle, spacing and navigation patterns.</li><li>Established an iconography policy using Lucide React for UI chrome.</li></ul><a class="resource-link" href="chandra-assets/chandra-design-system.html" target="_blank" rel="noopener">Open design system</a></article>
             <article class="evidence-card system-card"><span class="tag">Accessibility audit</span><h3 class="ds-subtitle">Quality check before launch readiness</h3><ul><li>Claude's audit found 16 issues in version 1.</li><li>Issues included zoom blocking, contrast, keyboard access, labels and modal focus handling.</li><li>Feedback was incorporated through later implementation work.</li></ul><a class="resource-link" href="chandra-assets/chandra-a11y-report.html" target="_blank" rel="noopener">Open accessibility audit</a></article>
@@ -580,7 +582,7 @@
           <blockquote class="ds-callout">For culturally sensitive products, speed is useful only when paired with trust. AI helped the work move fast, but the product became credible only when Panchang users, interested beginners, accessibility review and Play Store testers shaped the next decisions.</blockquote>
           <div class="case-next">
             <a class="ds-button" href="index.html#featured-work">Back to selected work</a>
-            <a class="ds-button ds-button-primary" href="case-study-1.html">Next: Insurance agent portal transformation</a>
+            <a class="ds-button ds-button-primary" href="case-study-1.html">Next: Travel portal</a>
           </div>
         </div>
       </div>

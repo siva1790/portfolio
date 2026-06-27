@@ -23,7 +23,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { overflow-x: hidden; scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--canvas);
@@ -32,6 +32,7 @@
       font-size: 16px;
       line-height: 1.7;
       text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; }
@@ -132,6 +133,7 @@
       gap: 52px;
       align-items: start;
     }
+    .section-label > * { min-width: 0; }
     .section-index {
       position: sticky;
       top: 100px;
@@ -163,7 +165,7 @@
       width: 100%;
       max-width: 900px;
     }
-    .research-figure { margin: 0; }
+    .research-figure { width: 100%; min-width: 0; margin: 0; }
     .research-figure h3 {
       margin-bottom: 12px;
       color: var(--ink);
@@ -171,6 +173,8 @@
       font-weight: 600;
     }
     .image-viewer {
+      width: 100%;
+      max-width: 100%;
       padding: 10px;
       overflow-x: auto;
       border: 1px solid var(--line);
@@ -399,7 +403,11 @@
     }
     .back-to-top svg { width: 24px; height: 24px; display: block; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
     .back-to-top:hover { transform: translateY(-2px); background: var(--green-deep); }
-    footer { padding-block: 26px; background: var(--ink); color: #aaa; font-size: .86rem; }
+    footer { padding-block: 28px; background: var(--ink); color: #aaa; }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 24px; font-size: .9rem; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
 
     @media (max-width: 860px) {
       .section-label { grid-template-columns: 1fr; gap: 18px; }
@@ -426,8 +434,8 @@
       .figure { margin-inline: 0; padding: 8px; border-radius: 10px; }
       .figure img,
       .figure.slim img { width: 100%; min-width: 0; max-width: 100%; height: auto; }
-      .image-viewer { margin-inline: 0; padding: 8px; overflow-x: visible; border-radius: 10px; }
-      .image-viewer img { width: 100%; min-width: 0; max-width: 100%; height: auto; }
+      .image-viewer { margin-inline: 0; padding: 8px; overflow-x: auto; border-radius: 10px; }
+      .image-viewer img { width: 100%; min-width: 760px; max-width: none; height: auto; }
       .process-table { grid-template-columns: 72px repeat(4, minmax(132px, 1fr)); border-radius: 10px; }
       .process-table > div { padding: 12px; }
       .image-hint { display: none; }
@@ -713,6 +721,11 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5 12 8.5l6.5 6"/></svg>
   </a>
 
-  <footer><div class="container">© 2026 Sivakumar Ravi</div></footer>
+  <footer>
+    <div class="container footer-wrap">
+      <span>© 2026 Sivakumar Ravi</span>
+      <div class="footer-links"><a href="mailto:siva1790@gmail.com">Email</a><a href="https://linkedin.com/in/sivakumar-ravi" target="_blank" rel="noopener">LinkedIn</a><a href="https://medium.com/@siva1790" target="_blank" rel="noopener">Medium</a></div>
+    </div>
+  </footer>
 </body>
 </html>

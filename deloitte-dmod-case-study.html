@@ -470,7 +470,11 @@
     }
     .back-to-top svg { width: 24px; height: 24px; display: block; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
     .back-to-top:hover { transform: translateY(-2px); background: var(--green-deep); }
-    footer { padding-block: 26px; background: var(--ink); color: #aaa; font-size: .86rem; }
+    footer { padding-block: 28px; background: var(--ink); color: #aaa; }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 24px; font-size: .9rem; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
 
     @media (max-width: 900px) {
       .facts, .problem-grid, .principle-grid, .impact-grid { grid-template-columns: repeat(2, 1fr); }
@@ -541,7 +545,8 @@
       .process-table td:nth-child(6)::before { content: "Owner"; }
       .process-table .step-cell { background: #eef4ef; color: var(--green-deep); }
       .confidentiality, .tool-card { padding: 20px; }
-      .case-next { flex-direction: column; }
+      .case-next, .footer-wrap { flex-direction: column; }
+      .footer-links { flex-wrap: wrap; }
       .button { width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -888,7 +893,7 @@
       <div class="container">
         <div class="case-next">
           <a class="button" href="index.html#featured-work">← Back to selected work</a>
-          <a class="button button-primary" href="case-study-1.html">Next: Travel portal →</a>
+          <a class="button button-primary" href="chandra-ai-case-study.html">Next: Chandra PWA →</a>
         </div>
       </div>
     </section>
@@ -899,7 +904,10 @@
   </a>
 
   <footer>
-    <div class="container">© 2026 Sivakumar Ravi. Case study content sanitized for portfolio use.</div>
+    <div class="container footer-wrap">
+      <span>© 2026 Sivakumar Ravi</span>
+      <div class="footer-links"><a href="mailto:siva1790@gmail.com">Email</a><a href="https://linkedin.com/in/sivakumar-ravi" target="_blank" rel="noopener">LinkedIn</a><a href="https://medium.com/@siva1790" target="_blank" rel="noopener">Medium</a></div>
+    </div>
   </footer>
 </body>
 </html>
