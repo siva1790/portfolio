@@ -1,99 +1,475 @@
 %PDF-1.4
-%“Œ‹ž ReportLab Generated PDF document (opensource)
+%âãÏÓ
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 4 0 R
+/Producer (pypdf)
 >>
 endobj
 2 0 obj
 <<
-/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 13 0 R ]
 >>
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/Type /Catalog
+/Pages 2 0 R
 >>
 endobj
 4 0 obj
 <<
-/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+/Contents 5 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+/F2 8 0 R
+/F3 9 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ 10 0 R 11 0 R 12 0 R ]
+/Parent 2 0 R
 >>
 endobj
 5 0 obj
 <<
-/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/Length 9315
 >>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 48.51969 773.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 0 6 Tm /F2 22 Tf 28 TL 167.1901 0 Td (Sivakumar Ravi) Tj T* -167.1901 0 Td ET
+Q
+Q
+q
+1 0 0 1 48.51969 757.874 cm
+q
+BT 1 0 0 1 0 1 Tm 90.49261 0 Td 12 TL /F2 11 Tf .043137 .447059 .521569 rg (Lead UX Designer & Design Manager | AI-Augmented Design) Tj T* -90.49261 0 Td ET
+Q
+Q
+q
+1 0 0 1 48.51969 741.874 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3.5 Tm /F1 7.45 Tf 12 TL 86.24621 0 Td (+91 7708336605 | siva1790@gmail.com | www.sivakumarravi.com | linkedin.com/in/sivakumar-ravi) Tj T* -86.24621 0 Td ET
+Q
+Q
+q
+1 0 0 1 48.51969 723.874 cm
+q
+.043137 .447059 .521569 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (PROFESSIONAL SUMMARY) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 721.374 cm
+q
+.5 w
+1 J
+.043137 .447059 .521569 RG
+n 0 0 m 498.2362 0 l S
+Q
+Q
+q
+1 0 0 1 48.51969 640.374 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 0 69 Tm /F1 9 Tf 13 TL .452576 Tw (UX design leader with 11+ years spanning backend engineering, hands-on user experience design, and team leadership \227) Tj T* 0 Tw 1.240106 Tw (currently a design manager at Deloitte USI \(U.S. India\) who still ships craft. I lead a cross-functional team of 6 and own) Tj T* 0 Tw .834948 Tw (product delivery end-to-end, from personally running UX research and interaction design to assigning story points, running) Tj T* 0 Tw .969514 Tw (design reviews, and managing stakeholders, while building AI-powered tools and agents that raise team efficiency. I have) Tj T* 0 Tw .501801 Tw (delivered measurable outcomes across enterprise, government, and consumer domains, including a mobile app I designed,) Tj T* 0 Tw (built, and published to the Google Play Store which is currently in closed testing stage.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 623.374 cm
+q
+.043137 .447059 .521569 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (PROFESSIONAL EXPERIENCE) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 620.874 cm
+q
+.5 w
+1 J
+.043137 .447059 .521569 RG
+n 0 0 m 498.2362 0 l S
+Q
+Q
+q
+1 0 0 1 42.51969 604.874 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 1 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (Specialist Assistant Manager, Design) Tj T* ET
+Q
+Q
+q
+1 0 0 1 321.4488 1 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3 Tm /F1 9 Tf 12 TL 74.7304 0 Td (Nov 2023 \226 Present \267 2.5 yrs) Tj T* -74.7304 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 592.874 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3.5 Tm /F3 8.5 Tf 12 TL (Deloitte USI \227 Bengaluru, India) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 554.874 cm
+q
+BT 1 0 0 1 10 27.3 Tm 12 TL /F1 8.7 Tf .101961 .101961 .101961 rg (\177 Lead the Experience & Technology team of 6 \(UX designers, developers and UX writers\) \227 owning team delivery across) Tj T* (Deloitte.com \(60+ web pages\) and two performance and project-tracking dashboards while staying hands-on across research) Tj T* (and interaction design.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 528.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 15.3 Tm /F1 8.7 Tf 12 TL (\177 Led the design and development of Sidekick Research Assistant, a ChatGPT-style internal AI product \227 assigning story) Tj T* (points to designers and developers, running design reviews, and managing stakeholders through delivery.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 490.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 27.3 Tm /F1 8.7 Tf 12 TL (\177 Owned end-to-end UX research for Captivate, a one-stop web application used across Deloitte to manage the full client-visit) Tj T* (lifecycle \(access management, boardroom booking, catering, and tech services\), coordinating with design and development) Tj T* (teams to ship it.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 464.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 15.3 Tm /F1 8.7 Tf 12 TL (\177 Designed and built Showtime, an internal Behance-style portfolio platform for Deloitte USI, as the sole designer from scratch) Tj T* (\227 using Figma Make to drive ideation, user testing, and stakeholder feedback.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 426.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 27.3 Tm /F1 8.7 Tf 12 TL (\177 Built a transitional design library aligned to Deloitte's DMOD design system \227 establishing interaction patterns, reusable) Tj T* (components, and governance standards that enable the team to adopt DMOD seamlessly when the formal migration occurs,) Tj T* (reducing future rework and onboarding friction.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 388.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 27.3 Tm /F1 8.7 Tf 12 TL (\177 Built AI-powered internal tools \227 a programmatic ad generator that turns a message and image into multi-resolution banners) Tj T* (\(~60% less production time\) and a brand-guidelines Figma plugin built with Claude \(brand colors, contrast-ratio checker, hex) Tj T* (values, icons\) that cut tab-switching and improved designer efficiency by ~10%.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 362.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 15.3 Tm /F1 8.7 Tf 12 TL (\177 Established a sprint-based intake and delivery process from scratch for the 40+ member Marketing Excellence org, improving) Tj T* (cross-team alignment and cutting project completion timelines by ~30%.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 336.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 15.3 Tm /F1 8.7 Tf 12 TL (\177 Built team capability through a two-month advanced-UX and product-thinking learning series for 10+ designers and) Tj T* (contributed to Deloitte's Design Alchemy curriculum across three competency levels.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 330.874 cm
+Q
+q
+1 0 0 1 42.51969 317.874 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 1 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (UX Designer / Researcher) Tj T* ET
+Q
+Q
+q
+1 0 0 1 321.4488 1 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3 Tm /F1 9 Tf 12 TL 76.7194 0 Td (Aug 2018 \226 Oct 2023 \267 5 yrs) Tj T* -76.7194 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 305.874 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3.5 Tm /F3 8.5 Tf 12 TL (Tata Consultancy Services) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 279.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 15.3 Tm /F1 8.7 Tf 12 TL (\177 Led a 13-member cross-functional team of UX researchers and PwD \(persons with disabilities\) users for 1.5 years,) Tj T* (conducting 60+ usability and accessibility evaluations and delivering actionable recommendations for a major tech client.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 253.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 15.3 Tm /F1 8.7 Tf 12 TL (\177 Introduced a 'Shift Left' usability approach that improved defect-detection efficiency from 75% to 95% \(up to 100% in some) Tj T* (cases\) and contributed to a 200% revenue increase \(FY 2021\22622\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 215.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 27.3 Tm /F1 8.7 Tf 12 TL (\177 Modernized a B2B BFSI \(banking, financial services, and insurance\) product end-to-end \227 built a design system and defined) Tj T* -0.026619 Tw (interaction patterns that governed 45+ high-fidelity prototypes across web and iOS, ensuring consistency across all touchpoints) Tj T* 0 Tw (and adherence to a scalable design language.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 189.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 15.3 Tm /F1 8.7 Tf 12 TL (\177 Led the interaction design transformation of a travel-insurance agent portal \227 reducing policy issuance time to ~1 minute and) Tj T* (contributing to a 300% increase in agent digital engagement.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 175.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 3.3 Tm /F1 8.7 Tf 12 TL (\177 Mentored and trained 20+ new joiners on UX research, usability testing, and web accessibility.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 169.874 cm
+Q
+q
+1 0 0 1 42.51969 156.874 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 1 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (Experience Designer) Tj T* ET
+Q
+Q
+q
+1 0 0 1 321.4488 1 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3 Tm /F1 9 Tf 12 TL 102.2344 0 Td (Sep 2017 \226 Mar 2018) Tj T* -102.2344 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 144.874 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3.5 Tm /F3 8.5 Tf 12 TL (OYO Rooms) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 130.874 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 3.3 Tm /F1 8.7 Tf 12 TL (\177 Redesigned reception and check-in experiences across OYO business and leisure properties in Delhi and Goa.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 124.874 cm
+Q
+q
+1 0 0 1 42.51969 111.874 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 1 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (Backend Developer) Tj T* ET
+Q
+Q
+q
+1 0 0 1 321.4488 1 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3 Tm /F1 9 Tf 12 TL 101.7214 0 Td (Aug 2012 \226 Aug 2015) Tj T* -101.7214 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 48.51969 99.87402 cm
+q
+.4 .4 .4 rg
+BT 1 0 0 1 0 3.5 Tm /F3 8.5 Tf 12 TL (Triad Software Pvt. Ltd.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 48.51969 61.87402 cm
+q
+.101961 .101961 .101961 rg
+BT 1 0 0 1 10 27.3 Tm /F1 8.7 Tf 12 TL (\177 Reverse-engineered 22 feature specifications across third-party CAD formats and built the backend logic for an interoperable) Tj T* -0.032462 Tw (CAD viewer \227 enabling it to accurately read and render industrial 3D models created using those features in external software;) Tj T* 0 Tw (this grounded my design practice in the realities of complex engineering systems and technical constraints.) Tj T* ET
+Q
+Q
+endstream
 endobj
 6 0 obj
 <<
-/Contents 11 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 7 0 obj
 <<
-/PageMode /UseNone /Pages 9 0 R /Type /Catalog
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 8 0 obj
 <<
-/Author (\(anonymous\)) /CreationDate (D:20260623173627+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260623173627+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
-  /Subject (\(unspecified\)) /Title (\(anonymous\)) /Trapped /False
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 9 0 obj
 <<
-/Count 2 /Kids [ 5 0 R 6 0 R ] /Type /Pages
+/BaseFont /Helvetica-Oblique
+/Encoding /WinAnsiEncoding
+/Name /F3
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 10 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 3802
+/A <<
+/S /URI
+/Type /Action
+/URI (mailto\072siva1790\100gmail\056com)
 >>
-stream
-Gau`VgN)%<&q0LUbY&R\/],$f<r91c/\AB$7uA]r,uo7/!^guZ&;.q%U:I[sDr9#,!!Fd_d#MB\`t:`?1Ynt@:S/[f&3g'rr;U:P`6"9hoem@I.'Aj[LqQnq]bdSJ0E1PeB^UhWhC+bNB4<WQ]]g]]A%:e-5/%HDrL`3:"dTS.?,kl=K,m8jndaWCedob60:;QWr@/P7\\==fogY8,;Vp]2`RQ>Uoa`e4^C)suME_X)24E=R[C:EHS'QI8SqZ3:)05@4)\`EcOQXY]&5@fo`tNqZ'Ab,G7Td$&M8=Nb;t9B:nO?Zpb#Km>Cd*^e17'M=nNV#@2E\-D)jOJSD6A$lm-jk*"*)Zi2AY_qqaa35aC,sB.=GGZ^'$acNQ.`5"6Rd0J4TLb-lS0F&M1:S2jhheJ#tV,B3o%*pbL=oNCn=g^V8.l/),ed=RLlNDs\o7#lCUk.&?_MKl(Q-rgc!#Mp(_$Vt9`;q(KeW`VebO&'($O\+Vpq5i>)%!@+kg/cU:LP08&&EaE0!in;fhUN))s1,48pq/PcqQ9R5!B5P:nlsE0[H1<:&9i)R/0gKKM/tXn0)U`?#X#8o4;XBW!Xg!N'F.KMQ67+W@:PHqm3`i?"G=Q*oo@+7E/o$;7e`R"kX#s8(RR[G27A](B=l$6'+g/_%d\>ui&V1b<Ic*;?P.E3,ak9G1f!8#6l*<X!B1>sf&g-:Lid1+ARsX-G:URk7=_u\ZfLfeETP^c$9"D$BRJ4^98SP7H0'bX![)lnA$o:QG".<l3q4:UC1l>r9P`7.bPL`;/K/.kUarO;LLQrb:a,sJi88!0bBi3MgedaE">:L!pP;R9O;4j]Gc!/LD,G_/3FMFpd<\=gKZUaC4q^*Hs7R>6F2(OpV<i`?F82F([.=%]>-6pTm!0#3f=O]B)kp#>c0O%P//1P-bbDu^4Cb)MC5VAnAb+YSr9:\mMG6Hu1hPu!V7Xd#p4$&!2)m$VJdak7"?rL!*W,@;P(k"[i<>Hn358#K!gN0)@B7460>Ak)9e:8ic(p<HUX4_)62J,6]aJ+2.c?YZrm9)4f(RrC$HBDpRAfous'(:c^iVAC*m_g)9.tRqed7BKSj`E,<bZK0`+dF%1/*/p$r*us,oGuTIoXBb-bHoZ)?Cr9JKAU1SDam!#]=]6C/ar:2k7BT@Sd0VES,RjKAN^IE]MOHN#\bTF;)&>L?F;BSk[)a8'1*:u3KC#dcBLirgHJj4es"aU7"3pu[U77\#lQG$()r/>.W?5F*KDKK3/LpT]>h8Q?t[rlO%!tD$brJ>8,F<OYg89$=E+DBQ<@ME7uedc:S?)`ISe!+'&gc=E*DWq!arn)jjC;i_0%H"#Z`WYJZ!_ZiC@maP'(XtZeG(cq"h-60la&T(1%T\E_YTR[aZE2$as[a_:_e`]L'Z`NbVa94()05>S"jR9<hJ);'9pn*UZa.6Nk+[,o@?Y0nGSOP=hi`"j4QQ9i>]W$R<jE2M?r-gsLhY#rWdTP(%&[_rQ:IWJn^YQ`=>E.N!HYSP#CDEhnPI$V/Z2aLDFeU1+JJ>c6jV-TC%jD-pSjJR$00oS@]-=$p3ZJ-%f%h=UJ9Zu(t9F0DikBXe7:[+n*]DZg<ZD4q1n3I"MlHF<1HhuIlZRK"#c[Y=2V]'!;)V4Kg%;ZTECnQH\CKPmUl8s:d@BF<$U['iXUP#J0R*n97L=4r,J8Kj,OZA-e!1)*\F][^%a*Q"4NWaqG=37e8#,RS=sk?P4P,VBP+@:@@hlT"7b-ora.?n2B9X\Pf_E7pTkD-1gKA:aMpnoPXD6#qcanEK5"BT1tiTBjbOPd7!a%`Ea3[[#\\r:sXhSu=MHIZr67.BB;e1ftob("!)<Y"u<Igi=75a]+VK:((5Rc`1(H>Rn.fnD7nR5j2E2*6kiYXpS,I#Q;`CkXKj-;"Sd5/<rh!Kc^A.3<&WNIDYbN!Ck:qDGER._h29[P.3GlGf.'-Xe1]k+3rcNGM8UieAb>g4I%JH#b!qE(:'[M&/2"rP*51I"H+'E)qN)`OAh98gVco;'/[m7Q*UUi+E<#VZ(7>XEos#?2]53iWc,LM\LT+D!1DL'<U%ZQ,g_:S;jd`dgH$KfQZZ:q6C)A%ar<9'jBPc6Z./-[!J--*?c2@<"f`sA]/4_XhpF6b2>l6Gi+`=("==*O!*npLK7g]\i=1m)F1@-FkS'6a'@g6^LS-PheVr#[K;,r@5D/:<+(P<U5o@(jJSq7:CYGp*8/a2DWn'Sm3Q;2'+%94_iL>F1^3Q9k3[HuM-U:4jTg"$i!SM.e+id5$CP<oHH>ouMGBVb."">-8BYM:-ls*H+6+Ih9XIaD-3VQqFX\/'Iq/60DMk0Vfn:*DCW8mC%;qYkh/&Z$:b<ab1E$;=k0+j'dj$j0f&LRK@+YegNT#]2C)mrha_%3ia;9\@(T+dK$/C-urqJfp87aQ]*TXgAuc<2f>39lBfBJbpG)U24tDAQKn000NVk\Ji:)>m`:YjmQ$,_elrm5ioC8HTG]81/d[Di%6;+^0)b"=\VO(%R$C@"rReKFR0KbHM2$FAL6T#R`Ym(NoC`>',^JS0;f04!$b3;J5["mJO1`.7R69S:_^P>'gg6S[Nf_QA^@:h`&aOO#(-c,#acaBmq"JP@2teDo_MXo33nko@l9g[@-/2^tfseqTh;h^.&%bYDdC$Z@]BZ'9EW.%&'7OqWmrZLQgEcR1c;$U1(qQNujncoPLYi0=Gf7eF#`K2L85)=)sab/eU3>h9aMB-]LXpK&L<m!i'2+[V`9icX8o:Rr9"'41AtZVa'<bB.,3Z;PAb/<bZV&m>J\*57np!eo`J=J?fMP?i9cZH)T')&&^/\peULh?<2T+=oHio]`8F3R*+6cf;FokUSa[hf3Nb%MOArLqLM1ML*,$"\tIB#O04H0C<`WRWmF;jC%r`X8Q5te^^R+2R[S_(.bp$VhYp9h'2U!/iUtNPi"q?d^"iEkTT4*l?cMO[4:rrZq/@1&`(`0`:&7[2C"o?DW&]s9@nKQ\*,e@!hW2[3C!hanIJ)lG%I:$SkD-e7LZ<A.j-.Q>`2nlfe#T]1*k`8']ikr5XF;Yefp/O[`SGM_O+h-/q>:Mq_-BTL&i(<E3QfU+1*^d?-YkYHmiRI.h4uGpDXJKBS&gP(UXefg?e'q&F9^4_6oUo8*]bODEJ'OePN5@qJtN\c])]G&CS'8lAI_rmeI)e+!(pI"o<"fZ#_YDD#lP`Grc#@/F!ZDfEqRjk4UT6sQ0OX3c0186:"G)-2u/p?O.K*rCi.=,`W\&\Pc2cl,$/"=$0a]S$fH>!IFMbm]lB8-Xj=5,pb\R*.5c_)q!XCb]ed]0EdSso&br%97WBq7k,KPl0l\rN,+D$Ah)ilp]:TlU5ofn>EH2!T\[XJ.F+BV`U9?QkHTFMI<VsLb>-TQeNk*Wc]S7p(]fGGXO)/.LTa=FJFE==dV3r8RM47(-:bb:3Y;K[:BB15h)TGQcCCpDlfm;)Z@sufIKmp41%D57Lglo[MbLPaa;(l#JG<__#1St7=r+[N_C70si=]Sa`E*qC$Sp4V=LV/6Ip3-F)o&::u.'4Dr0><9K6a9UR:Ok"0QWc;f[e=TXdq(QkA-mj9IJh)*/60-&$q\^HIANO'Ptmi!D2okjpAIoC&f4C^O$i?uZm$NH6^G>o1m5CsKN<*9U-gG6.=)`RDn^:m]:=lm23bL;Im`+NhM;Vo;b$5ti=!;=-^<08TZo@^EJ^[@c0:@-@e.inGl_Q[=CI60(9,(lgGJ>M)gT:`PMF,8D?-=NmZ%Q:p]!6>,Hbj,#+YkIN7AEI[H^P?YB]Se^D/H2~>endstream
+/Border [ 0 0 0 ]
+/Rect [ 196.9734 743.3 268.2923 753.3 ]
+/Subtype /Link
+/Type /Annot
+>>
 endobj
 11 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2325
+/A <<
+/S /URI
+/Type /Action
+/URI (https\072\057\057www\056sivakumarravi\056com)
+>>
+/Border [ 0 0 0 ]
+/Rect [ 274.3715 743.3 354.6676 753.3 ]
+/Subtype /Link
+/Type /Annot
+>>
+endobj
+12 0 obj
+<<
+/A <<
+/S /URI
+/Type /Action
+/URI (https\072\057\057linkedin\056com\057in\057sivakumar\055ravi)
+>>
+/Border [ 0 0 0 ]
+/Rect [ 360.7468 743.3 460.5097 753.3 ]
+/Subtype /Link
+/Type /Annot
+>>
+endobj
+13 0 obj
+<<
+/Contents 14 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/Font 15 0 R
+/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Parent 2 0 R
+>>
+endobj
+14 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ]
+/Length 2325
 >>
 stream
-Gau0Dhfmd6)L]q=n\+:RmK&4@:%sL-9SSsI_?R<:4XVo"(:G.9njmdLs8?9G2?D6"4^EA[:2-sal/(moITLdD_&q#%m3b:D<qPfmO1[*I2WXPcI9M&pX4>1](LB,-5Ah"Ea`'SAnYA;hp$irl[QFGZf,IT!h]HtF'5A&hh>i1-G_%<Wr@40n_$XK=3c9YSS\O^LeUM:QGPg^VCpeX`X3\0LVd8rPq"*$i8+#/^i;mdMjO[IWE-H_m\eu.G:WDd>DqN$Y@TpK,rM]TUrUK$T(q*dfg4G^E0/h>R3dB,#nYniibT`>WMU=f#4/1uP2:YlD_ZRK4CCtWVAf3`g0"Da+aqakCQi)]\1?7ZYD%.ukLK(ptNC+O*hA`hK73+K/[mp[WGjn0I.Q8"PG"t?6SU`184:PI`[d`5[AGJ8%3l1l*a@J&uVe[_K?sCQc7nY'ArtkLA;EQi,N^QKg/2^`f>T8f[G+&bQK0:q$ZSgUZ>`9AO.,eCI1cH[=P\[FD]*:,un,1[_a@0oA7UdOVBY-d*B:2`=i=6iK[$Bor'?b6V@a7qf+`8O-\:)b;.C$:HC(4ts2o:@umYGC&Mg%Yc/1/:,UNTu[mmVN=dQL$ko,p`2Hs%Q#AAEVeKhO@99c,;@>%<@rE?2&?hkQq&?SZc9[0j48D"9Q_=DYL^o4.ckI$sgn1JPI\j5'[H"OOMg_iY:S(`k/=J>QJkcbaN[]\:L7+Mk/A[BT%0nC?\h\CgUPqgufB(_4sVJWRjEs&k!]UR@(;U?_Ouc9i<1q[`[FfK[-^B=9RW@r\a):@#rV:kKBV<Zj(.1UL2E\@+ntRIXog'?0%O(V[eY'f0P2K]7I>"JoH>)V>FfVb]Y$e7m]8aCC?gPW?(#Hjp$a>'_]X+5(Ra>SRe9.f;qo&#Z!;l5967kGRi""Z%.][a9NC'Wcm:SFs9H&SV9if$<W<@cs"l]SFL,m[G102#!g6g"To5i@NBZ5_2@A@6_m/$3/k'=SdX+U"L^&q6DD0%n#ZtehcZ_6)d7X;J7Fa.q^T>?>^n*V0kqMilq4!H'[dkn^-V$^fG#\4D7D7k<QnLi7MP5UQ(F.`?`7@XY/?=Q+R*m/X/qSbE%AW81_sR=ZgY%4E@%HQa#D!?4A;D.3ki5Dd$2DY[cE.;d8kQo[KOL0GtkWom`m?j_saO+)>Df_5)DhlHZ!'#/e:KoLE-[:<iK:<a1e0^,],.A)9:\<[I1Q"tc&JE/=#]rf9r(9q%tVH;[^`Wo+qQ]5qSV(t@HBHp>2I@9FVE:FPd'0fW%_gt*V5(hn.o'2?'u3l<\W-fad=df+i;37+'1_<QgqIe85MHPd8n:XOAD6hD()8#mhaU&"OK!eVo9IV=+t9s4r<J)Y7u(QA%Hj&+DgoGg6QqVa$I@YV8l"mF8r?CM&C3u8,D3=FbROiUctNNjS5HU5^[r^kF'pSGSi"q,\g2J,Qrh:gqh'*U^*2&k0TD/t+rb7$";Cs5UZaEqUQFL'Z]cQjRtAsLaXIhI.pfNK3ea<MR4"%S:+i:"O/TkfroFo"oqrO8cm:PQ&Lg&%74,-1]2.k+?Sn-+BLR,n@/c#(I!%%PFiIqb4ji!.Ps#9!?J\MTAR_bmk[3D)'5n"'-eNaL8[hZ[e8l5(l)DGP\RihT0GJU/FJkOD0a0hhQ_oFe^feCZhQgR0\?=-rZfl"Y\EH_"0K5P!sl5J2uI>S[eWidJE]Y.L%n.-oKpBql<c]sAfjb<aCCC#.!7E-->oajK=7Z78LSj=-fgUYG<n(c]Is\5(cGpNf%:fSB0#H]Q?nT[QhYMJoc4[MOggLCW-tqb`7?&]1#L;C$&?/kHgkB2mmWf#$Y\?b6^e+/hMVYNlttnS*;n\V,[l?-R8jJ"P=,W7Up/nY8&B\iY59S`W!AH(,ai?ieio(L4MT@Dh8Mb>a"<gb,J,=2OZaNM-$hGpuk(UMctkHso<3U4n&S2r85*6l;V7;^>;0/"?k-Y@tR$b3jUP^[hsmS4ZW/D+,i]g0"&"1F!Nm+KK#o7P<:;.cIXLo(J_&Xr.r`dUm$:lTiP"5L.nO2*u+tFI4Cjs0,<'rlJm0?Yq*XXu$<U7;Ib-`iBdq'J8&<f@&/8Imu@c!sP^NLjHSHi(=]oT5/u5KbqTh16T16HquFI&aiE`B?k>VXb1UI4tFW%DB(4ZQ"ZOFQA^I`gPi+;,g-Zs`dA_.CdC(j!0jJW93JIU5:_>2R`_NPA1s1\oB_U@B$3O0=%`6kA&'bAIq7Kpr>&9\FL?g-[>]/g`P^Fk#^W&Jlg2l5l>DkfDf7,APo-);NN5Jhj3[Zb-UCuVD-]!flV2Am3!DP`rr_/=;]G~>endstream
+Gau0Dhfmd6)L]q=n\+:RmK&4@:%sL-9SSsI_?R<:4XVo"(:G.9njmdLs8?9G2?D6"4^EA[:2-sal/(moITLdD_&q#%m3b:D<qPfmO1[*I2WXPcI9M&pX4>1](LB,-5Ah"Ea`'SAnYA;hp$irl[QFGZf,IT!h]HtF'5A&hh>i1-G_%<Wr@40n_$XK=3c9YSS\O^LeUM:QGPg^VCpeX`X3\0LVd8rPq"*$i8+#/^i;mdMjO[IWE-H_m\eu.G:WDd>DqN$Y@TpK,rM]TUrUK$T(q*dfg4G^E0/h>R3dB,#nYniibT`>WMU=f#4/1uP2:YlD_ZRK4CCtWVAf3`g0"Da+aqakCQi)]\1?7ZYD%.ukLK(ptNC+O*hA`hK73+K/[mp[WGjn0I.Q8"PG"t?6SU`184:PI`[d`5[AGJ8%3l1l*a@J&uVe[_K?sCQc7nY'ArtkLA;EQi,N^QKg/2^`f>T8f[G+&bQK0:q$ZSgUZ>`9AO.,eCI1cH[=P\[FD]*:,un,1[_a@0oA7UdOVBY-d*B:2`=i=6iK[$Bor'?b6V@a7qf+`8O-\:)b;.C$:HC(4ts2o:@umYGC&Mg%Yc/1/:,UNTu[mmVN=dQL$ko,p`2Hs%Q#AAEVeKhO@99c,;@>%<@rE?2&?hkQq&?SZc9[0j48D"9Q_=DYL^o4.ckI$sgn1JPI\j5'[H"OOMg_iY:S(`k/=J>QJkcbaN[]\:L7+Mk/A[BT%0nC?\h\CgUPqgufB(_4sVJWRjEs&k!]UR@(;U?_Ouc9i<1q[`[FfK[-^B=9RW@r\a):@#rV:kKBV<Zj(.1UL2E\@+ntRIXog'?0%O(V[eY'f0P2K]7I>"JoH>)V>FfVb]Y$e7m]8aCC?gPW?(#Hjp$a>'_]X+5(Ra>SRe9.f;qo&#Z!;l5967kGRi""Z%.][a9NC'Wcm:SFs9H&SV9if$<W<@cs"l]SFL,m[G102#!g6g"To5i@NBZ5_2@A@6_m/$3/k'=SdX+U"L^&q6DD0%n#ZtehcZ_6)d7X;J7Fa.q^T>?>^n*V0kqMilq4!H'[dkn^-V$^fG#\4D7D7k<QnLi7MP5UQ(F.`?`7@XY/?=Q+R*m/X/qSbE%AW81_sR=ZgY%4E@%HQa#D!?4A;D.3ki5Dd$2DY[cE.;d8kQo[KOL0GtkWom`m?j_saO+)>Df_5)DhlHZ!'#/e:KoLE-[:<iK:<a1e0^,],.A)9:\<[I1Q"tc&JE/=#]rf9r(9q%tVH;[^`Wo+qQ]5qSV(t@HBHp>2I@9FVE:FPd'0fW%_gt*V5(hn.o'2?'u3l<\W-fad=df+i;37+'1_<QgqIe85MHPd8n:XOAD6hD()8#mhaU&"OK!eVo9IV=+t9s4r<J)Y7u(QA%Hj&+DgoGg6QqVa$I@YV8l"mF8r?CM&C3u8,D3=FbROiUctNNjS5HU5^[r^kF'pSGSi"q,\g2J,Qrh:gqh'*U^*2&k0TD/t+rb7$";Cs5UZaEqUQFL'Z]cQjRtAsLaXIhI.pfNK3ea<MR4"%S:+i:"O/TkfroFo"oqrO8cm:PQ&Lg&%74,-1]2.k+?Sn-+BLR,n@/c#(I!%%PFiIqb4ji!.Ps#9!?J\MTAR_bmk[3D)'5n"'-eNaL8[hZ[e8l5(l)DGP\RihT0GJU/FJkOD0a0hhQ_oFe^feCZhQgR0\?=-rZfl"Y\EH_"0K5P!sl5J2uI>S[eWidJE]Y.L%n.-oKpBql<c]sAfjb<aCCC#.!7E-->oajK=7Z78LSj=-fgUYG<n(c]Is\5(cGpNf%:fSB0#H]Q?nT[QhYMJoc4[MOggLCW-tqb`7?&]1#L;C$&?/kHgkB2mmWf#$Y\?b6^e+/hMVYNlttnS*;n\V,[l?-R8jJ"P=,W7Up/nY8&B\iY59S`W!AH(,ai?ieio(L4MT@Dh8Mb>a"<gb,J,=2OZaNM-$hGpuk(UMctkHso<3U4n&S2r85*6l;V7;^>;0/"?k-Y@tR$b3jUP^[hsmS4ZW/D+,i]g0"&"1F!Nm+KK#o7P<:;.cIXLo(J_&Xr.r`dUm$:lTiP"5L.nO2*u+tFI4Cjs0,<'rlJm0?Yq*XXu$<U7;Ib-`iBdq'J8&<f@&/8Imu@c!sP^NLjHSHi(=]oT5/u5KbqTh16T16HquFI&aiE`B?k>VXb1UI4tFW%DB(4ZQ"ZOFQA^I`gPi+;,g-Zs`dA_.CdC(j!0jJW93JIU5:_>2R`_NPA1s1\oB_U@B$3O0=%`6kA&'bAIq7Kpr>&9\FL?g-[>]/g`P^Fk#^W&Jlg2l5l>DkfDf7,APo-);NN5Jhj3[Zb-UCuVD-]!flV2Am3!DP`rr_/=;]G~>
+endstream
+endobj
+15 0 obj
+<<
+/F1 6 0 R
+/F2 8 0 R
+/F3 9 0 R
+>>
 endobj
 xref
-0 12
+0 16
 0000000000 65535 f 
-0000000061 00000 n 
-0000000112 00000 n 
-0000000219 00000 n 
-0000000331 00000 n 
-0000000446 00000 n 
-0000000650 00000 n 
-0000000854 00000 n 
-0000000922 00000 n 
-0000001202 00000 n 
-0000001267 00000 n 
-0000005161 00000 n 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000120 00000 n 
+0000000169 00000 n 
+0000000443 00000 n 
+0000009810 00000 n 
+0000009917 00000 n 
+0000010024 00000 n 
+0000010136 00000 n 
+0000010251 00000 n 
+0000010432 00000 n 
+0000010623 00000 n 
+0000010829 00000 n 
+0000011031 00000 n 
+0000013449 00000 n 
 trailer
 <<
-/ID 
-[<d7effb086fc39a7b0b3a32b4fef2cac3><d7effb086fc39a7b0b3a32b4fef2cac3>]
-% ReportLab generated PDF document -- digest (opensource)
-
-/Info 8 0 R
-/Root 7 0 R
-/Size 12
+/Size 16
+/Root 3 0 R
+/Info 1 0 R
 >>
 startxref
-7578
+13501
 %%EOF
