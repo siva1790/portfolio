@@ -216,20 +216,20 @@
       <div>
         <div class="copy">
           <p class="eyebrow">Reframing the product</p>
-          <h2>The redesign positioned Captivate as a shared visit workspace.</h2>
-          <p>The redesign needed to support the lifecycle before, during and after submission. I used three principles to maintain this direction across screens.</p>
+          <h2>The redesign positioned Captivate as a shared role-based coordination platform.</h2>
+          <p>The redesign needed to support the lifecycle before, during and after submission. Instead of splitting requester and admin work into separate tools, I framed Captivate as one shared visit record with role-specific workspaces for requesters, coordinators, service owners and admins.</p>
         </div>
         <div class="principles">
           <article class="principle"><span>PRINCIPLE 01</span><h3>Ask for the right detail at the right time.</h3><p>Make early submission possible, then use clear deadlines and readiness indicators for information that can follow.</p></article>
           <article class="principle"><span>PRINCIPLE 02</span><h3>Organize the interface like the visit itself.</h3><p>Keep locations, sessions, attendees and services connected so users can understand dependencies without a scoping call.</p></article>
           <article class="principle"><span>PRINCIPLE 03</span><h3>Make ownership and consequence visible.</h3><p>Every action should explain what was sent, who is reviewing it and whether a change affects confirmation.</p></article>
         </div>
-        <blockquote class="quote"><p>The new model separates information readiness, service confirmation and actual visit status, so progress is tied to the work happening behind the scenes.</p></blockquote>
+        <blockquote class="quote"><p>The new model separates information readiness, service confirmation and actual visit status, while giving each role the actions and visibility they need from the same source of truth.</p></blockquote>
         <figure class="blueprint-figure">
           <div class="copy">
             <p class="eyebrow">Proposed operating model</p>
             <h3>Future-state service blueprint hypothesis</h3>
-            <p>I used the research findings and proposed interaction model to show how the redesigned service could operate across requesters, Captivate, coordinators, service teams and supporting systems.</p>
+            <p>I used the research findings and proposed interaction model to show how the redesigned service could operate across requesters, Captivate, coordinators, service teams, admins and supporting systems.</p>
           </div>
           <div class="blueprint-disclosure">
             <h4>How to interpret this blueprint</h4>
@@ -241,17 +241,17 @@
             </ul>
           </div>
           <div class="blueprint-frame">
-            <a href="captivate-assets/captivate-service-blueprint.svg" target="_blank" rel="noopener">
-              <img src="captivate-assets/captivate-service-blueprint.svg" alt="Future-state Captivate service blueprint hypothesis showing six lifecycle phases, requester actions, frontstage interactions, backstage operations, systems, risks, opportunities and measures">
+            <a href="captivate-assets/captivate-service-blueprint.svg?v=role-workspaces-v4" target="_blank" rel="noopener">
+              <img src="captivate-assets/captivate-service-blueprint.svg?v=role-workspaces-v4" alt="Future-state Captivate service blueprint showing six visit coordination phases across requester, coordinator, service owner, admin, system and measurement lanes">
             </a>
           </div>
           <figcaption>Scroll horizontally to review the detailed blueprint, or select it to open the full-resolution version. Confidence tags distinguish research-backed, inferred, proposed and validation-needed content.</figcaption>
         </figure>
         <figure class="architecture-figure">
-          <div class="copy"><h3>Information architecture and omnichannel interaction model</h3><p>The architecture connects the visible navigation to the underlying visit hierarchy and shows how actions move between requesters, coordinators, service teams and supporting channels.</p></div>
+          <div class="copy"><h3>Information architecture and omnichannel interaction model</h3><p>The architecture connects the visible navigation to the underlying visit hierarchy and shows how actions move between requesters, coordinators, service teams, admins and supporting channels.</p></div>
           <div class="architecture-frame">
-            <a href="captivate-assets/captivate-information-architecture.svg" target="_blank" rel="noopener">
-              <img src="captivate-assets/captivate-information-architecture.svg" alt="Captivate information architecture showing actors and channels, global navigation, the shared visit workspace, Visit to Location to Session to Service data hierarchy, and the service confirmation lifecycle">
+            <a href="captivate-assets/captivate-information-architecture.svg?v=role-workspaces-v3" target="_blank" rel="noopener">
+              <img src="captivate-assets/captivate-information-architecture.svg?v=role-workspaces-v3" alt="Captivate information architecture showing one shared visit record connected to role-based workspaces for requesters, coordinators, service owners and admins">
             </a>
           </div>
           <figcaption>Select the diagram to open the full-resolution version. Solid green paths show primary workflow; dashed paths show feedback, notifications and change loops.</figcaption>
@@ -302,6 +302,11 @@
           <div class="decision"><div><small>Evidence</small><p>Users needed inspiration and clarification without leaving the planning flow.</p></div><div><small>Design decision</small><p>Connect learning content directly to visit and session actions.</p></div><div><small>Expected effect</small><p>Reduce broad consultations while preserving support for genuinely complex visits.</p></div></div>
         </div>
 
+        <div class="solution-block">
+          <div class="solution-head"><span class="solution-number">8</span><div><h3>Role-based workspaces inside the same Captivate platform</h3><p>A role switcher in the prototype shows how requesters, coordinators, service owners and admins can use the same visit record while seeing different queues, actions and summaries.</p></div></div>
+          <div class="decision"><div><small>Evidence</small><p>Coordinators and service owners needed a reliable summary instead of monitoring requests through disconnected updates.</p></div><div><small>Design decision</small><p>Keep admin work inside Captivate with role-specific dashboards for assignment, SLA risk, service queues, workload and improvement priorities.</p></div><div><small>Expected effect</small><p>Create one operational source of truth and reduce fragmentation between requester, admin and service-team workflows.</p></div></div>
+        </div>
+
         <div class="subsection">
           <div class="copy"><h3>Research-to-design traceability</h3><p>The table below captures the central logic of the redesign.</p></div>
           <div class="mapping-table">
@@ -311,6 +316,7 @@
             <div class="mapping-row"><div><p>Pax varies by room, meal and activity.</p></div><div><p>Capture the correct quantity for each service.</p></div><div><p>Session assignments and service-specific attendee counts.</p></div></div>
             <div class="mapping-row"><div><p>Scoping calls compensate for missing structured detail.</p></div><div><p>Ask precise follow-up questions asynchronously.</p></div><div><p>Conditional forms, rationale text and visit conversations.</p></div></div>
             <div class="mapping-row"><div><p>Updates occur outside the tool.</p></div><div><p>See one reliable, shared status.</p></div><div><p>Activity history, service owners, questions and independent statuses.</p></div></div>
+            <div class="mapping-row"><div><p>Admins and service owners lacked a shared operational summary.</p></div><div><p>Coordinate work without creating a disconnected admin experience.</p></div><div><p>Role-based Captivate workspaces for requester, coordinator, service owner and admin views.</p></div></div>
             <div class="mapping-row"><div><p>Dates, venues and catering change after submission.</p></div><div><p>Edit without restarting the entire request.</p></div><div><p>Persistent workspace and targeted service revalidation.</p></div></div>
           </div>
         </div>
@@ -322,7 +328,7 @@
     <div class="container section-label">
       <div class="section-index">06 · Prototype</div>
       <div>
-        <div class="copy"><p class="eyebrow">Clickable experience</p><h2>The prototype covers the requester journey from discovery to service confirmation.</h2><p>It includes the visit dashboard, preliminary support request, workspace, attendee management, location and session planning, conditional services, final review, Service Library and Help centre.</p></div>
+        <div class="copy"><p class="eyebrow">Clickable experience</p><h2>The prototype demonstrates a shared platform with role-based workspaces.</h2><p>It includes the requester journey from discovery to service confirmation, plus a role switcher that reveals coordinator, service-owner and admin workspaces inside the same Captivate shell. These views show assignment, SLA risk, service queues, dependency checks, reporting and the six improvement priorities for the next iteration.</p></div>
         <div class="prototype">
           <div class="prototype-window">
             <iframe src="captivate-design.html?embedded=1" title="Captivate clickable prototype"></iframe>
@@ -340,22 +346,23 @@
       <div>
         <div class="copy">
           <p class="eyebrow">What changed</p>
-          <h2>The redesign converted operational ambiguity into visible structure, ownership and next actions.</h2>
+          <h2>The redesign converted operational ambiguity into shared structure, role-specific ownership and next actions.</h2>
           <p>The current outcome is a detailed interaction model and clickable prototype. Because the product has not yet been measured in production, I frame impact as design improvements and testable hypotheses rather than claiming unverified business results.</p>
         </div>
         <div class="outcome-grid">
           <article class="outcome"><strong>Progressive planning</strong><p>Requesters can begin with known details and complete the visit plan as information becomes available.</p></article>
-          <article class="outcome"><strong>Shared status and ownership</strong><p>The visit workspace brings service progress, responsibilities and next actions into one place.</p></article>
+          <article class="outcome"><strong>Shared status and ownership</strong><p>The visit workspace brings service progress, responsibilities and next actions into one place across requester and admin roles.</p></article>
           <article class="outcome"><strong>More focused follow-up</strong><p>Contextual questions and structured service details reduce the need for broad scoping conversations.</p></article>
         </div>
         <div class="next-steps">
           <h3>Next steps</h3>
           <ul>
             <li>Run task-based usability testing with requesters planning both single-location and multi-city visits.</li>
-            <li>Test whether service teams receive enough information to avoid a scoping call.</li>
+            <li>Validate coordinator assignment rules, SLA thresholds and escalation responsibilities.</li>
+            <li>Test whether service-owner queues provide enough information to confirm, ask a focused question or decline support without a broad scoping call.</li>
             <li>Validate terminology such as preliminary support, service confirmation and visit status.</li>
-            <li>Measure completion quality, clarification volume, time to first service response and status-related follow-up.</li>
-            <li>Define the integration boundary between Captivate and the backend admin tool before engineering handoff.</li>
+            <li>Prototype and test change-impact handling so date, venue, attendee and catering edits reopen only affected services.</li>
+            <li>Define reporting metrics for completion quality, clarification volume, workload, time to first service response and status-related follow-up.</li>
           </ul>
         </div>
       </div>

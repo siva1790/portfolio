@@ -1,206 +1,195 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1840" viewBox="0 0 2200 1840" role="img" aria-labelledby="title desc">
-  <title id="title">Captivate future-state service blueprint hypothesis</title>
-  <desc id="desc">A proposed future-state service blueprint informed by stakeholder walkthroughs and product research. Backstage operations, systems, ownership and measures require further validation.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1680" viewBox="0 0 2400 1680" role="img" aria-labelledby="title desc">
+  <title id="title">Captivate role-based service blueprint</title>
+  <desc id="desc">A future-state service blueprint for Captivate showing six visit coordination phases across requester, coordinator, service owner, admin, system and measurement lanes.</desc>
   <defs>
     <style>
-      .bg{fill:#f7f5f2}.ink{fill:#17211b}.muted{fill:#5f6962}.green{fill:#167d45}.line{stroke:#d8ddd9;stroke-width:2}.lane{fill:#fff;stroke:#d8ddd9;stroke-width:2}.phaseA,.phaseC,.phaseE{fill:#eef0ed}.phaseB,.phaseD,.phaseF{fill:#f5f3ef}.label{font:700 14px Arial,sans-serif;letter-spacing:2px;fill:#167d45}.title{font:700 36px Georgia,serif;fill:#17211b}.subtitle{font:16px Arial,sans-serif;fill:#5f6962}.phaseNo{font:700 13px Arial,sans-serif;letter-spacing:1px;fill:#167d45}.phaseTitle{font:700 20px Georgia,serif;fill:#17211b}.phaseMeta{font:13px Arial,sans-serif;fill:#5f6962}.laneTitle{font:700 16px Arial,sans-serif;fill:#17211b}.laneMeta{font:12px Arial,sans-serif;fill:#647067}.cellTitle{font:700 14px Arial,sans-serif;fill:#17211b}.cellText{font:12.5px Arial,sans-serif;fill:#526058}.cellSmall{font:11.5px Arial,sans-serif;fill:#647067}.statusText{font:700 9.5px Arial,sans-serif;letter-spacing:.35px;fill:#17211b}.white{fill:#fff}.center{text-anchor:middle}.interaction{stroke:#167d45;stroke-width:3;stroke-dasharray:10 7}.visibility{stroke:#2765a8;stroke-width:3;stroke-dasharray:10 7}.internal{stroke:#a86000;stroke-width:3;stroke-dasharray:10 7}.chip{fill:#e8f5ed;stroke:#b9d0c0;stroke-width:1.5}.risk{fill:#fff0ef;stroke:#e2b7b3;stroke-width:1.5}.opp{fill:#edf4fc;stroke:#b8cee5;stroke-width:1.5}.metric{fill:#17211b}.icon{font:700 13px Arial,sans-serif}.arrow{fill:#167d45}
+      .bg{fill:#f7f5f2}.ink{fill:#17211b}.muted{fill:#5f6962}.green{fill:#167d45}.greenSoft{fill:#f7fbf8;stroke:#d9e6dd;stroke-width:2}.blueSoft{fill:#f7fafc;stroke:#d9e3ee;stroke-width:2}.amberSoft{fill:#fffaf0;stroke:#eadfbd;stroke-width:2}.redSoft{fill:#fff8f7;stroke:#ead8d5;stroke-width:2}.panel{fill:#fff;stroke:#d9ddd9;stroke-width:2}.lane{fill:#f2f5f1;stroke:#d9ddd9;stroke-width:2}.laneAlt{fill:#f5f7f4;stroke:#d9ddd9;stroke-width:2}.phase{fill:#f5f8f5;stroke:#d9ddd9;stroke-width:2}.phaseAlt{fill:#fbfbf8;stroke:#d9ddd9;stroke-width:2}.system{fill:#f8fafb;stroke:#dbe2e8;stroke-width:2}.measure{fill:#f8fbf7;stroke:#dce8dd;stroke-width:2}.h1{font:700 38px Arial,sans-serif;fill:#17211b}.h2{font:700 21px Arial,sans-serif;fill:#17211b}.h3{font:700 16px Arial,sans-serif;fill:#17211b}.label{font:700 14px Arial,sans-serif;letter-spacing:2px;fill:#167d45}.labelLight{font:700 14px Arial,sans-serif;letter-spacing:1.5px;fill:#167d45}.laneText{font:700 17px Arial,sans-serif;fill:#17211b}.body{font:15px Arial,sans-serif;fill:#526058}.small{font:13px Arial,sans-serif;fill:#647067}.tiny{font:12px Arial,sans-serif;fill:#647067}.white{fill:#647067}.center{text-anchor:middle}.flow{fill:none;stroke:#167d45;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.flowBlue{fill:none;stroke:#2765a8;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}.flowAmber{fill:none;stroke:#a86000;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}.dash{stroke-dasharray:10 8}.thin{fill:none;stroke:#a9b6ad;stroke-width:2}.chip{fill:#eef3ef;stroke:#c8d6cd;stroke-width:1.5}.shadow{filter:url(#shadow)}
     </style>
-    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" class="arrow"/></marker>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#17211b" flood-opacity=".08"/></filter>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L10 5L0 10Z" fill="#167d45"/></marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L10 5L0 10Z" fill="#2765a8"/></marker>
+    <marker id="arrowAmber" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L10 5L0 10Z" fill="#a86000"/></marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#17211b" flood-opacity=".08"/></filter>
   </defs>
 
-  <rect width="2200" height="1840" class="bg"/>
-  <text x="54" y="56" class="label">CAPTIVATE · FUTURE-STATE SERVICE BLUEPRINT HYPOTHESIS</text>
-  <text x="54" y="103" class="title">From early visit intent to coordinated service delivery and change recovery</text>
-  <text x="54" y="135" class="subtitle">Research-informed proposal. Backstage processes, ownership, integrations and measures require validation.</text>
+  <rect width="2400" height="1680" class="bg"/>
+  <text x="72" y="66" class="label">CAPTIVATE - SERVICE BLUEPRINT</text>
+  <text x="72" y="116" class="h1">Shared role-based coordination from request to closeout</text>
+  <text x="72" y="152" class="body">The same Captivate tool supports requesters, coordinators, service owners and admins through role-specific workspaces on one shared visit record.</text>
 
-  <!-- Legend -->
-  <g transform="translate(1490 38)">
-    <rect width="650" height="122" rx="18" class="lane"/>
-    <text x="24" y="28" class="cellTitle">Blueprint boundaries</text>
-    <line x1="24" y1="50" x2="92" y2="50" class="interaction"/><text x="105" y="55" class="cellSmall">Line of interaction</text>
-    <line x1="250" y1="50" x2="318" y2="50" class="visibility"/><text x="331" y="55" class="cellSmall">Line of visibility</text>
-    <line x1="465" y1="50" x2="533" y2="50" class="internal"/><text x="546" y="55" class="cellSmall">Internal handoff</text>
-    <text x="24" y="82" class="cellSmall">Evidence status</text>
-    <rect x="112" y="68" width="130" height="24" rx="12" fill="#e8f5ed" stroke="#9dc4aa"/><text x="177" y="84" class="statusText center">RESEARCH-BACKED</text>
-    <rect x="252" y="68" width="82" height="24" rx="12" fill="#fff4dc" stroke="#e6c985"/><text x="293" y="84" class="statusText center">INFERRED</text>
-    <rect x="344" y="68" width="88" height="24" rx="12" fill="#edf4fc" stroke="#b8cee5"/><text x="388" y="84" class="statusText center">PROPOSED</text>
-    <rect x="442" y="68" width="100" height="24" rx="12" fill="#fff0ef" stroke="#e2b7b3"/><text x="492" y="84" class="statusText center">TO VALIDATE</text>
-    <text x="24" y="108" class="cellSmall">Status tags in the left lane identify the confidence level of each row.</text>
-  </g>
-
-  <!-- Dimensions -->
-  <!-- left label width 250; phase width 315 -->
-  <g transform="translate(54 172)">
-    <rect width="2090" height="124" rx="20" fill="#17211b"/>
-    <text x="26" y="38" class="label" fill="#c7f05b">SERVICE LIFECYCLE</text>
-    <text x="26" y="70" class="laneTitle white">Six connected phases</text>
-    <text x="26" y="92" class="laneMeta white">Information becomes more precise</text>
-    <text x="26" y="110" class="laneMeta white">over time.</text>
-
-    <g transform="translate(250)">
-      <rect width="300" height="124" class="phaseA"/><text x="22" y="30" class="phaseNo">01 · DISCOVER</text><text x="22" y="60" class="phaseTitle">Understand support</text><text x="22" y="84" class="phaseMeta">Explore services, lead times</text><text x="22" y="103" class="phaseMeta">and planning guidance</text>
-      <rect x="300" width="300" height="124" class="phaseB"/><text x="322" y="27" class="phaseNo">02 · INITIATE</text><text x="322" y="54" class="phaseTitle">Request preliminary</text><text x="322" y="76" class="phaseTitle">support</text><text x="322" y="98" class="phaseMeta">Share what is known now</text><text x="322" y="116" class="phaseMeta">and create a workspace</text>
-      <rect x="600" width="300" height="124" class="phaseC"/><text x="622" y="30" class="phaseNo">03 · PLAN</text><text x="622" y="60" class="phaseTitle">Enrich the visit</text><text x="622" y="84" class="phaseMeta">Add people, sessions and</text><text x="622" y="103" class="phaseMeta">service-specific details</text>
-      <rect x="900" width="300" height="124" class="phaseD"/><text x="922" y="30" class="phaseNo">04 · REVIEW</text><text x="922" y="60" class="phaseTitle">Clarify and assess</text><text x="922" y="84" class="phaseMeta">Route work, resolve questions</text><text x="922" y="103" class="phaseMeta">and evaluate availability</text>
-      <rect x="1200" width="300" height="124" class="phaseE"/><text x="1222" y="30" class="phaseNo">05 · CONFIRM &amp; DELIVER</text><text x="1222" y="60" class="phaseTitle">Coordinate the visit</text><text x="1222" y="84" class="phaseMeta">Confirm services, prepare</text><text x="1222" y="103" class="phaseMeta">and support execution</text>
-      <rect x="1500" width="340" height="124" class="phaseF"/><text x="1522" y="30" class="phaseNo">06 · CHANGE &amp; CLOSE</text><text x="1522" y="60" class="phaseTitle">Recover and learn</text><text x="1522" y="84" class="phaseMeta">Revalidate affected services,</text><text x="1522" y="103" class="phaseMeta">complete and retain history</text>
+  <g transform="translate(72 190)">
+    <rect x="0" y="0" width="2256" height="98" rx="20" class="panel"/>
+    <text x="26" y="35" class="label">PRIMARY HANDOFF FLOW</text>
+    <text x="26" y="66" class="small">Solid arrows show the core path; dashed arrows show clarification loops.</text>
+    <g transform="translate(470 24)">
+      <rect x="0" y="0" width="220" height="50" rx="14" class="greenSoft"/>
+      <text x="110" y="31" class="h3 center">Request starts</text>
+      <path d="M220 25H295" class="flow" marker-end="url(#arrowGreen)"/>
+      <rect x="300" y="0" width="238" height="50" rx="14" class="blueSoft"/>
+      <text x="419" y="31" class="h3 center">Coordinator triage</text>
+      <path d="M538 25H613" class="flow" marker-end="url(#arrowGreen)"/>
+      <rect x="618" y="0" width="238" height="50" rx="14" class="amberSoft"/>
+      <text x="737" y="31" class="h3 center">Owner review</text>
+      <path d="M856 25H931" class="flow dash" marker-end="url(#arrowGreen)"/>
+      <rect x="936" y="0" width="238" height="50" rx="14" class="greenSoft"/>
+      <text x="1055" y="31" class="h3 center">Requester answers</text>
+      <path d="M1174 25H1249" class="flow" marker-end="url(#arrowGreen)"/>
+      <rect x="1254" y="0" width="238" height="50" rx="14" class="measure"/>
+      <text x="1373" y="31" class="h3 center">Confirm and learn</text>
     </g>
   </g>
 
-  <!-- Lane backgrounds -->
-  <g transform="translate(54 316)">
-    <!-- Physical / digital evidence -->
-    <rect width="2090" height="142" class="lane"/>
-    <rect width="250" height="142" fill="#f0f1ef"/>
-    <text x="24" y="36" class="laneTitle">Evidence &amp; touchpoints</text>
-    <text x="24" y="60" class="laneMeta">What people see, receive</text><text x="24" y="79" class="laneMeta">or use across channels</text>
-    <rect x="24" y="99" width="130" height="22" rx="11" fill="#e8f5ed" stroke="#9dc4aa"/><text x="89" y="114" class="statusText center">RESEARCH-BACKED</text>
-    <g transform="translate(250)">
-      <text x="20" y="34" class="cellTitle">Service Library + Help</text><text x="20" y="58" class="cellText">Search, categories, location</text><text x="20" y="79" class="cellText">filters, lead times, policies</text><rect x="20" y="98" width="112" height="24" rx="12" class="chip"/><text x="76" y="115" class="cellSmall center">Web application</text>
-      <text x="320" y="34" class="cellTitle">Preliminary form</text><text x="320" y="58" class="cellText">Autosave, “required now”</text><text x="320" y="79" class="cellText">labels, confirmation message</text><rect x="320" y="98" width="125" height="24" rx="12" class="chip"/><text x="382" y="115" class="cellSmall center">Workspace created</text>
-      <text x="620" y="34" class="cellTitle">Shared visit workspace</text><text x="620" y="58" class="cellText">Attendee table, itinerary,</text><text x="620" y="79" class="cellText">service forms, readiness</text><rect x="620" y="98" width="146" height="24" rx="12" class="chip"/><text x="693" y="115" class="cellSmall center">Uploads + dashboard</text>
-      <text x="920" y="34" class="cellTitle">Questions + status</text><text x="920" y="58" class="cellText">Conversation, notifications,</text><text x="920" y="79" class="cellText">email and action prompts</text><rect x="920" y="98" width="135" height="24" rx="12" class="chip"/><text x="987" y="115" class="cellSmall center">Service-level state</text>
-      <text x="1220" y="34" class="cellTitle">Confirmation evidence</text><text x="1220" y="58" class="cellText">Owner, availability, response</text><text x="1220" y="79" class="cellText">deadline and final itinerary</text><rect x="1220" y="98" width="130" height="24" rx="12" class="chip"/><text x="1285" y="115" class="cellSmall center">Visit-ready plan</text>
-      <text x="1520" y="34" class="cellTitle">Change + history</text><text x="1520" y="58" class="cellText">Impact warning, reopened</text><text x="1520" y="79" class="cellText">services, completion record</text><rect x="1520" y="98" width="142" height="24" rx="12" class="chip"/><text x="1591" y="115" class="cellSmall center">Audit trail + history</text>
-    </g>
-
-    <!-- Customer actions -->
-    <rect y="142" width="2090" height="180" class="lane"/>
-    <rect y="142" width="250" height="180" fill="#f0f1ef"/>
-    <text x="24" y="180" class="laneTitle">Requester actions</text>
-    <text x="24" y="204" class="laneMeta">Visible customer journey</text>
-    <rect x="24" y="225" width="130" height="22" rx="11" fill="#e8f5ed" stroke="#9dc4aa"/><text x="89" y="240" class="statusText center">RESEARCH-BACKED</text>
-    <g transform="translate(250 142)">
-      <text x="20" y="35" class="cellTitle">Explore and compare</text><text x="20" y="62" class="cellText">• Understand available support</text><text x="20" y="85" class="cellText">• Check location and lead time</text><text x="20" y="108" class="cellText">• Decide whether help is needed</text><text x="20" y="139" class="cellSmall">Intent may begin 2 months–2 days out.</text>
-      <text x="320" y="35" class="cellTitle">Share preliminary intent</text><text x="320" y="62" class="cellText">• Enter purpose, sponsor, dates</text><text x="320" y="85" class="cellText">• Add offices and estimates</text><text x="320" y="108" class="cellText">• Select broad support categories</text><text x="320" y="139" class="cellSmall">Submit before every detail is known.</text>
-      <text x="620" y="35" class="cellTitle">Build the operational plan</text><text x="620" y="62" class="cellText">• Add/import attendees</text><text x="620" y="85" class="cellText">• Create locations and sessions</text><text x="620" y="108" class="cellText">• Configure service requirements</text><text x="620" y="139" class="cellSmall">Complete information progressively.</text>
-      <text x="920" y="35" class="cellTitle">Respond and refine</text><text x="920" y="62" class="cellText">• Answer focused questions</text><text x="920" y="85" class="cellText">• Correct missing information</text><text x="920" y="108" class="cellText">• Review independent statuses</text><text x="920" y="139" class="cellSmall">Avoid repeating context in calls/chat.</text>
-      <text x="1220" y="35" class="cellTitle">Track and participate</text><text x="1220" y="62" class="cellText">• Monitor confirmations</text><text x="1220" y="85" class="cellText">• Share final guest updates</text><text x="1220" y="108" class="cellText">• Follow the agreed itinerary</text><text x="1220" y="139" class="cellSmall">Use one current source of truth.</text>
-      <text x="1520" y="35" class="cellTitle">Edit, cancel or review</text><text x="1520" y="62" class="cellText">• Change date, venue or count</text><text x="1520" y="85" class="cellText">• See affected confirmations</text><text x="1520" y="108" class="cellText">• Review completed visit history</text><text x="1520" y="139" class="cellSmall">Only impacted services re-open.</text>
-    </g>
-
-    <line x1="250" y1="322" x2="2090" y2="322" class="interaction"/>
-
-    <!-- Frontstage platform -->
-    <rect y="322" width="2090" height="190" class="lane"/>
-    <rect y="322" width="250" height="190" fill="#f0f1ef"/>
-    <text x="24" y="362" class="laneTitle">Frontstage — Captivate</text>
-    <text x="24" y="386" class="laneMeta">Automated and interactive</text><text x="24" y="405" class="laneMeta">product behaviour</text>
-    <rect x="24" y="430" width="88" height="22" rx="11" fill="#edf4fc" stroke="#b8cee5"/><text x="68" y="445" class="statusText center">PROPOSED</text>
-    <g transform="translate(250 322)">
-      <text x="20" y="36" class="cellTitle">Explain before asking</text><text x="20" y="63" class="cellText">• Surface service scope</text><text x="20" y="86" class="cellText">• Show minimum lead times</text><text x="20" y="109" class="cellText">• Provide task-based help</text><text x="20" y="142" class="cellSmall">Contextual guidance reduces consultations.</text>
-      <text x="320" y="36" class="cellTitle">Create a provisional workspace</text><text x="320" y="63" class="cellText">• Autosave progress</text><text x="320" y="86" class="cellText">• Validate only required-now fields</text><text x="320" y="109" class="cellText">• State “services not confirmed”</text><text x="320" y="142" class="cellSmall">Route preliminary request to coordination.</text>
-      <text x="620" y="36" class="cellTitle">Structure dependencies</text><text x="620" y="63" class="cellText">• Visit → location → session → service</text><text x="620" y="86" class="cellText">• Recommend contextual services</text><text x="620" y="109" class="cellText">• Calculate counts and readiness</text><text x="620" y="142" class="cellSmall">Display next actions and due information.</text>
-      <text x="920" y="36" class="cellTitle">Route and communicate</text><text x="920" y="63" class="cellText">• Assign requests by service owner</text><text x="920" y="86" class="cellText">• Attach questions to service context</text><text x="920" y="109" class="cellText">• Notify by dashboard + email</text><text x="920" y="142" class="cellSmall">Track the 48-hour review expectation.</text>
-      <text x="1220" y="36" class="cellTitle">Expose independent progress</text><text x="1220" y="63" class="cellText">• Confirm each service separately</text><text x="1220" y="86" class="cellText">• Roll up visit readiness</text><text x="1220" y="109" class="cellText">• Keep activity and ownership visible</text><text x="1220" y="142" class="cellSmall">Distinguish readiness from visit status.</text>
-      <text x="1520" y="36" class="cellTitle">Assess change impact</text><text x="1520" y="63" class="cellText">• Detect affected sessions/services</text><text x="1520" y="86" class="cellText">• Preserve unaffected confirmation</text><text x="1520" y="109" class="cellText">• Notify owners and retain history</text><text x="1520" y="142" class="cellSmall">Provide closure and reusable records.</text>
-    </g>
-
-    <!-- Frontstage human -->
-    <rect y="512" width="2090" height="170" class="lane"/>
-    <rect y="512" width="250" height="170" fill="#f0f1ef"/>
-    <text x="24" y="552" class="laneTitle">Frontstage — people</text>
-    <text x="24" y="576" class="laneMeta">Human interactions visible</text><text x="24" y="595" class="laneMeta">to the requester</text>
-    <rect x="24" y="620" width="82" height="22" rx="11" fill="#fff4dc" stroke="#e6c985"/><text x="65" y="635" class="statusText center">INFERRED</text>
-    <g transform="translate(250 512)">
-      <text x="20" y="38" class="cellTitle">Optional consultation</text><text x="20" y="67" class="cellText">Coordination team supports genuinely</text><text x="20" y="88" class="cellText">complex or unusual visit scenarios.</text>
-      <text x="320" y="38" class="cellTitle">Acknowledgement</text><text x="320" y="67" class="cellText">Coordinator becomes visible as the</text><text x="320" y="88" class="cellText">assigned point of coordination.</text>
-      <text x="620" y="38" class="cellTitle">Targeted guidance</text><text x="620" y="67" class="cellText">Coordinator helps resolve cross-service</text><text x="620" y="88" class="cellText">or itinerary dependencies when needed.</text>
-      <text x="920" y="38" class="cellTitle">Focused clarification</text><text x="920" y="67" class="cellText">Service owners ask precise questions</text><text x="920" y="88" class="cellText">inside the visit conversation.</text>
-      <text x="1220" y="38" class="cellTitle">Visible assurance</text><text x="1220" y="67" class="cellText">Teams confirm availability, explain</text><text x="1220" y="88" class="cellText">constraints and coordinate delivery.</text>
-      <text x="1520" y="38" class="cellTitle">Exception handling</text><text x="1520" y="67" class="cellText">Owners explain revalidation, alternatives</text><text x="1520" y="88" class="cellText">or cancellation consequences.</text>
-    </g>
-
-    <line x1="250" y1="682" x2="2090" y2="682" class="visibility"/>
-
-    <!-- Backstage -->
-    <rect y="682" width="2090" height="210" class="lane"/>
-    <rect y="682" width="250" height="210" fill="#f0f1ef"/>
-    <text x="24" y="722" class="laneTitle">Backstage operations</text>
-    <text x="24" y="746" class="laneMeta">Work not directly visible</text><text x="24" y="765" class="laneMeta">to the requester</text>
-    <rect x="24" y="790" width="100" height="22" rx="11" fill="#fff0ef" stroke="#e2b7b3"/><text x="74" y="805" class="statusText center">TO VALIDATE</text>
-    <g transform="translate(250 682)">
-      <text x="20" y="38" class="cellTitle">Maintain service knowledge</text><text x="20" y="66" class="cellText">• Define service catalogue</text><text x="20" y="89" class="cellText">• Maintain location availability</text><text x="20" y="112" class="cellText">• Set lead times and policies</text><text x="20" y="145" class="cellSmall">Owners keep content operationally valid.</text>
-      <text x="320" y="38" class="cellTitle">Triage preliminary demand</text><text x="320" y="66" class="cellText">• Check timing and completeness</text><text x="320" y="89" class="cellText">• Assign coordinator</text><text x="320" y="112" class="cellText">• Identify unusual complexity</text><text x="320" y="145" class="cellSmall">Avoid defaulting every request to a call.</text>
-      <text x="620" y="38" class="cellTitle">Prepare service work packets</text><text x="620" y="66" class="cellText">• Resolve location dependencies</text><text x="620" y="89" class="cellText">• Match people and quantities</text><text x="620" y="112" class="cellText">• Identify missing operational detail</text><text x="620" y="145" class="cellSmall">Keep requirements tied to sessions.</text>
-      <text x="920" y="38" class="cellTitle">Assess independently</text><text x="920" y="66" class="cellText">• Review capacity and resources</text><text x="920" y="89" class="cellText">• Ask contextual questions</text><text x="920" y="112" class="cellText">• Confirm / decline / propose alternative</text><text x="920" y="145" class="cellSmall">Coordinate conflicts across owners.</text>
-      <text x="1220" y="38" class="cellTitle">Orchestrate delivery</text><text x="1220" y="66" class="cellText">• Prepare room, AV, catering, badges</text><text x="1220" y="89" class="cellText">• Align local coordinators</text><text x="1220" y="112" class="cellText">• Monitor day-of exceptions</text><text x="1220" y="145" class="cellSmall">Update actual completion and issues.</text>
-      <text x="1520" y="38" class="cellTitle">Revalidate and close</text><text x="1520" y="66" class="cellText">• Reassess only affected work</text><text x="1520" y="89" class="cellText">• Withdraw obsolete tasks</text><text x="1520" y="112" class="cellText">• Complete records and capture learning</text><text x="1520" y="145" class="cellSmall">Preserve traceability for future visits.</text>
-    </g>
-
-    <line x1="250" y1="892" x2="2090" y2="892" class="internal"/>
-
-    <!-- Support processes and systems -->
-    <rect y="892" width="2090" height="170" class="lane"/>
-    <rect y="892" width="250" height="170" fill="#f0f1ef"/>
-    <text x="24" y="932" class="laneTitle">Systems &amp; support</text>
-    <text x="24" y="956" class="laneMeta">Data, integrations, rules</text><text x="24" y="975" class="laneMeta">and operational enablers</text>
-    <rect x="24" y="1000" width="100" height="22" rx="11" fill="#fff0ef" stroke="#e2b7b3"/><text x="74" y="1015" class="statusText center">TO VALIDATE</text>
-    <g transform="translate(250 892)">
-      <text x="20" y="38" class="cellTitle">Content governance</text><text x="20" y="67" class="cellText">Service catalogue CMS · policy content</text><text x="20" y="90" class="cellText">Location directory · help knowledge</text>
-      <text x="320" y="38" class="cellTitle">Request orchestration</text><text x="320" y="67" class="cellText">Identity/profile · autosave · visit ID</text><text x="320" y="90" class="cellText">Routing rules · coordinator queue</text>
-      <text x="620" y="38" class="cellTitle">Planning data</text><text x="620" y="67" class="cellText">Spreadsheet import · schedule upload</text><text x="620" y="90" class="cellText">Attendee/access data · session model</text>
-      <text x="920" y="38" class="cellTitle">Operational integration</text><text x="920" y="67" class="cellText">Admin tool · owner queues · email</text><text x="920" y="90" class="cellText">Notifications · conversation records</text>
-      <text x="1220" y="38" class="cellTitle">Delivery systems</text><text x="1220" y="67" class="cellText">Room/AV · catering · security/badging</text><text x="1220" y="90" class="cellText">Local office operations · audit log</text>
-      <text x="1520" y="38" class="cellTitle">Change + analytics</text><text x="1520" y="67" class="cellText">Dependency rules · version history</text><text x="1520" y="90" class="cellText">Service outcomes · reporting dataset</text>
-    </g>
-
-    <!-- Risks -->
-    <rect y="1062" width="2090" height="128" class="lane"/>
-    <rect y="1062" width="250" height="128" fill="#f0f1ef"/>
-    <text x="24" y="1102" class="laneTitle">Failure points / risks</text>
-    <text x="24" y="1126" class="laneMeta">Where experience or delivery</text><text x="24" y="1145" class="laneMeta">can break down</text>
-    <rect x="24" y="1162" width="82" height="22" rx="11" fill="#fff4dc" stroke="#e6c985"/><text x="65" y="1177" class="statusText center">INFERRED</text>
-    <g transform="translate(250 1062)">
-      <text x="20" y="39" class="cellTitle">Unclear service scope</text><text x="20" y="66" class="cellText">Lead time confused with response time;</text><text x="20" y="87" class="cellText">user escalates before starting.</text>
-      <text x="320" y="39" class="cellTitle">Premature completeness</text><text x="320" y="66" class="cellText">Rigid validation produces dummy data</text><text x="320" y="87" class="cellText">or delays early coordination.</text>
-      <text x="620" y="39" class="cellTitle">Broken hierarchy</text><text x="620" y="66" class="cellText">Wrong counts or services become detached</text><text x="620" y="87" class="cellText">from their session/location.</text>
-      <text x="920" y="39" class="cellTitle">Fragmented clarification</text><text x="920" y="66" class="cellText">Questions move to email/chat and lose</text><text x="920" y="87" class="cellText">context, ownership or due date.</text>
-      <text x="1220" y="39" class="cellTitle">False “confirmed” signal</text><text x="1220" y="66" class="cellText">Overall status hides one unconfirmed or</text><text x="1220" y="87" class="cellText">changed critical service.</text>
-      <text x="1520" y="39" class="cellTitle">Change blast radius</text><text x="1520" y="66" class="cellText">Every owner is contacted manually and</text><text x="1520" y="87" class="cellText">already valid work is repeated.</text>
-    </g>
-
-    <!-- Opportunities -->
-    <rect y="1190" width="2090" height="128" class="lane"/>
-    <rect y="1190" width="250" height="128" fill="#f0f1ef"/>
-    <text x="24" y="1230" class="laneTitle">Design opportunities</text>
-    <text x="24" y="1254" class="laneMeta">Levers for a stronger</text><text x="24" y="1273" class="laneMeta">service experience</text>
-    <rect x="24" y="1290" width="88" height="22" rx="11" fill="#edf4fc" stroke="#b8cee5"/><text x="68" y="1305" class="statusText center">PROPOSED</text>
-    <g transform="translate(250 1190)">
-      <text x="20" y="39" class="cellTitle">Guide by visit context</text><text x="20" y="66" class="cellText">Recommend services and surface clear</text><text x="20" y="87" class="cellText">availability before form entry.</text>
-      <text x="320" y="39" class="cellTitle">Progressive commitment</text><text x="320" y="66" class="cellText">Separate preliminary support from final</text><text x="320" y="87" class="cellText">requirements and confirmation.</text>
-      <text x="620" y="39" class="cellTitle">Automate dependency checks</text><text x="620" y="66" class="cellText">Infer quantities, access and recommended</text><text x="620" y="87" class="cellText">services from people and sessions.</text>
-      <text x="920" y="39" class="cellTitle">Keep questions in context</text><text x="920" y="66" class="cellText">Attach each clarification to the exact</text><text x="920" y="87" class="cellText">service, owner and response deadline.</text>
-      <text x="1220" y="39" class="cellTitle">Separate progress dimensions</text><text x="1220" y="66" class="cellText">Show information readiness, service</text><text x="1220" y="87" class="cellText">confirmation and visit status distinctly.</text>
-      <text x="1520" y="39" class="cellTitle">Targeted revalidation</text><text x="1520" y="66" class="cellText">Explain impact before saving and reopen</text><text x="1520" y="87" class="cellText">only services materially affected.</text>
-    </g>
-
-    <!-- Measures -->
-    <rect y="1318" width="2090" height="126" rx="0 0 20 20" class="lane"/>
-    <rect y="1318" width="250" height="126" fill="#f0f1ef"/>
-    <text x="24" y="1358" class="laneTitle">Measures &amp; signals</text>
-    <text x="24" y="1382" class="laneMeta">How to validate service</text><text x="24" y="1401" class="laneMeta">and operational outcomes</text>
-    <rect x="24" y="1416" width="100" height="22" rx="11" fill="#fff0ef" stroke="#e2b7b3"/><text x="74" y="1431" class="statusText center">TO VALIDATE</text>
-    <g transform="translate(250 1318)">
-      <text x="20" y="38" class="cellTitle">Discovery usefulness</text><text x="20" y="66" class="cellText">Library→request conversion</text><text x="20" y="88" class="cellText">Consultation rate · search success</text>
-      <text x="320" y="38" class="cellTitle">Data quality</text><text x="320" y="66" class="cellText">Preliminary completion time</text><text x="320" y="88" class="cellText">Placeholder rate · abandonment</text>
-      <text x="620" y="38" class="cellTitle">Planning efficiency</text><text x="620" y="66" class="cellText">Required fields completed on time</text><text x="620" y="88" class="cellText">Import success · correction volume</text>
-      <text x="920" y="38" class="cellTitle">Coordination load</text><text x="920" y="66" class="cellText">Time to first response · questions</text><text x="920" y="88" class="cellText">Scoping calls · off-platform messages</text>
-      <text x="1220" y="38" class="cellTitle">Confirmation reliability</text><text x="1220" y="66" class="cellText">Services confirmed by deadline</text><text x="1220" y="88" class="cellText">Status follow-ups · delivery exceptions</text>
-      <text x="1520" y="38" class="cellTitle">Change resilience</text><text x="1520" y="66" class="cellText">Services reopened per change</text><text x="1520" y="88" class="cellText">Reconfirmation time · repeat work</text>
-    </g>
-
-    <!-- Boundary labels are painted last so lane backgrounds cannot cover them -->
-    <g>
-      <rect x="54" y="306" width="178" height="32" rx="16" fill="#e8f5ed" stroke="#b9d0c0"/>
-      <text x="143" y="327" class="phaseNo center">LINE OF INTERACTION</text>
-      <rect x="63" y="666" width="169" height="32" rx="16" fill="#edf4fc" stroke="#b8cee5"/>
-      <text x="147" y="687" class="phaseNo center">LINE OF VISIBILITY</text>
-      <rect x="58" y="876" width="174" height="32" rx="16" fill="#fff4dc" stroke="#e6c985"/>
-      <text x="145" y="897" class="phaseNo center">INTERNAL HANDOFFS</text>
+  <g transform="translate(72 330)">
+    <rect x="0" y="0" width="250" height="108" rx="16" class="lane"/>
+    <text x="28" y="43" class="labelLight">PHASES</text>
+    <text x="28" y="72" class="small white">Visit lifecycle</text>
+    <g transform="translate(250 0)">
+      <rect x="0" y="0" width="330" height="108" class="phase"/>
+      <text x="24" y="34" class="label">01</text><text x="24" y="64" class="h2">Discover</text><text x="24" y="88" class="small">Find the right entry point</text>
+      <rect x="330" y="0" width="330" height="108" class="phaseAlt"/>
+      <text x="354" y="34" class="label">02</text><text x="354" y="64" class="h2">Initiate</text><text x="354" y="88" class="small">Create request and context</text>
+      <rect x="660" y="0" width="330" height="108" class="phase"/>
+      <text x="684" y="34" class="label">03</text><text x="684" y="64" class="h2">Plan</text><text x="684" y="88" class="small">Shape locations and sessions</text>
+      <rect x="990" y="0" width="330" height="108" class="phaseAlt"/>
+      <text x="1014" y="34" class="label">04</text><text x="1014" y="64" class="h2">Assign and review</text><text x="1014" y="88" class="small">Route work to owners</text>
+      <rect x="1320" y="0" width="330" height="108" class="phase"/>
+      <text x="1344" y="34" class="label">05</text><text x="1344" y="64" class="h2">Confirm and deliver</text><text x="1344" y="88" class="small">Lock support and run visit</text>
+      <rect x="1650" y="0" width="330" height="108" class="phaseAlt"/>
+      <text x="1674" y="34" class="label">06</text><text x="1674" y="64" class="h2">Change and close</text><text x="1674" y="88" class="small">Manage updates and learn</text>
     </g>
   </g>
 
-  <text x="54" y="1808" class="cellSmall">Future-state hypothesis · Research-backed frontstage findings are separated from inferred and validation-needed operational assumptions.</text>
+  <g transform="translate(72 452)">
+    <rect x="0" y="0" width="250" height="166" rx="16" class="lane"/>
+    <text x="28" y="44" class="laneText">Requester</text><text x="28" y="72" class="small white">Business user</text>
+    <g transform="translate(250 0)">
+      <rect x="0" y="0" width="330" height="166" class="greenSoft"/>
+      <text x="24" y="35" class="h3">Needs a visit planned</text><text x="24" y="64" class="small">Sees role-aware home</text><text x="24" y="86" class="small">and request entry points</text>
+      <rect x="330" y="0" width="330" height="166" class="greenSoft"/>
+      <text x="354" y="35" class="h3">Submits preliminary request</text><text x="354" y="64" class="small">Adds date, audience,</text><text x="354" y="86" class="small">locations and intent</text>
+      <rect x="660" y="0" width="330" height="166" class="greenSoft"/>
+      <text x="684" y="35" class="h3">Refines agenda</text><text x="684" y="64" class="small">Adds sessions, services</text><text x="684" y="86" class="small">and attendee context</text>
+      <rect x="990" y="0" width="330" height="166" class="greenSoft"/>
+      <text x="1014" y="35" class="h3">Answers focused questions</text><text x="1014" y="64" class="small">Responds from activity</text><text x="1014" y="86" class="small">without email hunting</text>
+      <rect x="1320" y="0" width="330" height="166" class="greenSoft"/>
+      <text x="1344" y="35" class="h3">Tracks confirmations</text><text x="1344" y="64" class="small">Sees service status,</text><text x="1344" y="86" class="small">risks and next steps</text>
+      <rect x="1650" y="0" width="330" height="166" class="greenSoft"/>
+      <text x="1674" y="35" class="h3">Reviews outcome</text><text x="1674" y="64" class="small">Receives closure summary</text><text x="1674" y="86" class="small">and feedback prompt</text>
+    </g>
+  </g>
+
+  <g transform="translate(72 618)">
+    <rect x="0" y="0" width="250" height="166" rx="16" class="laneAlt"/>
+    <text x="28" y="44" class="laneText">Coordinator</text><text x="28" y="72" class="small white">Operational owner</text>
+    <g transform="translate(250 0)">
+      <rect x="0" y="0" width="330" height="166" class="blueSoft"/>
+      <text x="24" y="35" class="h3">Monitors intake</text><text x="24" y="64" class="small">Views new requests,</text><text x="24" y="86" class="small">risk and priority signals</text>
+      <rect x="330" y="0" width="330" height="166" class="blueSoft"/>
+      <text x="354" y="35" class="h3">Triage and validate</text><text x="354" y="64" class="small">Checks missing context</text><text x="354" y="86" class="small">before routing work</text>
+      <rect x="660" y="0" width="330" height="166" class="blueSoft"/>
+      <text x="684" y="35" class="h3">Builds visit structure</text><text x="684" y="64" class="small">Coordinates locations,</text><text x="684" y="86" class="small">sessions and dependencies</text>
+      <rect x="990" y="0" width="330" height="166" class="blueSoft"/>
+      <text x="1014" y="35" class="h3">Assigns service owners</text><text x="1014" y="64" class="small">Uses queues, workload</text><text x="1014" y="86" class="small">and SLA signals</text>
+      <rect x="1320" y="0" width="330" height="166" class="blueSoft"/>
+      <text x="1344" y="35" class="h3">Resolves blockers</text><text x="1344" y="64" class="small">Escalates risks and</text><text x="1344" y="86" class="small">locks final readiness</text>
+      <rect x="1650" y="0" width="330" height="166" class="blueSoft"/>
+      <text x="1674" y="35" class="h3">Closes the visit</text><text x="1674" y="64" class="small">Captures lessons, late</text><text x="1674" y="86" class="small">changes and exceptions</text>
+    </g>
+  </g>
+
+  <g transform="translate(72 784)">
+    <rect x="0" y="0" width="250" height="180" rx="16" class="lane"/>
+    <text x="28" y="44" class="laneText">Service owner</text><text x="28" y="72" class="small white">Team or function lead</text>
+    <g transform="translate(250 0)">
+      <rect x="0" y="0" width="330" height="180" class="amberSoft"/>
+      <text x="24" y="35" class="h3">Receives only relevant work</text><text x="24" y="64" class="small">No separate tool; role view</text><text x="24" y="86" class="small">filters the shared record</text>
+      <rect x="330" y="0" width="330" height="180" class="amberSoft"/>
+      <text x="354" y="35" class="h3">Sees request context</text><text x="354" y="64" class="small">Audience, intent and</text><text x="354" y="86" class="small">support expectations</text>
+      <rect x="660" y="0" width="330" height="180" class="amberSoft"/>
+      <text x="684" y="35" class="h3">Checks feasibility</text><text x="684" y="64" class="small">Reviews date, capacity,</text><text x="684" y="86" class="small">dependencies and details</text>
+      <rect x="990" y="0" width="330" height="180" class="amberSoft"/>
+      <text x="1014" y="35" class="h3">Confirms or asks</text><text x="1014" y="64" class="small">Can request focused</text><text x="1014" y="86" class="small">clarification in context</text>
+      <rect x="1320" y="0" width="330" height="180" class="amberSoft"/>
+      <text x="1344" y="35" class="h3">Delivers assigned service</text><text x="1344" y="64" class="small">Updates completion and</text><text x="1344" y="86" class="small">arrival readiness</text>
+      <rect x="1650" y="0" width="330" height="180" class="amberSoft"/>
+      <text x="1674" y="35" class="h3">Flags impact of changes</text><text x="1674" y="64" class="small">Late edits re-open only</text><text x="1674" y="86" class="small">affected service tasks</text>
+    </g>
+  </g>
+
+  <g transform="translate(72 964)">
+    <rect x="0" y="0" width="250" height="150" rx="16" class="laneAlt"/>
+    <text x="28" y="44" class="laneText">Admin view</text><text x="28" y="72" class="small white">Leadership and ops</text>
+    <g transform="translate(250 0)">
+      <rect x="0" y="0" width="330" height="150" class="measure"/>
+      <text x="24" y="35" class="h3">Portfolio visibility</text><text x="24" y="64" class="small">Demand, visit mix and</text><text x="24" y="86" class="small">regional workload</text>
+      <rect x="330" y="0" width="330" height="150" class="measure"/>
+      <text x="354" y="35" class="h3">Data quality watch</text><text x="354" y="64" class="small">Missing fields and</text><text x="354" y="86" class="small">request completeness</text>
+      <rect x="660" y="0" width="330" height="150" class="measure"/>
+      <text x="684" y="35" class="h3">Capacity signals</text><text x="684" y="64" class="small">Upcoming service load</text><text x="684" y="86" class="small">and owner availability</text>
+      <rect x="990" y="0" width="330" height="150" class="measure"/>
+      <text x="1014" y="35" class="h3">SLA and blockers</text><text x="1014" y="64" class="small">Aging assignments and</text><text x="1014" y="86" class="small">at-risk confirmations</text>
+      <rect x="1320" y="0" width="330" height="150" class="measure"/>
+      <text x="1344" y="35" class="h3">Readiness rollup</text><text x="1344" y="64" class="small">Confirmed, pending and</text><text x="1344" y="86" class="small">declined services</text>
+      <rect x="1650" y="0" width="330" height="150" class="measure"/>
+      <text x="1674" y="35" class="h3">Trends and exports</text><text x="1674" y="64" class="small">Repeat issues, service</text><text x="1674" y="86" class="small">performance and learning</text>
+    </g>
+  </g>
+
+  <g transform="translate(72 1114)">
+    <rect x="0" y="0" width="250" height="186" rx="16" class="lane"/>
+    <text x="28" y="44" class="laneText">System and data</text><text x="28" y="72" class="small white">Shared Captivate layer</text>
+    <g transform="translate(250 0)">
+      <rect x="0" y="0" width="330" height="186" class="system"/>
+      <text x="24" y="35" class="h3">Role-based landing</text><text x="24" y="64" class="small">Profile switcher sets</text><text x="24" y="86" class="small">workspace permissions</text>
+      <rect x="330" y="0" width="330" height="186" class="system"/>
+      <text x="354" y="35" class="h3">Shared visit record</text><text x="354" y="64" class="small">Visit, location, session,</text><text x="354" y="86" class="small">service and attendee data</text>
+      <rect x="660" y="0" width="330" height="186" class="system"/>
+      <text x="684" y="35" class="h3">Dependency model</text><text x="684" y="64" class="small">Links services to dates,</text><text x="684" y="86" class="small">rooms and session needs</text>
+      <rect x="990" y="0" width="330" height="186" class="system"/>
+      <text x="1014" y="35" class="h3">Assignment engine</text><text x="1014" y="64" class="small">Routes work, records</text><text x="1014" y="86" class="small">owner decisions and SLAs</text>
+      <rect x="1320" y="0" width="330" height="186" class="system"/>
+      <text x="1344" y="35" class="h3">Notification layer</text><text x="1344" y="64" class="small">Activity, email alerts,</text><text x="1344" y="86" class="small">status changes and audit</text>
+      <rect x="1650" y="0" width="330" height="186" class="system"/>
+      <text x="1674" y="35" class="h3">Reporting model</text><text x="1674" y="64" class="small">Operational metrics,</text><text x="1674" y="86" class="small">exports and audit history</text>
+    </g>
+  </g>
+
+  <g transform="translate(72 1300)">
+    <rect x="0" y="0" width="250" height="178" rx="16" class="laneAlt"/>
+    <text x="28" y="44" class="laneText">Risks and measures</text><text x="28" y="72" class="small white">Improvement scope</text>
+    <g transform="translate(250 0)">
+      <rect x="0" y="0" width="330" height="178" class="redSoft"/>
+      <text x="24" y="35" class="h3">Risk</text><text x="24" y="64" class="small">Users miss the correct</text><text x="24" y="86" class="small">role or next task</text><text x="24" y="121" class="h3">Measure</text><text x="24" y="149" class="small">Task discovery rate</text>
+      <rect x="330" y="0" width="330" height="178" class="redSoft"/>
+      <text x="354" y="35" class="h3">Risk</text><text x="354" y="64" class="small">Incomplete requests create</text><text x="354" y="86" class="small">manual follow-ups</text><text x="354" y="121" class="h3">Measure</text><text x="354" y="149" class="small">First-pass completeness</text>
+      <rect x="660" y="0" width="330" height="178" class="redSoft"/>
+      <text x="684" y="35" class="h3">Risk</text><text x="684" y="64" class="small">Dependencies are unclear</text><text x="684" y="86" class="small">across services</text><text x="684" y="121" class="h3">Measure</text><text x="684" y="149" class="small">Planning rework volume</text>
+      <rect x="990" y="0" width="330" height="178" class="redSoft"/>
+      <text x="1014" y="35" class="h3">Risk</text><text x="1014" y="64" class="small">Owners miss assignments</text><text x="1014" y="86" class="small">or lack context</text><text x="1014" y="121" class="h3">Measure</text><text x="1014" y="149" class="small">SLA and question cycle time</text>
+      <rect x="1320" y="0" width="330" height="178" class="redSoft"/>
+      <text x="1344" y="35" class="h3">Risk</text><text x="1344" y="64" class="small">Readiness is hard to trust</text><text x="1344" y="86" class="small">near the visit date</text><text x="1344" y="121" class="h3">Measure</text><text x="1344" y="149" class="small">Confirmed service ratio</text>
+      <rect x="1650" y="0" width="330" height="178" class="redSoft"/>
+      <text x="1674" y="35" class="h3">Risk</text><text x="1674" y="64" class="small">Learning remains trapped</text><text x="1674" y="86" class="small">in individual teams</text><text x="1674" y="121" class="h3">Measure</text><text x="1674" y="149" class="small">Repeat issue reduction</text>
+    </g>
+  </g>
+
+  <g>
+    <path d="M567 582H702" class="flow" marker-end="url(#arrowGreen)"/>
+    <path d="M897 582H1032" class="flow" marker-end="url(#arrowGreen)"/>
+    <path d="M1227 582H1362" class="flow" marker-end="url(#arrowGreen)"/>
+    <path d="M1557 582H1692" class="flow" marker-end="url(#arrowGreen)"/>
+    <path d="M1887 582H2022" class="flow" marker-end="url(#arrowGreen)"/>
+    <path d="M567 748H702" class="flowBlue" marker-end="url(#arrowBlue)"/>
+    <path d="M897 748H1032" class="flowBlue" marker-end="url(#arrowBlue)"/>
+    <path d="M1227 748H1362" class="flowBlue" marker-end="url(#arrowBlue)"/>
+    <path d="M1557 748H1692" class="flowBlue" marker-end="url(#arrowBlue)"/>
+    <path d="M1887 748H2022" class="flowBlue" marker-end="url(#arrowBlue)"/>
+  </g>
+
+  <g transform="translate(72 1530)">
+    <rect x="0" y="0" width="2256" height="72" rx="18" class="panel"/>
+    <circle cx="32" cy="36" r="10" class="green"/><text x="52" y="41" class="small">Solid green arrows: primary visit flow</text>
+    <circle cx="330" cy="36" r="10" fill="#2765a8"/><text x="350" y="41" class="small">Blue arrows: coordinator handoffs</text>
+    <circle cx="610" cy="36" r="10" fill="#a86000"/><text x="630" y="41" class="small">Dashed amber arrows: clarification loops</text>
+    <text x="1100" y="41" class="small">Design implication: keep admin reporting inside Captivate, exposed as a role-based workspace rather than a separate dashboard.</text>
+  </g>
 </svg>

@@ -81,12 +81,28 @@
       padding: 10px 15px; cursor: pointer;
     }
     .global-nav button.active { color: white; background: #29322c; }
-    .top-actions { display: flex; align-items: center; gap: 13px; }
+    .top-actions { display: flex; align-items: center; gap: 13px; position: relative; }
     .icon-btn {
       width: 38px; height: 38px; border-radius: 10px; border: 1px solid #3b463e;
       display: grid; place-items: center; background: #202822; color: white; cursor: pointer;
     }
     .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--lime); color: #16331f; display: grid; place-items: center; font-weight: 800; }
+    .role-switch { border: 0; background: transparent; padding: 0; cursor: pointer; display: flex; align-items: center; gap: 9px; color: white; }
+    .role-switch-text { display: grid; gap: 1px; text-align: right; }
+    .role-switch-text small { color: #9fafaa; font-size: 10px; font-weight: 760; letter-spacing: .08em; text-transform: uppercase; }
+    .role-switch-text strong { color: white; font-size: 12px; line-height: 1.2; }
+    .role-menu {
+      position: absolute; right: 0; top: 49px; z-index: 90; width: 280px; padding: 8px;
+      display: none; border: 1px solid #d6dfd9; border-radius: 14px; background: white; color: var(--ink);
+      box-shadow: 0 18px 50px rgba(0,0,0,.2);
+    }
+    .role-menu.open { display: grid; gap: 4px; }
+    .role-option { width: 100%; border: 0; border-radius: 11px; padding: 12px; display: flex; gap: 11px; align-items: flex-start; background: transparent; text-align: left; cursor: pointer; }
+    .role-option:hover, .role-option.active { background: var(--green-soft); }
+    .role-dot { width: 30px; height: 30px; flex: 0 0 auto; border-radius: 10px; display: grid; place-items: center; background: #eef3ef; color: var(--green-dark); font-weight: 850; }
+    .role-option.active .role-dot { background: var(--green); color: white; }
+    .role-option strong { display: block; margin-bottom: 2px; }
+    .role-option span:last-child { color: var(--muted); font-size: 11px; }
     .shell { max-width: 1480px; margin: 0 auto; padding: 32px; }
     .screen { display: none; }
     .screen.active { display: block; animation: in .2s ease-out; }
@@ -145,6 +161,27 @@
     .attention p { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
     .policy { margin-top: 16px; padding: 16px; background: #f0f7f2; border-radius: 13px; }
     .policy strong { display: block; margin-bottom: 4px; }
+    .role-view { display: none; }
+    .role-view.active { display: block; animation: in .2s ease-out; }
+    .workspace-note { margin-bottom: 22px; padding: 16px 18px; border: 1px solid #cbded2; border-radius: 14px; background: #f8fbf9; display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+    .workspace-note p { margin: 0; }
+    .ops-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .ops-card { padding: 18px; min-height: 165px; }
+    .ops-card h2 { margin-top: 9px; }
+    .ops-card p { margin-bottom: 0; color: var(--muted); font-size: 12px; }
+    .queue-list { display: grid; gap: 11px; }
+    .queue-row { border: 1px solid var(--line); border-radius: 14px; padding: 15px; display: grid; grid-template-columns: minmax(220px,1.4fr) repeat(3, minmax(120px, .7fr)) auto; gap: 14px; align-items: center; background: white; }
+    .queue-row.compact { grid-template-columns: minmax(220px, 1.5fr) minmax(160px, .8fr) minmax(130px, .7fr) auto; }
+    .assignment-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .assignment-card { padding: 15px; border: 1px solid var(--line); border-radius: 13px; background: #fbfcfb; }
+    .assignment-card strong { display: block; margin-bottom: 4px; }
+    .priority-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .priority-card { padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: #fbfcfb; }
+    .priority-card span:first-child { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-bottom: 12px; border-radius: 9px; background: #17211b; color: white; font-weight: 800; font-size: 12px; }
+    .priority-card h3 { margin-bottom: 6px; }
+    .priority-card p { margin: 0; color: var(--muted); font-size: 12px; }
+    .dependency-strip { margin-top: 12px; padding: 13px; border-radius: 12px; background: var(--blue-soft); color: #245486; display: grid; gap: 8px; }
+    .dependency-strip strong { color: #1f4670; }
 
     .step-shell { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 24px; }
     .step-nav { padding: 16px; height: fit-content; position: sticky; top: 92px; }
@@ -347,24 +384,34 @@
     .contact-option:first-of-type { border-top: 0; }
     @media (max-width: 1050px) {
       .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .ops-grid, .priority-grid { grid-template-columns: repeat(2, 1fr); }
       .layout-2, .review-layout { grid-template-columns: 1fr; }
       .review-aside { position: static; }
       .visit-row { grid-template-columns: 1.4fr 1fr 1fr auto; }
       .visit-row > div:nth-child(3) { display: none; }
       .service-config { grid-template-columns: 1fr 1fr; }
+      .queue-row, .queue-row.compact { grid-template-columns: minmax(220px,1fr) minmax(130px,.55fr) auto; }
+      .queue-row > div:nth-child(4) { display: none; }
+      .assignment-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 760px) {
       .topbar { padding: 0 16px; }
       .global-nav { display: none; }
+      .role-switch-text { display: none; }
+      .role-menu { right: -4px; width: min(320px, calc(100vw - 24px)); }
       .shell { padding: 20px 14px 80px; }
       .page-head, .workspace-head, .visit-context { flex-direction: column; align-items: stretch; }
-      .metric-grid, .form-grid, .review-grid { grid-template-columns: 1fr; }
+      .metric-grid, .form-grid, .review-grid, .ops-grid, .priority-grid, .assignment-grid { grid-template-columns: 1fr; }
+      .workspace-note { flex-direction: column; align-items: flex-start; }
       .step-shell, .service-layout { grid-template-columns: 1fr; }
       .step-nav { position: static; display: flex; overflow-x: auto; }
       .step-nav button { min-width: 150px; }
       .step-nav .help-note { display: none; }
       .visit-row { grid-template-columns: 1fr auto; }
       .visit-row > div:not(:first-child):not(:last-child) { display: none; }
+      .queue-row, .queue-row.compact { grid-template-columns: 1fr; }
+      .queue-row > div:nth-child(4) { display: block; }
+      .queue-row .btn { width: 100%; }
       .workspace-stats { width: 100%; overflow-x: auto; }
       .tabs { width: 100%; overflow-x: auto; }
       .tabs button { white-space: nowrap; }
@@ -396,12 +443,22 @@
     </nav>
     <div class="top-actions">
       <button class="icon-btn" aria-label="Notifications">●</button>
-      <div class="avatar">RS</div>
+      <button class="role-switch" data-action="toggle-role-menu" aria-haspopup="true" aria-expanded="false">
+        <span class="role-switch-text"><small>Viewing as</small><strong data-role-label>Requester</strong></span>
+        <span class="avatar" data-role-avatar>RS</span>
+      </button>
+      <div class="role-menu" data-role-menu>
+        <button class="role-option active" data-role-option="requester"><span class="role-dot">RS</span><span><strong>Requester</strong>Plan visits, answer questions and track confirmations.</span></button>
+        <button class="role-option" data-role-option="coordinator"><span class="role-dot">CO</span><span><strong>Coordinator</strong>Assign owners, monitor SLA risk and resolve blockers.</span></button>
+        <button class="role-option" data-role-option="service"><span class="role-dot">FB</span><span><strong>Service owner</strong>Review assigned services and confirm or ask focused questions.</span></button>
+        <button class="role-option" data-role-option="admin"><span class="role-dot">AD</span><span><strong>Admin</strong>Review performance, workload and improvement priorities.</span></button>
+      </div>
     </div>
   </header>
 
   <main class="shell">
     <section class="screen active" id="dashboard">
+      <div class="role-view active" data-role-view="requester">
       <div class="page-head">
         <div>
           <div class="eyebrow">Friday, 19 June</div>
@@ -458,6 +515,152 @@
           </div>
           <div class="policy"><strong>Planning a visit soon?</strong><span class="subtle">Submit preliminary details at least 2 business days before the visit. Individual services may need more lead time.</span></div>
         </aside>
+      </div>
+      </div>
+
+      <div class="role-view" data-role-view="coordinator">
+        <div class="page-head">
+          <div>
+            <div class="eyebrow">Operations workspace</div>
+            <h1>Coordinate visits across teams.</h1>
+            <p class="subtle">One queue for intake, assignment, SLA risk and unresolved service questions.</p>
+          </div>
+          <button class="btn primary" data-action="assign-owners">Assign service owners</button>
+        </div>
+        <div class="workspace-note">
+          <p><strong>Same Captivate record:</strong> coordinators see every location, session and service while requesters see only their next actions.</p>
+          <span class="badge green">Shared source of truth</span>
+        </div>
+        <div class="metric-grid">
+          <article class="metric card"><div><div class="value">12</div><div class="label">Open visits</div></div><span class="delta">4 need assignment</span></article>
+          <article class="metric card"><div><div class="value">3</div><div class="label">SLA risks</div></div><span class="delta">Due within 12 hours</span></article>
+          <article class="metric card"><div><div class="value">18</div><div class="label">Service questions</div></div><span class="delta">7 waiting on requester</span></article>
+          <article class="metric card"><div><div class="value">91%</div><div class="label">Within review target</div></div><span class="delta">Last 30 days</span></article>
+        </div>
+        <div class="layout-2">
+          <section class="section-card card">
+            <div class="section-head"><div><h2>Visit coordination queue</h2><p class="subtle">Sorted by SLA risk and readiness blockers.</p></div><button class="link-btn">View all</button></div>
+            <div class="queue-list">
+              <article class="queue-row">
+                <div><div class="visit-title">Dell Technologies leadership visit</div><div class="meta">Hyderabad + Bengaluru · 05-08 Jul · CX-100908</div></div>
+                <div><div class="cell-label">Assignment</div><div class="cell-value">6 of 8 owners</div></div>
+                <div><div class="cell-label">Risk</div><span class="badge amber">2 blockers</span></div>
+                <div><div class="cell-label">Next response</div><div class="cell-value">23 Jun</div></div>
+                <button class="btn small" data-screen-link="workspace">Open</button>
+              </article>
+              <article class="queue-row">
+                <div><div class="visit-title">ABC Technologies executive workshop</div><div class="meta">Mumbai NESCO · 14 Jul · CX-100921</div></div>
+                <div><div class="cell-label">Assignment</div><div class="cell-value">4 of 5 owners</div></div>
+                <div><div class="cell-label">Risk</div><span class="badge blue">Under review</span></div>
+                <div><div class="cell-label">Next response</div><div class="cell-value">Today</div></div>
+                <button class="btn small">Review</button>
+              </article>
+              <article class="queue-row">
+                <div><div class="visit-title">Orion Bank client immersion</div><div class="meta">Bengaluru Vista · 01 Jul · CX-100887</div></div>
+                <div><div class="cell-label">Assignment</div><div class="cell-value">6 of 6 owners</div></div>
+                <div><div class="cell-label">Risk</div><span class="badge green">Ready</span></div>
+                <div><div class="cell-label">Next response</div><div class="cell-value">Complete</div></div>
+                <button class="btn small">View</button>
+              </article>
+            </div>
+          </section>
+          <aside class="section-card card">
+            <div class="section-head"><div><h2>Owner assignment</h2><p class="subtle">Dell Technologies visit</p></div></div>
+            <div class="assignment-grid">
+              <div class="assignment-card"><strong>F&B</strong><span class="badge amber">Needs owner</span><p class="meta">Lunch and dietary review.</p></div>
+              <div class="assignment-card"><strong>Technology</strong><span class="badge green">Assigned</span><p class="meta">Rohit S. reviewing VC setup.</p></div>
+              <div class="assignment-card"><strong>Badging</strong><span class="badge blue">Waiting</span><p class="meta">1 profile missing ID.</p></div>
+              <div class="assignment-card"><strong>Spaces</strong><span class="badge green">Confirmed</span><p class="meta">Room capacity locked.</p></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="role-view" data-role-view="service">
+        <div class="page-head">
+          <div>
+            <div class="eyebrow">F&B service owner workspace</div>
+            <h1>Review assigned food and hospitality requests.</h1>
+            <p class="subtle">Only the details needed by this service team are shown, with visit context kept nearby.</p>
+          </div>
+          <button class="btn primary" data-action="confirm-service">Confirm selected service</button>
+        </div>
+        <div class="metric-grid">
+          <article class="metric card"><div><div class="value">7</div><div class="label">Assigned requests</div></div><span class="delta">3 due today</span></article>
+          <article class="metric card"><div><div class="value">2</div><div class="label">Need clarification</div></div><span class="delta">Requester action pending</span></article>
+          <article class="metric card"><div><div class="value">5</div><div class="label">Confirmed this week</div></div><span class="delta">All within lead time</span></article>
+          <article class="metric card"><div><div class="value">1</div><div class="label">Change impact</div></div><span class="delta">Lunch time changed</span></article>
+        </div>
+        <div class="layout-2">
+          <section class="section-card card">
+            <div class="section-head"><div><h2>My service queue</h2><p class="subtle">Food and hospitality requests across active visits.</p></div><button class="link-btn">Filter</button></div>
+            <div class="queue-list">
+              <article class="queue-row compact">
+                <div><div class="visit-title">Hosted leadership lunch</div><div class="meta">Dell Technologies · Hyderabad · 22 attendees</div></div>
+                <div><div class="cell-label">Status</div><span class="badge amber">Dietary details missing</span></div>
+                <div><div class="cell-label">Lead time</div><div class="cell-value">5 business days</div></div>
+                <button class="btn small" data-action="ask-focused-question">Ask question</button>
+              </article>
+              <article class="queue-row compact">
+                <div><div class="visit-title">In-room refreshments</div><div class="meta">Dell Technologies · 05 Jul · 15 attendees</div></div>
+                <div><div class="cell-label">Status</div><span class="badge blue">Under review</span></div>
+                <div><div class="cell-label">Lead time</div><div class="cell-value">2 business days</div></div>
+                <button class="btn small primary" data-action="confirm-service">Confirm</button>
+              </article>
+              <article class="queue-row compact">
+                <div><div class="visit-title">Working lunch</div><div class="meta">ABC Technologies · Mumbai · 16 attendees</div></div>
+                <div><div class="cell-label">Status</div><span class="badge green">Ready</span></div>
+                <div><div class="cell-label">Lead time</div><div class="cell-value">Confirmed</div></div>
+                <button class="btn small">View</button>
+              </article>
+            </div>
+          </section>
+          <aside class="section-card card">
+            <div class="section-head"><div><h2>Dependency check</h2><p class="subtle">How attendee changes affect F&B work.</p></div></div>
+            <div class="dependency-strip"><strong>22 lunch guests</strong><span>Room capacity and executive dining are aligned. Dietary requirements still need requester confirmation.</span></div>
+            <div class="dependency-strip"><strong>1 attendee missing ID</strong><span>Badging can continue, but final guest count may affect meal quantity if the visitor joins lunch.</span></div>
+            <div class="dependency-strip"><strong>Lunch moved by 30 minutes</strong><span>Revalidation required only for catering and experience host, not meeting space or AV.</span></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="role-view" data-role-view="admin">
+        <div class="page-head">
+          <div>
+            <div class="eyebrow">Admin and reporting workspace</div>
+            <h1>Monitor performance and improve the shared platform.</h1>
+            <p class="subtle">Operational leaders can see workload, bottlenecks and roadmap priorities inside Captivate.</p>
+          </div>
+          <button class="btn primary" data-action="open-roadmap">Review improvement scope</button>
+        </div>
+        <div class="metric-grid">
+          <article class="metric card"><div><div class="value">38</div><div class="label">Visits this month</div></div><span class="delta">11 multi-location</span></article>
+          <article class="metric card"><div><div class="value">42h</div><div class="label">Avg first response</div></div><span class="delta">Within 48h target</span></article>
+          <article class="metric card"><div><div class="value">14%</div><div class="label">Reopened services</div></div><span class="delta">Mostly schedule changes</span></article>
+          <article class="metric card"><div><div class="value">6</div><div class="label">Improvement priorities</div></div><span class="delta">Next prototype scope</span></article>
+        </div>
+        <div class="layout-2">
+          <section class="section-card card">
+            <div class="section-head"><div><h2>Six improvement priorities</h2><p class="subtle">Planned as shared Captivate capabilities, not a separate admin tool.</p></div><span class="badge blue">Prototype scope</span></div>
+            <div class="priority-grid">
+              <article class="priority-card"><span>1</span><h3>Coordinator and service-owner views</h3><p>Give admins role-specific queues, assignment actions and confirmation controls.</p></article>
+              <article class="priority-card"><span>2</span><h3>Change-impact handling</h3><p>Show which services reopen when date, venue, attendee or catering details change.</p></article>
+              <article class="priority-card"><span>3</span><h3>Automation logic</h3><p>Use time, attendee count and past choices to recommend services and reduce manual entry.</p></article>
+              <article class="priority-card"><span>4</span><h3>Service dependencies</h3><p>Expose how attendee count drives room capacity, badging and food quantities.</p></article>
+              <article class="priority-card"><span>5</span><h3>Mobile-ready operations</h3><p>Convert dense tables into responsive cards for quick admin review on smaller screens.</p></article>
+              <article class="priority-card"><span>6</span><h3>Post-visit feedback</h3><p>Close the loop with requester feedback and service-team performance learning.</p></article>
+            </div>
+          </section>
+          <aside class="section-card card">
+            <div class="section-head"><div><h2>Workload by service</h2><p class="subtle">Admin view of operational pressure.</p></div></div>
+            <div class="task-list">
+              <div class="task"><div><strong>Food & refreshments</strong><div class="meta">12 open · 3 SLA risks</div></div><span class="badge amber">High load</span></div>
+              <div class="task"><div><strong>Technology support</strong><div class="meta">9 open · 2 questions pending</div></div><span class="badge blue">Reviewing</span></div>
+              <div class="task"><div><strong>Visitor access</strong><div class="meta">7 open · 4 waiting on IDs</div></div><span class="badge amber">Blocked</span></div>
+              <div class="task"><div><strong>Meeting spaces</strong><div class="meta">10 open · all assigned</div></div><span class="badge green">Stable</span></div>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -892,9 +1095,18 @@
   const isPreview = previewParams.get('preview') === '1';
   const isEmbedded = previewParams.get('embedded') === '1';
   const previewScreen = previewParams.get('screen');
+  const previewRole = previewParams.get('role');
   const state = isPreview
-    ? { screen: previewScreen || 'dashboard', submitted: false }
-    : JSON.parse(localStorage.getItem('captivatePrototype') || '{"screen":"dashboard","submitted":false}');
+    ? { screen: previewScreen || 'dashboard', role: previewRole || 'requester', submitted: false }
+    : JSON.parse(localStorage.getItem('captivatePrototype') || '{"screen":"dashboard","role":"requester","submitted":false}');
+  if (!state.role) state.role = 'requester';
+
+  const roleMeta = {
+    requester: { label: 'Requester', initials: 'RS', nav: 'My visits' },
+    coordinator: { label: 'Coordinator', initials: 'CO', nav: 'Operations' },
+    service: { label: 'Service owner', initials: 'FB', nav: 'My queue' },
+    admin: { label: 'Admin', initials: 'AD', nav: 'Reporting' }
+  };
 
   function saveState() {
     if (isPreview) return;
@@ -936,11 +1148,49 @@
     saveState();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  function applyRole(role) {
+    const nextRole = roleMeta[role] ? role : 'requester';
+    state.role = nextRole;
+    document.querySelectorAll('[data-role-view]').forEach(view => {
+      view.classList.toggle('active', view.dataset.roleView === nextRole);
+    });
+    document.querySelectorAll('[data-role-option]').forEach(option => {
+      option.classList.toggle('active', option.dataset.roleOption === nextRole);
+    });
+    document.querySelector('[data-role-label]').textContent = roleMeta[nextRole].label;
+    document.querySelector('[data-role-avatar]').textContent = roleMeta[nextRole].initials;
+    const homeNav = document.querySelector('.global-nav [data-screen-link="dashboard"]');
+    if (homeNav) homeNav.textContent = roleMeta[nextRole].nav;
+    saveState();
+  }
+
   document.addEventListener('click', event => {
     const link = event.target.closest('[data-screen-link]');
     if (!link) return;
     event.stopPropagation();
     showScreen(link.dataset.screenLink);
+  });
+
+  document.querySelectorAll('[data-role-option]').forEach(option => {
+    option.addEventListener('click', event => {
+      event.stopPropagation();
+      applyRole(option.dataset.roleOption);
+      document.querySelector('[data-role-menu]').classList.remove('open');
+      document.querySelector('[data-action="toggle-role-menu"]').setAttribute('aria-expanded', 'false');
+      showScreen('dashboard');
+      toast(`Switched to ${roleMeta[state.role].label} workspace.`);
+    });
+  });
+
+  document.addEventListener('click', event => {
+    const menu = document.querySelector('[data-role-menu]');
+    const switcher = event.target.closest('[data-action="toggle-role-menu"]');
+    if (switcher) return;
+    if (!event.target.closest('[data-role-menu]')) {
+      menu.classList.remove('open');
+      document.querySelector('[data-action="toggle-role-menu"]').setAttribute('aria-expanded', 'false');
+    }
   });
 
   function toast(message, type = 'success') {
@@ -1044,8 +1294,70 @@
   document.addEventListener('click', event => {
     const action = event.target.closest('[data-action]')?.dataset.action;
     if (!action) return;
+    if (action === 'toggle-role-menu') {
+      const menu = document.querySelector('[data-role-menu]');
+      const switcher = event.target.closest('[data-action="toggle-role-menu"]');
+      const open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      switcher.setAttribute('aria-expanded', String(open));
+    }
     if (action === 'close-modal') closeModal();
     if (action === 'close-drawer') serviceDrawer.classList.remove('open');
+    if (action === 'assign-owners') {
+      openModal({
+        eyebrow: 'Coordinator action',
+        title: 'Assign service owners',
+        body: `<p>Each service stays connected to the same visit record, but ownership is routed to the right admin queue.</p><div class="task-list">
+          <div class="task"><div><strong>F&B</strong><div class="meta">Hosted lunch and dietary requirements</div></div><span class="badge amber">Assign owner</span></div>
+          <div class="task"><div><strong>Technology</strong><div class="meta">AV setup and video platform confirmation</div></div><span class="badge green">Rohit S.</span></div>
+          <div class="task"><div><strong>Visitor access</strong><div class="meta">Badging and ID readiness</div></div><span class="badge blue">Security queue</span></div>
+        </div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="save-assignments">Save assignments</button>`
+      });
+    }
+    if (action === 'save-assignments') {
+      closeModal();
+      toast('Service owners assigned inside Captivate.');
+    }
+    if (action === 'ask-focused-question') {
+      openModal({
+        eyebrow: 'Service owner action',
+        title: 'Ask a focused question',
+        body: `<p>This question appears in the requester workspace and stays attached to the hosted lunch service.</p><div><label>Question</label><textarea>Can you confirm dietary restrictions for the 22 lunch attendees?</textarea></div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="send-focused-question">Send question</button>`
+      });
+    }
+    if (action === 'send-focused-question') {
+      closeModal();
+      toast('Question sent to the requester workspace.');
+    }
+    if (action === 'confirm-service') {
+      openModal({
+        eyebrow: 'Service confirmation',
+        title: 'Confirm service availability',
+        body: `<p>The requester and coordinator will see this service move to confirmed while other services continue independently.</p><div class="notice"><strong>Dependency check</strong><span>Catering can be confirmed after dietary details are received. Meeting space and AV are not affected.</span></div>`,
+        actions: `<button class="btn" data-action="close-modal">Cancel</button><button class="btn primary" data-action="save-service-confirmation">Confirm service</button>`
+      });
+    }
+    if (action === 'save-service-confirmation') {
+      closeModal();
+      toast('Service confirmation saved.');
+    }
+    if (action === 'open-roadmap') {
+      openModal({
+        eyebrow: 'Prototype improvement scope',
+        title: 'Six priorities for the next iteration',
+        body: `<div class="task-list">
+          <div class="task"><div><strong>1. Role-based admin workspaces</strong><div class="meta">Coordinator, service owner and reporting views inside Captivate.</div></div></div>
+          <div class="task"><div><strong>2. Change-impact handling</strong><div class="meta">Reopen only affected services after material updates.</div></div></div>
+          <div class="task"><div><strong>3. Automation logic</strong><div class="meta">Recommendations from time, attendee count and past choices.</div></div></div>
+          <div class="task"><div><strong>4. Service dependencies</strong><div class="meta">Expose how people, rooms, badges and food depend on each other.</div></div></div>
+          <div class="task"><div><strong>5. Mobile-ready operations</strong><div class="meta">Responsive cards for dense admin review.</div></div></div>
+          <div class="task"><div><strong>6. Post-visit feedback</strong><div class="meta">Close the loop after the visit is completed.</div></div></div>
+        </div>`,
+        actions: `<button class="btn primary" data-action="close-modal">Done</button>`
+      });
+    }
     if (action === 'view-service') {
       document.querySelector('[data-drawer-title]').textContent = event.target.closest('[data-service]').dataset.service;
       serviceDrawer.classList.add('open');
@@ -1235,6 +1547,7 @@
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') closeModal();
   });
+  applyRole(state.role);
   showScreen(state.screen && document.getElementById(state.screen) ? state.screen : 'dashboard');
 </script>
 </body>
