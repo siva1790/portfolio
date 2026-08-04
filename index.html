@@ -501,18 +501,6 @@
     .result { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--ink) !important; font-weight: 600; }
     .card-link { margin-top: 24px; color: var(--blue); font-weight: 600; }
 
-    .other-work { margin-top: 54px; }
-    .mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .mini-card {
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--surface);
-    }
-    .mini-card .tag { color: var(--blue); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-    .mini-card h3 { margin: 38px 0 9px; }
-    .mini-card p { margin: 0; color: var(--muted); font-size: .94rem; }
-
     .principles-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(48px, 8vw, 110px); }
     .principle-list { border-top: 1px solid var(--line); }
     .principle { display: grid; grid-template-columns: 52px 1fr; gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--line); }
@@ -602,42 +590,6 @@
     .footer-links a { text-decoration: none; }
     .footer-links a:hover { color: #fff; }
 
-    .detail-view {
-      display: none;
-      min-height: 100vh;
-      background: var(--surface);
-    }
-    .detail-view.active { display: block; }
-    .case-hero { padding-block: clamp(70px, 10vw, 130px) 65px; }
-    .back-link { display: inline-block; margin-bottom: 50px; color: var(--blue); font-weight: 600; text-decoration: none; }
-    .case-hero h1 { max-width: 900px; font-size: clamp(2.5rem, 5vw, 4.6rem); }
-    .case-summary { max-width: 760px; color: var(--muted); font-size: 1.08rem; }
-    .case-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 50px; }
-    .case-fact { padding-top: 16px; border-top: 1px solid var(--line); }
-    .case-fact small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-    .case-fact strong { display: block; margin-top: 7px; }
-    .case-banner { min-height: 520px; display: grid; place-items: center; overflow: hidden; }
-    .case-banner.blue { background: var(--blue-soft); }
-    .case-banner-note {
-      width: min(88%, 780px);
-      padding: clamp(35px, 6vw, 70px);
-      border: 1px solid rgba(23,23,23,.12);
-      border-radius: 20px;
-      background: rgba(255,255,255,.72);
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-    .case-banner-note strong { display: block; margin-bottom: 10px; font-family: "DM Sans", sans-serif; font-size: 1.65rem; }
-    .case-body { width: min(calc(100% - 48px), 900px); margin-inline: auto; padding-block: 90px 120px; }
-    .case-section { display: grid; grid-template-columns: 200px 1fr; gap: 54px; padding: 52px 0; border-bottom: 1px solid var(--line); }
-    .case-section h2 { font-family: "DM Sans", sans-serif; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); }
-    .case-section h3 { font-family: "DM Sans", sans-serif; font-size: clamp(1.65rem, 3vw, 2.45rem); }
-    .case-section p, .case-section li { color: var(--muted); }
-    .case-section li + li { margin-top: 8px; }
-    .decision { margin: 28px 0; padding: 24px; border-left: 4px solid var(--blue); background: var(--blue-soft); }
-    .decision strong { display: block; margin-bottom: 5px; }
-    .case-next { display: flex; justify-content: space-between; gap: 30px; padding-top: 70px; }
-
     .resume-view { display: none; background: #fff; }
     .resume-view.active { display: block; }
     .resume-sheet { width: min(calc(100% - 48px), 920px); margin: 60px auto; padding: clamp(30px, 6vw, 72px); border: 1px solid var(--line); }
@@ -660,15 +612,13 @@
       .outcome:nth-child(3) { padding-left: 0; }
       .project-card { grid-template-columns: 1fr; }
       .project-visual { min-height: 390px; }
-      .mini-grid { grid-template-columns: 1fr 1fr; }
-      .case-facts { grid-template-columns: repeat(2, 1fr); }
       .contact-wrap { grid-template-columns: 1fr; }
       .contact-actions { justify-content: flex-start; }
       .article-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 720px) {
-      .container, .case-body { width: min(calc(100% - 32px), var(--max)); }
+      .container { width: min(calc(100% - 32px), var(--max)); }
       .nav { min-height: 66px; }
       .menu-button { display: block; }
       .nav-links {
@@ -693,13 +643,10 @@
       .outcome { padding: 20px 14px; }
       .project-visual { min-height: 300px; }
       .project-copy { padding: 30px 24px; }
-      .mini-grid, .article-grid, .capabilities { grid-template-columns: 1fr; }
+      .article-grid, .capabilities { grid-template-columns: 1fr; }
       .principle { grid-template-columns: 38px 1fr; }
       .timeline-item, .resume-role { grid-template-columns: 1fr; gap: 5px; }
-      .case-facts { grid-template-columns: 1fr 1fr; }
-      .case-banner { min-height: 390px; }
-      .case-section { grid-template-columns: 1fr; gap: 12px; padding: 38px 0; }
-      .case-next, .footer-wrap, .resume-top { flex-direction: column; }
+      .footer-wrap, .resume-top { flex-direction: column; }
       .resume-contact { text-align: left; }
       .footer-links { flex-wrap: wrap; }
     }
@@ -707,7 +654,7 @@
     @media print {
       body { background: #fff; font-size: 11pt; }
       .site-header, .resume-actions, .back-to-top, footer { display: none !important; }
-      #site-content, .detail-view { display: none !important; }
+      #site-content { display: none !important; }
       .resume-view.active { display: block !important; }
       .resume-sheet { width: 100%; margin: 0; padding: 0; border: 0; }
       .resume-section { break-inside: avoid; }
@@ -789,21 +736,6 @@
           </div>
 
           <div class="work-list">
-            <a class="project-card" href="case-study-1.html">
-              <div class="project-visual blue" aria-hidden="true">
-                <div class="project-shot">
-                  <img class="project-image" src="case-study-1-assets/hero-portal.webp" alt="">
-                </div>
-              </div>
-              <div class="project-copy">
-                <div class="project-meta">Enterprise UX · Insurance · Digital transformation</div>
-                <h3>Travel portal</h3>
-                <p>A responsive redesign that unified fragmented workflows across Health, Motor, Travel, Marine and four other insurance products.</p>
-                <p class="result">Research, information architecture and interaction design for a 12-month enterprise transformation.</p>
-                <span class="card-link">Read the case study →</span>
-              </div>
-            </a>
-
             <a class="project-card" href="captivate-case-study.html">
               <div class="project-visual blue" aria-hidden="true">
                 <div class="project-shot">
@@ -820,6 +752,21 @@
                 <h3>Captivate: a shared visit coordination workspace</h3>
                 <p>Reframing a static request form as a progressive workspace for requesters, coordinators and independent service teams.</p>
                 <p class="result">A research-led information architecture and prototype for complex, multi-location visits.</p>
+                <span class="card-link">Read the case study →</span>
+              </div>
+            </a>
+
+            <a class="project-card" href="case-study-1.html">
+              <div class="project-visual blue" aria-hidden="true">
+                <div class="project-shot">
+                  <img class="project-image" src="case-study-1-assets/hero-portal.webp" alt="">
+                </div>
+              </div>
+              <div class="project-copy">
+                <div class="project-meta">Enterprise UX · Insurance · Digital transformation</div>
+                <h3>Travel portal</h3>
+                <p>A responsive redesign that unified fragmented workflows across Health, Motor, Travel, Marine and four other insurance products.</p>
+                <p class="result">Research, information architecture and interaction design for a 12-month enterprise transformation.</p>
                 <span class="card-link">Read the case study →</span>
               </div>
             </a>
@@ -872,17 +819,6 @@
                 <span class="card-link">Read the case study →</span>
               </div>
             </a>
-          </div>
-
-          <div class="other-work" hidden>
-            <div class="section-head">
-              <div><p class="eyebrow">Other projects & experiments</p><h2>Additional work.</h2></div>
-            </div>
-            <div class="mini-grid">
-              <article class="mini-card"><span class="tag">Research & design</span><h3>Captivate</h3><p>Enterprise UX work spanning research, synthesis, and product design.</p></article>
-              <article class="mini-card"><span class="tag">Product design</span><h3>Showtime</h3><p>A product-design engagement focused on simplifying discovery and action.</p></article>
-              <article class="mini-card"><span class="tag">Mobile experiment</span><h3>Chandra PWA</h3><p>An AI-assisted Panchang PWA currently in Google Play closed testing.</p></article>
-            </div>
           </div>
         </div>
       </section>
@@ -978,76 +914,6 @@
       </section>
     </div>
 
-    <article class="detail-view" id="case-bajaj" data-title="Bajaj Allianz Agent Portal">
-      <header class="case-hero container">
-        <a class="back-link route-link" href="#featured-work">← Back to selected work</a>
-        <p class="eyebrow">UX transformation · BFSI</p>
-        <h1>Redesigning policy issuance for insurance agents.</h1>
-        <p class="case-summary">An enterprise UX project focused on simplifying the workflow, improving usability, and aligning a cross-functional team.</p>
-        <div class="case-facts">
-          <div class="case-fact"><small>Role</small><strong>UX lead</strong></div>
-          <div class="case-fact"><small>Organisation</small><strong>TCS / Bajaj Allianz</strong></div>
-          <div class="case-fact"><small>Focus</small><strong>Research, strategy, design</strong></div>
-          <div class="case-fact"><small>Outcome</small><strong>300% engagement growth</strong></div>
-        </div>
-      </header>
-      <div class="case-banner blue"><div class="case-banner-note"><strong>Replace with a redacted workflow or product hero</strong><span>Use one image that makes the transformation legible before explaining the process.</span></div></div>
-      <div class="case-body">
-        <section class="case-section"><h2>Problem</h2><div><h3>A complex policy-issuance workflow.</h3><p>Agents needed to complete policy issuance quickly and with confidence. The team first needed a shared view of the workflow, its business rules, and the points where users encountered difficulty.</p></div></section>
-        <section class="case-section"><h2>My role</h2><div><h3>UX lead within a cross-functional team.</h3><p>I connected research findings, product constraints, stakeholder priorities, and delivery decisions throughout the project.</p><ul><li>Structured the research and evaluation approach.</li><li>Aligned stakeholders around priority workflow issues.</li><li>Guided the design direction and validation.</li><li>Helped translate findings into implementable changes.</li></ul></div></section>
-        <section class="case-section"><h2>Key decision</h2><div><h3>Evaluate the end-to-end journey.</h3><div class="decision"><strong>Design decision</strong>Use time-to-issue and task confidence as primary measures, rather than evaluating screens in isolation.</div><p>This gave business and technical teams a shared basis for discussing priorities and trade-offs.</p></div></section>
-        <section class="case-section"><h2>Outcome</h2><div><h3>Changes in time and adoption.</h3><p>The redesigned experience reduced policy issuance time to approximately one minute and contributed to a reported 300% increase in agent digital engagement.</p><p><strong>Add before-and-after task metrics, usability evidence, and a stakeholder quote when available.</strong></p></div></section>
-        <section class="case-section"><h2>Reflection</h2><div><h3>Further measurement.</h3><p>I would add workflow instrumentation earlier and connect usability findings with operational metrics throughout delivery.</p></div></section>
-        <div class="case-next"><a class="button route-link" href="#featured-work">All work</a><a class="button button-primary route-link" href="#case-ad-generator">Next: Ad Generator →</a></div>
-      </div>
-    </article>
-
-    <article class="detail-view" id="case-ad-generator" data-title="Programmatic Ad Generator">
-      <header class="case-hero container">
-        <a class="back-link route-link" href="#featured-work">← Back to selected work</a>
-        <p class="eyebrow">AI tooling · Delivery transformation</p>
-        <h1>An AI-assisted workflow for digital ad production.</h1>
-        <p class="case-summary">An internal tool designed to reduce repetitive production work while retaining brand controls and human review.</p>
-        <div class="case-facts">
-          <div class="case-fact"><small>Role</small><strong>Design lead / builder</strong></div>
-          <div class="case-fact"><small>Organisation</small><strong>Deloitte USI</strong></div>
-          <div class="case-fact"><small>Focus</small><strong>AI workflow design</strong></div>
-          <div class="case-fact"><small>Outcome</small><strong>~60% less time</strong></div>
-        </div>
-      </header>
-      <div class="case-banner blue"><div class="case-banner-note"><strong>Replace with the real generation workflow</strong><span>Show input, governance checks, generated variants, and the human review point.</span></div></div>
-      <div class="case-body">
-        <section class="case-section"><h2>Opportunity</h2><div><h3>Repetitive production work.</h3><p>Digital ad production required many predictable variations. The process took time away from concept development, review, and other design work.</p></div></section>
-        <section class="case-section"><h2>Approach</h2><div><h3>Identify appropriate points for automation.</h3><p>I mapped repeatable steps, brand constraints, review points, and likely failure conditions. This helped distinguish tasks that could be automated from decisions that still required a designer.</p><div class="decision"><strong>Product principle</strong>Use AI to support production while keeping review and approval with the team.</div></div></section>
-        <section class="case-section"><h2>Adoption</h2><div><h3>Introduce the tool with its controls.</h3><ul><li>Involved users early to understand trust and control concerns.</li><li>Made brand constraints visible in the workflow.</li><li>Positioned the tool as support for existing team practices.</li><li>Compared production time before and after introduction.</li></ul></div></section>
-        <section class="case-section"><h2>Outcome</h2><div><h3>Reduced production time.</h3><p>The tool reduced production time by approximately 60% and provided a reference for evaluating similar workflows.</p><p><strong>Add adoption numbers, an error-rate comparison, and examples of generated output when disclosure permits.</strong></p></div></section>
-        <div class="case-next"><a class="button route-link" href="#featured-work">All work</a><a class="button button-primary route-link" href="#case-plugin">Next: Figma Plugin →</a></div>
-      </div>
-    </article>
-
-    <article class="detail-view" id="case-plugin" data-title="Brand Guidelines Plugin">
-      <header class="case-hero container">
-        <a class="back-link route-link" href="#featured-work">← Back to selected work</a>
-        <p class="eyebrow">Figma plugin · AI-assisted building</p>
-        <h1>A Figma plugin for accessing brand guidance.</h1>
-        <p class="case-summary">A self-initiated project covering product definition, interaction design, AI-assisted development, testing, and publication.</p>
-        <div class="case-facts">
-          <div class="case-fact"><small>Role</small><strong>Designer / developer</strong></div>
-          <div class="case-fact"><small>Context</small><strong>Self-initiated</strong></div>
-          <div class="case-fact"><small>Focus</small><strong>Workflow tooling</strong></div>
-          <div class="case-fact"><small>Evidence</small><strong>Published plugin</strong></div>
-        </div>
-      </header>
-      <div class="case-banner blue"><div class="case-banner-note"><strong>Add plugin screens and a short demo</strong><span>A 20–30 second workflow video would communicate the value faster than a long feature list.</span></div></div>
-      <div class="case-body">
-        <section class="case-section"><h2>Problem</h2><div><h3>Guidance outside the design workflow.</h3><p>Designers often need to leave Figma, search documentation, interpret a rule, and then return to their work. The plugin explores whether common guidance can be made available within that workflow.</p></div></section>
-        <section class="case-section"><h2>Process</h2><div><h3>From concept to a published plugin.</h3><p>I defined the scope, designed the interaction, used AI to assist implementation, tested failure states, and completed the Figma Community review process.</p><div class="decision"><strong>Scope decision</strong>Begin with common brand questions rather than reproduce an entire guidelines website inside Figma.</div></div></section>
-        <section class="case-section"><h2>Learning</h2><div><h3>Designing and implementing the same product.</h3><p>The project gave me practical experience moving from problem definition to interaction design and implementation, including the limitations of AI-assisted development.</p></div></section>
-        <section class="case-section"><h2>Reflection</h2><div><h3>Learning from future usage.</h3><p>A future version could use lightweight analytics and feedback to identify the guidance people use most often and where additional support is needed.</p></div></section>
-        <div class="case-next"><a class="button route-link" href="#featured-work">All work</a><a class="button button-primary" href="https://medium.com/design-bootcamp/i-built-a-figma-plugin-with-claude-heres-the-honest-messy-deeply-satisfying-story-325390a88618?sk=6d227f57e9b55bb1aad93400bfaf9020" target="_blank" rel="noopener">Read the full story ↗</a></div>
-      </div>
-    </article>
-
     <section class="resume-view" id="resume" data-title="Resume">
       <div class="resume-actions">
         <a class="button route-link" href="#work">← Portfolio</a>
@@ -1088,7 +954,6 @@
     const menuButton = document.querySelector(".menu-button");
     const navLinks = document.querySelector(".nav-links");
     const siteContent = document.getElementById("site-content");
-    const detailViews = [...document.querySelectorAll(".detail-view")];
     const resumeView = document.getElementById("resume");
     const footer = document.querySelector("footer");
     const baseTitle = "Sivakumar Ravi — UX Design Leader";
@@ -1109,11 +974,9 @@
 
     function route() {
       const hash = location.hash || "#work";
-      const caseView = detailViews.find(view => `#${view.id}` === hash);
       const isResume = hash === "#resume";
-      const isSpecialView = Boolean(caseView || isResume);
+      const isSpecialView = isResume;
 
-      detailViews.forEach(view => view.classList.toggle("active", view === caseView));
       resumeView.classList.toggle("active", isResume);
       siteContent.style.display = isSpecialView ? "none" : "block";
       footer.style.display = isSpecialView ? "none" : "block";
@@ -1124,8 +987,7 @@
         else link.removeAttribute("aria-current");
       });
 
-      if (caseView) document.title = `${caseView.dataset.title} — Sivakumar Ravi`;
-      else if (isResume) document.title = "Resume — Sivakumar Ravi";
+      if (isResume) document.title = "Resume — Sivakumar Ravi";
       else document.title = baseTitle;
 
       if (!isSpecialView) {
