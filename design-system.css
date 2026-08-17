@@ -156,7 +156,10 @@ button {
 
 .site-note {
   color: var(--color-muted);
-  font-size: .9rem;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
 }
 
 .case-hero {
