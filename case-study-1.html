@@ -23,7 +23,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { overflow-x: hidden; scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--canvas);
@@ -32,7 +32,6 @@
       font-size: 16px;
       line-height: 1.7;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden;
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; }
@@ -51,6 +50,7 @@
     .container { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
     .reading { width: min(100%, var(--reading)); }
     .site-header {
+      position: -webkit-sticky;
       position: sticky;
       top: 0;
       z-index: 50;
@@ -113,7 +113,12 @@
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-    .fact strong { font-weight: 500; }
+    .fact strong {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      line-height: 1.45;
+    }
     .hero-image {
       margin-top: 58px;
       padding: clamp(18px, 4vw, 44px);
@@ -412,6 +417,7 @@
     @media (max-width: 860px) {
       .section-label { grid-template-columns: 1fr; gap: 18px; }
       .section-index { position: static; }
+      .facts { grid-template-columns: repeat(2, 1fr); }
       .research-visuals { width: 100%; max-width: none; }
       .themes { grid-template-columns: repeat(2, 1fr); }
       .findings, .impact-grid { grid-template-columns: 1fr 1fr; }
@@ -463,11 +469,11 @@
   <main id="content">
     <header class="hero">
       <div class="container">
-        <p class="eyebrow">Case study 01 · Enterprise UX</p>
+        <p class="eyebrow">Case study: travel insurance workflows</p>
         <h1>Enterprise digital transformation for a leading general insurance provider in India</h1>
         <p class="hero-intro">A focused redesign of the Travel insurance agent portal within a broader general-insurance transformation program.</p>
         <div class="facts" aria-label="Project overview">
-          <div class="fact"><small>Role</small><strong>UX Researcher / Interaction Designer</strong></div>
+          <div class="fact"><small>Role</small><strong>UX research, interaction design</strong></div>
           <div class="fact"><small>Duration</small><strong>12 months</strong></div>
           <div class="fact"><small>Scope</small><strong>Responsive enterprise portal</strong></div>
         </div>
