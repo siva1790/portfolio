@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Knotty Little Loops crochet branding case study by Sivakumar Ravi.">
+  <meta name="theme-color" content="#f7f5f2">
+  <title>Knotty Little Loops — Crochet Brand Identity Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    .skip-link{position:fixed;top:12px;left:12px;z-index:1000;padding:10px 16px;background:var(--color-ink);color:#fff;transform:translateY(-150%)}
+    .skip-link:focus{transform:translateY(0)}
+    .case-section-layout>div{min-width:0}
+    .knotty-hero-visual{margin-top:58px;display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(18px,4vw,42px);align-items:center;padding:clamp(28px,5vw,58px);border:1px solid var(--color-line);border-radius:var(--radius-lg);background:linear-gradient(135deg,#fffdf9 0%,#f9ebe7 50%,#f5f2ec 100%)}
+    .logo-stage{display:grid;place-items:center;align-self:stretch;min-height:320px;border:1px dashed #e9a1a5;border-radius:16px;background:#fffdf9}
+    .logo-stage img{width:min(78%,280px);border-radius:50%;box-shadow:0 20px 42px rgba(107,63,42,.16)}
+    .hero-photo{overflow:hidden;border:1px solid rgba(107,63,42,.14);border-radius:16px;background:#fff}
+    .hero-photo img{width:100%;height:100%;object-fit:cover}
+    .brand-pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--space-5)}
+    .brand-pill{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border:1px solid #efd0cc;border-radius:999px;background:#fffdf9;color:#6b3f2a;font-size:.82rem;font-weight:700}
+    .insight-grid,.collateral-grid,.logo-grid,.palette-grid{display:grid;gap:var(--space-4);margin-top:var(--space-6)}
+    .insight-grid{grid-template-columns:repeat(3,1fr)}
+    .logo-grid{grid-template-columns:.8fr 1.2fr;align-items:center}
+    .palette-grid{grid-template-columns:repeat(6,1fr)}
+    .collateral-grid{grid-template-columns:repeat(2,1fr)}
+    .artifact-card{overflow:hidden;border:1px solid var(--color-line);border-radius:var(--radius-md);background:var(--color-surface)}
+    .artifact-card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#fffdf9}
+    .artifact-card.logo-art img{aspect-ratio:1;object-fit:contain;padding:30px}
+    .artifact-card.email-art img{object-fit:contain;padding:16px}
+    .artifact-card-body{padding:var(--space-5)}
+    .artifact-card-body p{margin-bottom:var(--space-4);color:var(--color-muted)}
+    .artifact-links{display:flex;flex-wrap:wrap;gap:10px}
+    .mini-link{display:inline-flex;align-items:center;min-height:38px;padding:0 13px;border:1px solid var(--color-line);border-radius:999px;color:var(--color-primary);font-size:.86rem;font-weight:700;text-decoration:none}
+    .mini-link:hover{border-color:var(--color-primary)}
+    .swatch{min-height:126px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:14px;border:1px solid var(--color-line);border-radius:10px;background:var(--swatch,#fff)}
+    .swatch strong,.swatch span{color:var(--label,#171717)}
+    .swatch strong{font-size:.9rem}.swatch span{font-size:.78rem;font-weight:700;opacity:.78}
+    .quote-panel{margin:var(--space-7) 0;padding:28px clamp(24px,5vw,48px);border-left:3px solid #6b3f2a;background:#fff8f5;color:var(--color-ink);font-size:clamp(1.25rem,2vw,1.65rem);line-height:1.45}
+    .brand-table{margin-top:var(--space-6);overflow:hidden;border:1px solid var(--color-line);border-radius:var(--radius-md);background:var(--color-surface)}
+    .brand-row{display:grid;grid-template-columns:1fr 1.25fr 1.2fr;border-top:1px solid var(--color-line)}
+    .brand-row:first-child{border-top:0;background:#f8ede9;color:#6b3f2a;font-weight:700}
+    .brand-row>div{padding:16px;border-left:1px solid var(--color-line)}
+    .brand-row>div:first-child{border-left:0}
+    .brand-row p{margin:0;color:var(--color-muted)}
+    .pdf-preview{min-height:260px;display:grid;place-items:center;padding:30px;background:#fff8f5;text-align:center}
+    .pdf-preview strong{display:block;margin-bottom:8px;font-size:1.2rem}
+    .case-next{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:48px;padding-top:34px;border-top:1px solid var(--color-line)}
+    .back-to-top{position:fixed;right:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:60;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:var(--color-primary);color:#fff;font-size:0;text-decoration:none;box-shadow:0 14px 34px rgba(32,28,24,.16);transition:transform .18s,background .18s}
+    .back-to-top svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    footer{padding-block:28px;background:var(--color-ink);color:#aaa}.footer-wrap{display:flex;justify-content:space-between;gap:24px;font-size:.9rem}.footer-links{display:flex;gap:22px}.footer-links a{text-decoration:none}.footer-links a:hover{color:#fff}
+    @media(max-width:900px){.knotty-hero-visual,.logo-grid,.collateral-grid{grid-template-columns:1fr}.insight-grid{grid-template-columns:1fr}.palette-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:620px){.knotty-hero-visual{padding:18px}.palette-grid{grid-template-columns:repeat(2,1fr)}.brand-row{grid-template-columns:1fr}.brand-row>div{border-left:0;border-top:1px solid var(--color-line)}.brand-row>div:first-child{border-top:0}.case-next,.footer-wrap{flex-direction:column}.footer-links{flex-wrap:wrap}.ds-button{width:100%}}
+  </style>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="ds-container site-nav">
+    <a class="site-brand" href="index.html">Sivakumar Ravi</a>
+    <span class="site-note">Brand identity &middot; Collateral design &middot; Small business</span>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="case-hero">
+    <div class="ds-container">
+      <p class="ds-eyebrow">Case study: crochet brand identity</p>
+      <h1 class="ds-display-title">Knotty Little Loops: building a warm, playful brand system for a handmade crochet startup.</h1>
+      <p class="ds-intro">Knotty Little Loops is a small business creating handmade crochet products across soft toys, hair clips, charms, bag decor, bookmarks, home accents and custom gifts. The brand identity was designed to feel tactile, friendly and giftable for women 20-40 years of age, while still carrying enough playfulness to appeal to kids 10-16 years of age.</p>
+      <div class="case-facts">
+        <div class="case-fact"><small>Role</small><strong>Brand strategy, visual identity, digital and print collateral design</strong></div>
+        <div class="case-fact"><small>Audience</small><strong>Women 20-40 years of age and kids 10-16 years of age across gifting and self-purchase moments</strong></div>
+        <div class="case-fact"><small>Scope</small><strong>Logo, brand guidelines, website layout, emailers, visiting card and flea-market poster</strong></div>
+        <div class="case-fact"><small>Positioning</small><strong>Handmade crochet products that feel cozy, playful, personal and made with love</strong></div>
+      </div>
+      <div class="knotty-hero-visual">
+        <div class="logo-stage"><img src="knotty-little-loops-assets/new-logo.jpeg" alt="Knotty Little Loops logo"></div>
+        <div class="hero-photo"><img src="knotty-little-loops-assets/visiting-card-photo.png" alt="Knotty Little Loops visiting cards with the new crochet logo"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="context">
+    <div class="ds-container case-section-layout">
+      <div class="case-section-label">01 &middot; Context</div>
+      <div>
+        <div class="ds-reading">
+          <p class="ds-eyebrow">The opportunity</p>
+          <h2 class="ds-section-title">The brand needed to balance softness, craft and commercial clarity.</h2>
+          <p class="ds-body">Crochet products carry strong emotional cues: they are handmade, textured, slow-crafted and often purchased as gifts. The identity therefore needed to avoid two extremes: looking too generic and craft-fair casual, or becoming overly childish because many products appeal to younger buyers.</p>
+          <p class="ds-body">The brand guidelines created a repeatable system for product storytelling, shopping moments, seasonal campaigns and in-person sales. The goal was to help the business look consistent across touchpoints without losing the personal warmth of handmade work.</p>
+        </div>
+        <div class="insight-grid">
+          <article class="ds-card"><h3 class="ds-subtitle">Women 20-40 years of age</h3><p class="ds-body">Needed a brand that felt polished enough for gifting, personal accessories and home accents, while still feeling intimate and handmade.</p></article>
+          <article class="ds-card"><h3 class="ds-subtitle">Kids 10-16 years of age</h3><p class="ds-body">Needed moments of color, character and playfulness through product names, collection language and accent graphics.</p></article>
+          <article class="ds-card"><h3 class="ds-subtitle">Small business reality</h3><p class="ds-body">Needed a flexible visual system that could work across website sections, emails, visiting cards and flea-market communication.</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="strategy">
+    <div class="ds-container case-section-layout">
+      <div class="case-section-label">02 &middot; Brand strategy</div>
+      <div>
+        <div class="ds-reading">
+          <p class="ds-eyebrow">Positioning and voice</p>
+          <h2 class="ds-section-title">A calm handmade shop with selective playful moments.</h2>
+          <p class="ds-body">The positioning was built around tactile keywords: little, loop, handmade, cozy, soft, playful, crafted, charm, cuddle, stitch, yarn, joy, gift and special. These words shaped both the verbal system and the visual direction.</p>
+          <p class="ds-body">Instead of making every touchpoint pink or decorative, the system uses warm white and brown as the foundation, with blush, lavender, sage and peach as controlled accents. This keeps the brand appealing to adult shoppers while creating enough delight for teen and kid-oriented products.</p>
+          <p class="ds-body">The brand identity was created with the support of AI after the core research direction was established. I conducted the user research, derived the foundational brand keywords and identified the primary color direction from that research. AI was then used as a production and iteration partner to generate the logo, website layout, emailers and print collaterals, with refinements made through prompting until each piece aligned with the brand guidelines.</p>
+          <div class="brand-pill-row" aria-label="Brand keywords">
+            <span class="brand-pill">Handmade</span><span class="brand-pill">Cozy</span><span class="brand-pill">Playful</span><span class="brand-pill">Tactile</span><span class="brand-pill">Giftable</span><span class="brand-pill">Personal</span>
+          </div>
+        </div>
+        <div class="palette-grid" aria-label="Knotty Little Loops color palette">
+          <div class="swatch" style="--swatch:#6B3F2A;--label:#FFFDF9"><strong>Knotty Brown</strong><span>#6B3F2A</span></div>
+          <div class="swatch" style="--swatch:#E9A1A5;--label:#3A2017"><strong>Blush</strong><span>#E9A1A5</span></div>
+          <div class="swatch" style="--swatch:#FFFDF9;--label:#6B3F2A"><strong>Warm White</strong><span>#FFFDF9</span></div>
+          <div class="swatch" style="--swatch:#B7A5D6;--label:#3A2017"><strong>Lavender</strong><span>#B7A5D6</span></div>
+          <div class="swatch" style="--swatch:#AAB79A;--label:#26301f"><strong>Sage</strong><span>#AAB79A</span></div>
+          <div class="swatch" style="--swatch:#F4B6A6;--label:#3A2017"><strong>Peach</strong><span>#F4B6A6</span></div>
+        </div>
+        <div class="artifact-links" style="margin-top:var(--space-6)">
+          <a class="mini-link" href="knotty-little-loops-assets/brand-guide.html" target="_blank" rel="noopener">Open brand guide</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="logo">
+    <div class="ds-container case-section-layout">
+      <div class="case-section-label">03 &middot; Logo system</div>
+      <div>
+        <div class="logo-grid">
+          <article class="artifact-card logo-art">
+            <img src="knotty-little-loops-assets/new-logo.jpeg" alt="Primary Knotty Little Loops circular logo">
+          </article>
+          <div>
+            <p class="ds-eyebrow">Identity design</p>
+            <h2 class="ds-section-title">The logo turns brand positioning into a recognizable crochet mark.</h2>
+            <p class="ds-body">The new logo uses yarn-like lettering to make the craft visible before the viewer reads the supporting copy. The yarn-ball "o" signals crochet immediately, while the hook detail reinforces the handmade process. The circular badge and stitched border make the mark suitable for stickers, product tags, visiting cards, packaging and social profiles.</p>
+            <p class="ds-body">The logo keeps the brand playful without becoming childish. Brown gives the mark warmth and materiality, while the soft pink border adds friendliness and approachability for a gifting-led handmade business.</p>
+            <div class="artifact-links">
+              <a class="mini-link" href="knotty-little-loops-assets/new-logo.jpeg" target="_blank" rel="noopener">View logo full size</a>
+            </div>
+          </div>
+        </div>
+        <blockquote class="quote-panel">The identity needed to feel handmade at first glance, but disciplined enough to support a full business system across digital campaigns and physical sales moments.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="guidelines">
+    <div class="ds-container case-section-layout">
+      <div class="case-section-label">04 &middot; Brand guidelines</div>
+      <div>
+        <div class="ds-reading">
+          <p class="ds-eyebrow">System foundations</p>
+          <h2 class="ds-section-title">The guidelines translated the brand into practical rules for future design decisions.</h2>
+          <p class="ds-body">The brand guide defines logo usage, spacing, color roles, typography, tone of voice, photography direction, illustration language, UI components and print principles. The system uses Fredoka for expressive headings and Nunito Sans for readable body and UI content, letting the custom yarn logo remain the visual hero.</p>
+        </div>
+        <div class="brand-table">
+          <div class="brand-row"><div>Foundation</div><div>Design decision</div><div>Why it matters</div></div>
+          <div class="brand-row"><div><strong>Color</strong></div><div><p>Warm white and brown carry most of the system; blush, lavender, sage and peach act as accents.</p></div><div><p>Keeps the brand mature, soft and flexible across product categories.</p></div></div>
+          <div class="brand-row"><div><strong>Typography</strong></div><div><p>Fredoka supports playful campaign moments; Nunito Sans keeps longer content readable.</p></div><div><p>Balances kid-friendly warmth with professional ecommerce clarity.</p></div></div>
+          <div class="brand-row"><div><strong>Imagery</strong></div><div><p>Warm daylight, honest materials, close-up texture and minimal props.</p></div><div><p>Lets the crochet texture and handmade quality carry the emotion.</p></div></div>
+          <div class="brand-row"><div><strong>Graphic language</strong></div><div><p>Stitch lines, yarn paths, loops and small crochet motifs are used selectively.</p></div><div><p>Creates recognition without over-decorating every surface.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="digital">
+    <div class="ds-container case-section-layout">
+      <div class="case-section-label">05 &middot; Digital collaterals</div>
+      <div>
+        <div class="ds-reading">
+          <p class="ds-eyebrow">Website and email system</p>
+          <h2 class="ds-section-title">Digital touchpoints were designed to introduce the brand, sell product categories and support seasonal campaigns.</h2>
+          <p class="ds-body">The website layout establishes the product world: collections, bestsellers, brand story, handmade proof points, custom orders and social discovery. The emailer system extends the same visual language into subscriber communication, with one template focused on new arrivals and product categories and another adapted for occasion-led campaigns such as Diwali and Christmas.</p>
+        </div>
+        <div class="collateral-grid">
+          <article class="artifact-card">
+            <div class="pdf-preview">
+              <div><strong>Website layout</strong><p class="ds-body">A warm ecommerce layout for discovery, product storytelling and custom orders.</p></div>
+            </div>
+            <div class="artifact-card-body">
+              <h3 class="ds-subtitle">Brand website</h3>
+              <p>The website uses calm sections, rounded product cards and tactile microcopy to make handmade products easy to browse without losing personality.</p>
+              <div class="artifact-links"><a class="mini-link" href="knotty-little-loops-assets/website-layout.html" target="_blank" rel="noopener">Open website layout</a></div>
+            </div>
+          </article>
+          <article class="artifact-card email-art">
+            <img src="knotty-little-loops-assets/email-preview-desktop-and-phone.png" alt="New arrivals email preview on desktop and phone">
+            <div class="artifact-card-body">
+              <h3 class="ds-subtitle">New arrivals emailer</h3>
+              <p>Designed for existing subscribers, this email promotes fresh product categories while keeping the tone short, friendly and product-led.</p>
+              <div class="artifact-links"><a class="mini-link" href="knotty-little-loops-assets/new-arrivals-email.html" target="_blank" rel="noopener">Open new arrivals email</a></div>
+            </div>
+          </article>
+          <article class="artifact-card email-art">
+            <img src="knotty-little-loops-assets/occasion-email-preview.png" alt="Occasion email preview for seasonal promotion">
+            <div class="artifact-card-body">
+              <h3 class="ds-subtitle">Occasion emailers</h3>
+              <p>Diwali and Christmas templates adapt the brand system for gifting moments, using festive cues while preserving the core handmade voice.</p>
+              <div class="artifact-links">
+                <a class="mini-link" href="knotty-little-loops-assets/diwali-email.html" target="_blank" rel="noopener">Open Diwali email</a>
+                <a class="mini-link" href="knotty-little-loops-assets/christmas-email.html" target="_blank" rel="noopener">Open Christmas email</a>
+              </div>
+            </div>
+          </article>
+          <article class="artifact-card logo-art">
+            <img src="knotty-little-loops-assets/new-logo.jpeg" alt="Knotty Little Loops logo">
+            <div class="artifact-card-body">
+              <h3 class="ds-subtitle">Digital logo usage</h3>
+              <p>The circular logo works as a primary brand mark across web headers, email signatures, social profiles and campaign visuals.</p>
+              <div class="artifact-links"><a class="mini-link" href="knotty-little-loops-assets/new-logo.jpeg" target="_blank" rel="noopener">View logo</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="physical">
+    <div class="ds-container case-section-layout">
+      <div class="case-section-label">06 &middot; Physical collaterals</div>
+      <div>
+        <div class="ds-reading">
+          <p class="ds-eyebrow">Print and flea-market presence</p>
+          <h2 class="ds-section-title">Physical collateral was designed for quick recognition in tactile, in-person buying moments.</h2>
+          <p class="ds-body">For flea markets and small-business selling contexts, the brand needed to work at two speeds: a poster that could attract attention from a distance, and a visiting card that could travel home with the customer. Both pieces use the logo, stitched details and warm palette to make the brand feel memorable after the interaction.</p>
+        </div>
+        <div class="collateral-grid">
+          <article class="artifact-card">
+            <img src="knotty-little-loops-assets/visiting-card-photo.png" alt="Knotty Little Loops visiting card mockup">
+            <div class="artifact-card-body">
+              <h3 class="ds-subtitle">Visiting card</h3>
+              <p>The card combines the circular logo, stitched border detail, contact information and a QR prompt so market visitors can quickly follow or place orders later.</p>
+              <div class="artifact-links">
+                <a class="mini-link" href="knotty-little-loops-assets/visiting-card-print.pdf" target="_blank" rel="noopener">Open print PDF</a>
+              </div>
+            </div>
+          </article>
+          <article class="artifact-card">
+            <div class="pdf-preview">
+              <div><strong>A2 flea-market poster</strong><p class="ds-body">A large-format print piece for product discovery, brand recall and stall visibility.</p></div>
+            </div>
+            <div class="artifact-card-body">
+              <h3 class="ds-subtitle">Flea-market poster</h3>
+              <p>The A2 poster extends the brand system into a high-visibility format, using simple messaging and the handmade visual language to support quick scanning.</p>
+              <div class="artifact-links"><a class="mini-link" href="knotty-little-loops-assets/flea-market-a2-poster.pdf" target="_blank" rel="noopener">Open A2 poster PDF</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="outcome">
+    <div class="ds-container case-section-layout">
+      <div class="case-section-label">07 &middot; Outcome</div>
+      <div>
+        <div class="ds-reading">
+          <p class="ds-eyebrow">What the system enables</p>
+          <h2 class="ds-section-title">A cohesive brand toolkit that can grow with the business.</h2>
+          <p class="ds-body">The final system gives Knotty Little Loops a consistent identity across brand, ecommerce, subscriber communication and print. More importantly, it gives the business reusable rules for future product drops, seasonal promotions, market events and packaging decisions.</p>
+          <p class="ds-body">The brand now has a clear visual and verbal direction: warm enough for handmade gifting, polished enough for adult shoppers, and playful enough for crochet characters and youth-oriented products.</p>
+          <p class="ds-body">Follow the brand on <a href="https://instagram.com/knottylittleloops" target="_blank" rel="noopener">Instagram</a>.</p>
+        </div>
+        <div class="case-next">
+          <a class="ds-button" href="index.html#featured-work">Back to selected work</a>
+          <a class="ds-button ds-button-primary" href="captivate-case-study.html">Next: Captivate -&gt;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a class="back-to-top" href="#top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg>
+</a>
+<footer>
+  <div class="ds-container footer-wrap">
+    <span>© 2026 Sivakumar Ravi. Portfolio case study.</span>
+    <div class="footer-links"><a href="index.html#featured-work">Work</a><a href="index.html#contact">Contact</a></div>
+  </div>
+</footer>
+</body>
+</html>
