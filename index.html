@@ -231,6 +231,34 @@
     .outcome span { color: var(--muted); font-size: .9rem; line-height: 1.35; }
 
     .work-section { background: var(--surface); }
+    .work-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: -18px 0 34px;
+    }
+    .work-filter {
+      min-height: 42px;
+      padding: 9px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s, transform .18s;
+    }
+    .work-filter:hover {
+      border-color: var(--blue);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+    .work-filter[aria-pressed="true"] {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
     .work-list { display: grid; gap: 28px; }
     .project-card {
       display: grid;
@@ -243,6 +271,7 @@
       text-decoration: none;
       transition: transform .25s, box-shadow .25s;
     }
+    .project-card[hidden] { display: none; }
     .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
     .project-visual {
       position: relative;
@@ -678,6 +707,8 @@
       .portrait { width: min(82vw, 340px); }
       .outcomes { padding-block: 12px; }
       .outcome { padding: 20px 14px; }
+      .work-filters { margin-top: -10px; }
+      .work-filter { flex: 1 1 auto; }
       .project-visual { min-height: 300px; }
       .project-copy { padding: 30px 24px; }
       .article-grid, .capabilities { grid-template-columns: 1fr; }
@@ -772,8 +803,17 @@
             </div>
           </div>
 
+          <div class="work-filters" aria-label="Filter selected work">
+            <button class="work-filter" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="work-filter" type="button" data-filter="ux-research" aria-pressed="false">UX research</button>
+            <button class="work-filter" type="button" data-filter="interaction-design" aria-pressed="false">Interaction design</button>
+            <button class="work-filter" type="button" data-filter="ai-assisted-design" aria-pressed="false">AI-assisted design</button>
+            <button class="work-filter" type="button" data-filter="branding" aria-pressed="false">Branding</button>
+            <button class="work-filter" type="button" data-filter="process-design" aria-pressed="false">Process design</button>
+          </div>
+
           <div class="work-list">
-            <a class="project-card" href="captivate-case-study.html">
+            <a class="project-card" href="captivate-case-study.html" data-categories="ux-research interaction-design">
               <div class="project-visual blue" aria-hidden="true">
                 <div class="project-shot">
                   <div class="card-imac">
@@ -793,7 +833,7 @@
               </div>
             </a>
 
-            <a class="project-card" href="case-study-1.html">
+            <a class="project-card" href="case-study-1.html" data-categories="ux-research interaction-design">
               <div class="project-visual blue" aria-hidden="true">
                 <div class="project-shot">
                   <img class="project-image" src="case-study-1-assets/hero-portal.webp" alt="">
@@ -808,7 +848,7 @@
               </div>
             </a>
 
-            <a class="project-card" href="deloitte-dmod-case-study.html">
+            <a class="project-card" href="deloitte-dmod-case-study.html" data-categories="process-design">
               <div class="project-visual blue" aria-hidden="true">
                 <div class="dmod-workflow-card">
                   <div class="dmod-workflow-head">
@@ -842,7 +882,7 @@
               </div>
             </a>
 
-            <a class="project-card" href="chandra-ai-case-study.html">
+            <a class="project-card" href="chandra-ai-case-study.html" data-categories="ux-research interaction-design ai-assisted-design">
               <div class="project-visual blue" aria-hidden="true">
                 <div class="project-shot chandra-card-shot">
                   <img class="card-device-render" src="chandra-assets/samsung-a50-chandra-home.png" alt="">
@@ -857,7 +897,7 @@
               </div>
             </a>
 
-            <a class="project-card" href="knotty-little-loops-case-study.html">
+            <a class="project-card" href="knotty-little-loops-case-study.html" data-categories="ai-assisted-design branding">
               <div class="project-visual blue" aria-hidden="true">
                 <div class="knotty-card-stage">
                   <img class="knotty-logo" src="knotty-little-loops-assets/new-logo.jpeg" alt="">
@@ -1024,6 +1064,25 @@
     });
 
     document.querySelectorAll(".nav-links a").forEach(link => link.addEventListener("click", closeMenu));
+
+    const filterButtons = document.querySelectorAll(".work-filter");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    function filterWork(selectedFilter) {
+      filterButtons.forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.filter === selectedFilter));
+      });
+
+      projectCards.forEach(card => {
+        const categories = (card.dataset.categories || "").split(" ");
+        const shouldShow = selectedFilter === "all" || categories.includes(selectedFilter);
+        card.hidden = !shouldShow;
+      });
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => filterWork(button.dataset.filter));
+    });
 
     function route() {
       const hash = location.hash || "#work";
