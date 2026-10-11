@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Palette Studio Figma plugin case study by Sivakumar Ravi.">
+  <meta name="theme-color" content="#f7f5f2">
+  <title>Palette Studio — Figma Plugin Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+  <style>
+    .skip-link{position:fixed;top:12px;left:12px;z-index:1000;padding:10px 16px;background:var(--color-ink);color:#fff;transform:translateY(-150%)}
+    .skip-link:focus{transform:translateY(0)}
+    .case-section-layout>div{min-width:0}
+    .palette-hero-visual{display:grid;place-items:center;gap:var(--space-5);margin-top:58px;padding:clamp(24px,4vw,48px);border:1px solid var(--color-line);border-radius:var(--radius-lg);background:linear-gradient(180deg,#fff 0%,#eeeef7 100%);overflow:hidden}
+    .palette-hero-visual img{width:100%;border-radius:12px;box-shadow:0 24px 56px rgba(23,23,23,.14)}
+    .evidence-grid,.feature-grid,.timeline-grid{display:grid;gap:var(--space-4);margin-top:var(--space-6)}
+    .evidence-grid{grid-template-columns:repeat(3,1fr)}
+    .feature-grid{grid-template-columns:repeat(2,1fr)}
+    .timeline-grid{grid-template-columns:repeat(4,1fr)}
+    .evidence-card{padding:var(--space-5);border:1px solid var(--color-line);border-radius:var(--radius-md);background:var(--color-surface)}
+    .evidence-card p,.evidence-card li{color:var(--color-muted)}
+    .evidence-card ul{margin:0;padding-left:20px}
+    .evidence-card li+li{margin-top:8px}
+    .tag{display:inline-block;margin-bottom:var(--space-3);padding:4px 9px;border-radius:999px;background:var(--color-accent-soft);color:var(--color-accent);font-size:.7rem;font-weight:700;letter-spacing:.06em;line-height:1.3;text-transform:uppercase}
+    .screenshot-row{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);margin-top:var(--space-6)}
+    .screenshot-card{overflow:hidden;border:1px solid var(--color-line);border-radius:var(--radius-md);background:var(--color-surface)}
+    .screenshot-window{aspect-ratio:540/912;overflow:hidden;background:#f5f5f5}
+    .screenshot-window img{width:300%;max-width:none;height:100%;object-fit:cover}
+    .screenshot-window.chat img{transform:translateX(-33.333%)}
+    .screenshot-window.settings img{transform:translateX(-66.666%)}
+    .screenshot-card figcaption{padding:16px;color:var(--color-muted);font-size:.88rem;line-height:1.55}
+    .comparison-table{margin-top:var(--space-6);overflow:hidden;border:1px solid var(--color-line);border-radius:var(--radius-md);background:var(--color-surface)}
+    .comparison-row{display:grid;grid-template-columns:1fr 1.2fr 1.2fr;border-top:1px solid var(--color-line)}
+    .comparison-row:first-child{border-top:0;background:var(--color-primary-soft);color:var(--color-primary-deep);font-weight:700}
+    .comparison-row>div{padding:16px;border-left:1px solid var(--color-line)}
+    .comparison-row>div:first-child{border-left:0}
+    .comparison-row p{margin:0;color:var(--color-muted)}
+    .ai-panel{margin-top:var(--space-6);padding:clamp(24px,4vw,40px);border:1px solid #d8d4f2;border-radius:var(--radius-lg);background:#f2efff}
+    .ai-panel h3{margin-top:0}
+    .ai-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);margin-top:var(--space-5)}
+    .ai-step{padding:18px;border:1px solid rgba(65,93,157,.18);border-radius:var(--radius-md);background:#fff}
+    .ai-step span{display:block;margin-bottom:8px;color:var(--color-secondary);font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .ai-step p{margin:0;color:var(--color-muted)}
+    .timeline-card{position:relative;padding:var(--space-5);border-top:4px solid var(--color-primary);background:var(--color-surface)}
+    .timeline-card strong{display:block;margin-bottom:8px}
+    .resource-link{width:fit-content;min-height:42px;display:inline-flex;align-items:center;justify-content:center;margin-top:var(--space-5);padding:11px 16px;border:1px solid var(--color-primary);border-radius:999px;color:var(--color-primary);font-weight:700;line-height:1.2;text-decoration:none}
+    .resource-link:hover{background:var(--color-primary-soft);color:var(--color-primary-deep)}
+    .back-to-top{position:fixed;right:clamp(16px,3vw,28px);bottom:clamp(16px,3vw,28px);z-index:60;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.42);border-radius:50%;background:var(--color-primary);color:#fff;font-size:0;text-decoration:none;box-shadow:0 14px 34px rgba(32,28,24,.16);transition:transform .18s,background .18s}
+    .back-to-top svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    .back-to-top:hover{transform:translateY(-2px);background:var(--color-primary-deep)}
+    footer{padding-block:28px;background:var(--color-ink);color:#aaa}.footer-wrap{display:flex;justify-content:space-between;gap:24px;font-size:.9rem}.footer-links{display:flex;gap:22px}.footer-links a{text-decoration:none}.footer-links a:hover{color:#fff}
+    @media(max-width:900px){.evidence-grid,.feature-grid,.timeline-grid,.ai-flow{grid-template-columns:1fr}.screenshot-row{display:flex;overflow-x:auto;padding-bottom:var(--space-3)}.screenshot-card{flex:0 0 260px}}
+    @media(max-width:620px){.palette-hero-visual{padding:14px}.comparison-row{grid-template-columns:1fr}.comparison-row>div{border-left:0;border-top:1px solid var(--color-line)}.comparison-row>div:first-child{border-top:0}.case-next,.footer-wrap{flex-direction:column}.footer-links{flex-wrap:wrap}.ds-button{width:100%}}
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="ds-container site-nav" aria-label="Case study navigation">
+      <a class="site-brand" href="index.html">Sivakumar Ravi</a>
+      <span class="site-note">AI-assisted design tool &middot; Figma plugin</span>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="case-hero">
+      <div class="ds-container">
+        <p class="ds-eyebrow">Case study: AI-assisted Figma plugin</p>
+        <h1 class="ds-display-title">Palette Studio: a Figma plugin for faster color exploration.</h1>
+        <p class="ds-intro">Palette Studio started from a practical friction in visual exploration: generating, comparing and applying color palettes required too much context switching. The result is a shipped Figma plugin that combines curated palette browsing with optional AI-assisted generation, giving designers a simple way to explore colors on their own terms.</p>
+        <div class="case-facts">
+          <div class="case-fact"><small>Role</small><strong>Product idea, UX design, AI-assisted development, plugin publishing</strong></div>
+          <div class="case-fact"><small>Platform</small><strong>Figma plugin, Figma Community</strong></div>
+          <div class="case-fact"><small>Methods</small><strong>Workflow observation, rapid prototyping, prompt-led development, manual QA</strong></div>
+          <div class="case-fact"><small>Outcome</small><strong>Live plugin with Browse, AI Chat and Settings workflows</strong></div>
+        </div>
+        <figure class="palette-hero-visual">
+          <img src="portfolio-assets/article-figma-plugin.png" alt="Palette Studio Figma plugin showing Browse, AI Chat and Settings screens.">
+          <a class="ds-button ds-button-primary" href="https://www.figma.com/community/plugin/1639314699415906120/palette-studio" target="_blank" rel="noopener">View live Figma plugin</a>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section" id="challenge">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">01 / Challenge</div>
+        <div>
+          <p class="ds-eyebrow">Starting point</p>
+          <h2 class="ds-section-title">Color exploration was creative work trapped inside a repetitive workflow.</h2>
+          <p class="ds-body ds-reading">The project began during brand color exploration, where the design task was simple in theory: push a palette in a few directions, compare options and apply promising colors to the canvas. In practice, that meant jumping between inspiration sites, palette generators, notes, Figma swatches and manual copy-paste work.</p>
+          <blockquote class="ds-callout">The opportunity was not to replace a designer's eye. It was to remove the slow, mechanical parts around palette exploration so judgment could happen faster.</blockquote>
+          <div class="evidence-grid">
+            <article class="evidence-card"><span class="tag">Context switching</span><h3 class="ds-subtitle">Too many surfaces</h3><p>Exploration often moved between browser tools, reference images, Figma layers and brand guidelines instead of staying inside the design canvas.</p></article>
+            <article class="evidence-card"><span class="tag">Manual effort</span><h3 class="ds-subtitle">Copy, paste, apply, repeat</h3><p>Promising palettes still needed to be moved into Figma one color at a time, which slowed down comparison and made the task feel heavier than it should.</p></article>
+            <article class="evidence-card"><span class="tag">Creative control</span><h3 class="ds-subtitle">AI needed boundaries</h3><p>AI-assisted generation was useful only if designers could decide when to use it, what provider to connect and whether to rely on curated palettes instead.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="positioning">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">02 / Positioning</div>
+        <div>
+          <p class="ds-eyebrow">Opportunity scan</p>
+          <h2 class="ds-section-title">Palette Studio combines discovery, AI refinement and color application in one workflow.</h2>
+          <p class="ds-body ds-reading">Before the build moved forward, Claude was used to pressure-test the idea against the Figma plugin ecosystem. The scan surfaced several adjacent tools: AI palette generators, mood-to-palette plugins, dark-mode palette helpers, brand palette generators, browseable palette libraries and utilities for applying colors to selected objects.</p>
+          <p class="ds-body ds-reading">That was an important moment in the project. The feature space was not empty, but the gap was not a single missing feature. It was the absence of one cohesive experience that combined palette discovery, conversational refinement and direct application inside Figma.</p>
+          <div class="comparison-table" aria-label="Competitive positioning for Palette Studio">
+            <div class="comparison-row"><div>Existing pattern</div><div>What it solved</div><div>Gap that shaped Palette Studio</div></div>
+            <div class="comparison-row"><div><strong>AI palette generators</strong></div><div><p>Generate colors from a prompt, keyword or brand description.</p></div><div><p>Many use a one-shot output model, with limited support for iterative follow-up such as make it warmer, keep the blue or mute the green.</p></div></div>
+            <div class="comparison-row"><div><strong>Browseable palette tools</strong></div><div><p>Help designers scan ready-made or trending palettes quickly.</p></div><div><p>They are useful for discovery, but do not usually support conversational brand-specific refinement.</p></div></div>
+            <div class="comparison-row"><div><strong>Color application utilities</strong></div><div><p>Make it easier to apply selected colors to design elements.</p></div><div><p>They improve execution, but are often separate from generation and exploration.</p></div></div>
+            <div class="comparison-row"><div><strong>Palette Studio direction</strong></div><div><p>Bring browsing, AI chat, API-key control and direct application into one workflow.</p></div><div><p>The differentiator became the combination: designers can explore, refine and apply palettes without switching tools.</p></div></div>
+          </div>
+          <blockquote class="ds-callout">The defensible value was the iterative loop: a designer could start with a prompt, review a palette, then refine it conversationally instead of treating AI generation as a one-time answer.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="solution">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">03 / Solution</div>
+        <div>
+          <p class="ds-eyebrow">Product direction</p>
+          <h2 class="ds-section-title">Designers can move from palette idea to applied colors without leaving their canvas.</h2>
+          <p class="ds-body ds-reading">The plugin was designed as a complete color-exploration workflow rather than a single-purpose generator. Designers can browse curated palettes, generate new directions through chat, connect their own AI provider, choose whether colors should apply as fill, stroke or text, and apply swatches directly to selected frames or elements.</p>
+          <div class="screenshot-row" aria-label="Palette Studio screenshots">
+            <figure class="screenshot-card">
+              <div class="screenshot-window browse"><img src="portfolio-assets/article-figma-plugin.png" alt="Palette Studio Browse tab with palette categories and swatches."></div>
+              <figcaption><strong>Browse:</strong> Designers can scan curated palettes by mood and apply colors as fill, stroke or text.</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+              <div class="screenshot-window chat"><img src="portfolio-assets/article-figma-plugin.png" alt="Palette Studio AI Chat tab showing generated palette cards."></div>
+              <figcaption><strong>AI Chat:</strong> A prompt-based flow turns brand direction into palette options with visible hex values.</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+              <div class="screenshot-window settings"><img src="portfolio-assets/article-figma-plugin.png" alt="Palette Studio Settings screen showing API provider and key management."></div>
+              <figcaption><strong>Settings:</strong> API setup is visible, local and removable, so AI feels optional rather than hidden.</figcaption>
+            </figure>
+          </div>
+          <div class="feature-grid">
+            <article class="evidence-card"><span class="tag">Browse</span><h3 class="ds-subtitle">Curated palette discovery</h3><p>Palette groups such as minimal, vibrant, earthy and corporate give designers useful starting points when they want fast exploration without prompting AI.</p></article>
+            <article class="evidence-card"><span class="tag">Conversational AI</span><h3 class="ds-subtitle">Chat-based refinement</h3><p>Instead of a one-shot generator, the AI Chat flow supports iterative direction: designers can ask for a mood, review results and continue refining the palette in natural language.</p></article>
+            <article class="evidence-card"><span class="tag">Apply mode</span><h3 class="ds-subtitle">Fill, stroke or text</h3><p>Designers can choose the application target first, then click a swatch. The plugin uses the selection context in Figma to apply the color to the right property.</p></article>
+            <article class="evidence-card"><span class="tag">API control</span><h3 class="ds-subtitle">Bring your own provider</h3><p>The Settings screen keeps API setup straightforward, with provider choice, key storage, cost context and a clear option to remove the key later.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="ai-model">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">04 / AI Model</div>
+        <div>
+          <p class="ds-eyebrow">AI-assisted, not AI-dependent</p>
+          <h2 class="ds-section-title">The API key model keeps the app simple while giving designers control over AI usage.</h2>
+          <p class="ds-body ds-reading">Palette Studio uses an API-key setup so designers can connect their own AI provider instead of depending on a platform-managed pool of credits. That choice makes the tool more transparent: the designer decides whether to use AI, which provider to use and when to remove the key.</p>
+          <div class="ai-panel">
+            <h3 class="ds-subtitle">Why this matters for designers</h3>
+            <p class="ds-body">Figma's native AI availability and credits can vary by plan, rollout and team policy. Palette Studio keeps AI assistance separate from that dependency. Designers can still browse and apply palettes without AI, then bring in Claude or OpenAI when they want a more directed palette exploration.</p>
+            <div class="ai-flow">
+              <div class="ai-step"><span>1 / Choose</span><p>Select an AI provider from Settings.</p></div>
+              <div class="ai-step"><span>2 / Connect</span><p>Add an API key that stays local to the Figma environment.</p></div>
+              <div class="ai-step"><span>3 / Prompt</span><p>Describe the brand direction in plain language.</p></div>
+              <div class="ai-step"><span>4 / Apply</span><p>Use generated swatches directly as fills, strokes or text colors.</p></div>
+            </div>
+          </div>
+          <div class="comparison-table" aria-label="AI usage model comparison">
+            <div class="comparison-row"><div>Approach</div><div>Designer experience</div><div>Trade-off</div></div>
+            <div class="comparison-row"><div><strong>Only curated palettes</strong></div><div><p>Fast and predictable, with no setup cost.</p></div><div><p>Less responsive to brand-specific prompts.</p></div></div>
+            <div class="comparison-row"><div><strong>Platform AI credits</strong></div><div><p>Convenient when available inside the design tool.</p></div><div><p>Availability may depend on plan, rollout, admin settings or remaining credits.</p></div></div>
+            <div class="comparison-row"><div><strong>Own API key</strong></div><div><p>Designer controls when and how AI is used.</p></div><div><p>Requires a one-time key setup, so Settings had to be plain and reassuring.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="process">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">05 / Process</div>
+        <div>
+          <p class="ds-eyebrow">From idea to plugin</p>
+          <h2 class="ds-section-title">Claude became a development partner, while the product decisions stayed designer-led.</h2>
+          <p class="ds-body ds-reading">The build was intentionally honest and iterative: a first attempt failed, the scope was reduced to the core workflow, and the plugin moved forward through small pieces of UI, debugging and repeated testing in Figma. The important portfolio story is not that AI wrote code; it is that AI helped a designer cross the gap from product idea to shipped tool.</p>
+          <div class="timeline-grid">
+            <article class="timeline-card"><strong>1. Friction</strong><p class="ds-body">A recurring color exploration task exposed the need for a tool that lived inside Figma.</p></article>
+            <article class="timeline-card"><strong>2. Prototype</strong><p class="ds-body">The first direction tested whether a compact plugin could browse palettes and apply colors quickly.</p></article>
+            <article class="timeline-card"><strong>3. AI layer</strong><p class="ds-body">AI Chat was added as an optional way to turn brand prompts into palette directions.</p></article>
+            <article class="timeline-card"><strong>4. Publish</strong><p class="ds-body">The plugin was packaged, submitted and released through Figma Community review.</p></article>
+          </div>
+          <div class="feature-grid">
+            <article class="evidence-card"><span class="tag">Design judgment</span><h3 class="ds-subtitle">Keeping the interface quiet</h3><p>Because the plugin runs inside Figma, the UI needed to stay small, predictable and action-oriented. Tabs, segmented controls and swatches do most of the work.</p></article>
+            <article class="evidence-card"><span class="tag">Implementation learning</span><h3 class="ds-subtitle">Building beyond comfort zone</h3><p>The project required reading plugin code, testing behavior inside Figma and using Claude to understand errors without treating AI output as automatically correct.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="outcome">
+      <div class="ds-container case-section-layout">
+        <div class="case-section-label">06 / Outcome</div>
+        <div>
+          <p class="ds-eyebrow">What shipped</p>
+          <h2 class="ds-section-title">Palette Studio became a live design utility and a proof of AI-assisted product making.</h2>
+          <p class="ds-body ds-reading">The final plugin gives designers two modes of exploration: browse when they want fast, low-friction palettes, and AI Chat when they want palette ideas shaped by a prompt. Settings make the AI layer understandable by showing the provider, key status, cost note and removal option.</p>
+          <div class="evidence-grid">
+            <article class="evidence-card"><span class="tag">Browse</span><h3 class="ds-subtitle">Curated starting points</h3><p>Palette groups such as minimal, vibrant, earthy and corporate help designers start from a direction instead of a blank color picker.</p></article>
+            <article class="evidence-card"><span class="tag">AI Chat</span><h3 class="ds-subtitle">Prompt-led exploration</h3><p>Designers can ask for palette qualities such as bold, professional or luxury and evaluate generated swatches immediately.</p></article>
+            <article class="evidence-card"><span class="tag">Settings</span><h3 class="ds-subtitle">Simple key management</h3><p>The API key workflow makes AI optional, explainable and removable, which supports trust without adding unnecessary setup complexity.</p></article>
+          </div>
+          <blockquote class="ds-callout">The most valuable outcome was confidence: a designer can identify a workflow problem, use AI as a collaborator, make product decisions and ship a practical tool to a real design community.</blockquote>
+          <a class="resource-link" href="https://medium.com/design-bootcamp/i-built-a-figma-plugin-with-claude-heres-the-honest-messy-deeply-satisfying-story-325390a88618" target="_blank" rel="noopener">Read the original build story</a>
+          <div class="case-next">
+            <a class="ds-button" href="index.html#featured-work">Back to selected work</a>
+            <a class="ds-button ds-button-primary" href="captivate-case-study.html">Next: Captivate →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5 12 8.5l6.5 6"/></svg>
+  </a>
+
+  <footer>
+    <div class="ds-container footer-wrap">
+      <span>&copy; 2026 Sivakumar Ravi</span>
+      <div class="footer-links"><a href="mailto:siva1790@gmail.com">Email</a><a href="https://linkedin.com/in/sivakumar-ravi" target="_blank" rel="noopener">LinkedIn</a><a href="https://medium.com/@siva1790" target="_blank" rel="noopener">Medium</a></div>
+    </div>
+  </footer>
+</body>
+</html>
